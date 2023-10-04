@@ -22,3 +22,5 @@ En la rama jesus_avance6 comence a ponerle el carrito de compras
 Puse cambios el 03/10/2023 en la rama de jesus_avance7
 
 Puse cambios en la rama de jesus_ing1 el dia 04/10/2023
+
+Le puse el logo de inkamanu a los pdfs de reportes, lo subi a  firebase a un proyecto mio para almacenar ese logo 04/10/2023   17:24
