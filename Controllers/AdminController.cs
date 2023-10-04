@@ -242,7 +242,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
                     </style>
                 </head>
                 <body>
-                    <img src='https://firebasestorage.googleapis.com/v0/b/athletix-app.appspot.com/o/AthletiX%2FWhatsApp%20Image%202023-09-29%20at%206.58.13%20PM%20%281%29.jpeg?alt=media&token=2a97c125-f96c-413c-ba2b-c0c010cb1139' alt='Logo' width='100' class='logo'/>
+                    <img src='https://firebasestorage.googleapis.com/v0/b/proyectos-cb445.appspot.com/o/img_logo_inkamanu.jpeg?alt=media&token=3b834c39-f2ee-4555-8770-4f5a2bc88066&_gl=1*gxgr9z*_ga*MTcyOTkyMjIwMS4xNjk2NDU2NzU2*_ga_CW55HF8NVT*MTY5NjQ1Njc1NS4xLjEuMTY5NjQ1NzkyMy40OC4wLjA.' alt='Logo' width='100' class='logo'/>
                     <h1>Reporte de Productos</h1>
                     <table>
                         <tr>
@@ -394,7 +394,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
                     </style>
                 </head>
                 <body>
-                    <img src='https://firebasestorage.googleapis.com/v0/b/athletix-app.appspot.com/o/AthletiX%2FWhatsApp%20Image%202023-09-29%20at%206.58.13%20PM%20%281%29.jpeg?alt=media&token=2a97c125-f96c-413c-ba2b-c0c010cb1139' alt='Logo' width='100' class='logo'/>
+                    <img src='https://firebasestorage.googleapis.com/v0/b/proyectos-cb445.appspot.com/o/img_logo_inkamanu.jpeg?alt=media&token=3b834c39-f2ee-4555-8770-4f5a2bc88066&_gl=1*gxgr9z*_ga*MTcyOTkyMjIwMS4xNjk2NDU2NzU2*_ga_CW55HF8NVT*MTY5NjQ1Njc1NS4xLjEuMTY5NjQ1NzkyMy40OC4wLjA.' alt='Logo' width='100' class='logo'/>
                     <h1>Reporte de Producto {id}</h1>
                     <table>
                         <tr>
