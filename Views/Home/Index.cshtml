@@ -1,0 +1,234 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "AthletiX";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    /* codigo comun */
+    @@importurl('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+
+    :root {
+        --my-blue: #0074E4;
+        --light-my-blue: #6FA6FF;
+        /* Aquí defines el tono más claro */
+        --celeste: #40E0D0;
+        --light-celeste: hsl(177, 72%, 70%);
+        --amarillo: #f9d806;
+        --light-amarillo: #ffee80;
+        --rojo: #FF0000;
+        --light-rojo: #FFAFAF;
+        --verde: #369681;
+        --light-verde: #00B050;
+        --black: #130f40;
+        --light-color: #666;
+        --border: .1rem solid rgba(0, 0, 0, .1);
+        --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+    }
+
+    * {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        outline: none;
+        border: none;
+        text-decoration: none;
+        transition: all .2s linear;
+    }
+
+    section {
+        padding: 2rem 6%;
+    }
+
+    .heading {
+        text-align: center;
+        padding-bottom: 2rem;
+        font-size: 4.5rem;
+        color: var(--black);
+    }
+
+    .heading span {
+        position: relative;
+        z-index: 0;
+    }
+
+    .heading span::before {
+        content: '';
+        position: absolute;
+        bottom: 1rem;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: -1;
+        background: var(--celeste);
+        clip-path: polygon(0 90%, 100% 80%, 100% 100%, 0% 100%);
+        /* CON ESTO PONGO LA LINEA AMARILLA ABAJO DE LA PALABRA Vehicles de color amarillo */
+    }
+
+    .btn {
+        display: inline-block;
+        margin-top: 1rem;
+        border-radius: .5rem;
+        background: var(--light-celeste);
+        color: var(--black);
+        font-weight: 500;
+        font-size: 1.7rem;
+        width: 250px;
+        ;
+        cursor: pointer;
+        padding: .8rem 3rem;
+    }
+
+    .btn:hover {
+        background: var(--celeste);
+    }
+
+    /* para mision vision y descripcion codigo */
+
+    #mision {
+        padding: 1rem;
+    }
+
+    #descripcion {
+        padding: 1rem;
+    }
+
+    /* CSS DE ICONS EN EL MINUTO 36:40 */
+    .icons-container {
+ 
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+        gap: 1.5rem;
+
+    }
+
+    .icons-container .icons {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 2rem;
+        background: #fff;
+        box-shadow: var(--box-shadow);
+        border-radius: .5rem;
+    }
+
+    .icons-container .icons i {
+        height: 6rem;
+        width: 12rem;
+        line-height: 6rem;
+        font-size: 2.5rem;
+        border-radius: 50%;
+        background: #eee;
+        color: var(--black);
+        text-align: center;
+    }
+
+    .icons-container .icons .content h3 {
+        color: var(--celeste);
+        font-size: 2.5rem;
+    }
+
+    .icons-container .icons .content p {
+        color: var(--light-color);
+        font-size: 1.5rem;
+    }
+
+    .icons-container .icons:hover {
+        background: var(--black);
+    }
+
+    .icons-container .icons:hover i {
+        background: var(--celeste);
+    }
+
+    .icons-container .icons:hover .content h3 {
+        color: #fff;
+    }
+
+    .icons-container .icons:hover .content p {
+        color: #eee;
+    }
+
+    /* mensaje de bienvenido */
+    .Bienvenido {
+        font-size: 5.5rem;
+        background: var(--celeste);
+        color: #fff;
+        display: inline-block;
+        padding: .5rem 3rem;
+        clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0% 100%, 7% 50%, 0% 0%);
+    }
+</style>
+@if (TempData["MessageLOGUEARSE"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["MessageLOGUEARSE"]
+    </div>
+}
+<div class="text-center">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        var userId = UserManager.GetUserId(User); // Obtén el ID del usuario autenticado
+        var user = await UserManager.FindByIdAsync(userId); // Busca el usuario en la base de datos por ID
+
+        // Si el usuario está autenticado, muestra un mensaje de bienvenida personalizado
+        <h1 class="display-4"><span class="Bienvenido">Bienvenido @user.Nombres @user.Apellidos!</span></h1>
+        <p>DNI: @user.Dni</p>
+        <!--<p>Obtenga información <a href="https://docs.microsoft.com/aspnet/core">sobre cómo crear aplicaciones web con
+                ASP.NET Core</a>.</p>-->
+    }
+    else
+    {
+        // Si el usuario no está autenticado, muestra un mensaje de bienvenida genérico
+        <h1 class="display-4"><span class="Bienvenido">Bienvenido</span></h1>
+        <!--<p>Obtenga información <a href="https://docs.microsoft.com/aspnet/core">sobre cómo crear aplicaciones web con
+                ASP.NET Core</a>.</p>-->
+    }
+</div>
+
+
+<!---------------------------- descripcion section stars ---------------------------->
+<h1 class="heading" id="descripcion"> <span>Descripción de la empresa</span></h1>
+<section class="icons-container">
+    <div class="icons">
+        <i class="fas fa-home"></i>
+        <div class="content">
+            <h3>AthletiX</h3>
+            <p>AthletiX es una empresa pionera en el campo de la nutrición deportiva. Nos especializamos en la venta de
+                una amplia gama de productos, desde proteínas y aminoácidos hasta suplementos pre-entrenamiento y
+                vitaminas. Nuestra plataforma de ecommerce facilita a los clientes el acceso a productos de alta
+                calidad, garantizando una experiencia de compra cómoda y eficiente. En AthletiX, creemos en el poder de
+                la nutrición adecuada para potenciar el rendimiento y apoyar un estilo de vida activo y saludable.</p>
+        </div>
+    </div>
+</section>
+<!---------------------------- descripcion section ends ---------------------------->
+
+<!---------------------------- mision y vision section stars---------------------------->
+<h1 class="heading" id="mision"> <span>Misión y Visión</span></h1>
+<section class="icons-container">
+    <div class="icons">
+        <i class="fas fa-home"></i>
+        <div class="content">
+            <h3>Misión</h3>
+            <p>En AthletiX, nuestra misión es empoderar a atletas y entusiastas del fitness proporcionando suplementos
+                nutricionales de la más alta calidad. Nos comprometemos a apoyar a cada individuo en su viaje hacia el
+                bienestar y la excelencia física, ofreciendo productos que potencian el rendimiento, la recuperación y
+                la salud general.</p>
+        </div>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-home"></i>
+        <div class="content">
+            <h3>Visión</h3>
+            <p>AthletiX aspira a consolidarse como la marca de referencia en el mundo de la nutrición deportiva, siendo
+                sinónimo de calidad, confianza e innovación. Buscamos inspirar y facilitar a cada persona el camino
+                hacia sus objetivos de salud y condición física, contribuyendo al mejoramiento continuo de su calidad de
+                vida.</p>
+        </div>
+    </div>
+</section>
+<!---------------------------- mision y vision section ends ---------------------------->
