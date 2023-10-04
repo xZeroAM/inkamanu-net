@@ -1,4 +1,4 @@
-# Ecommerce Tienda Deportiva
+# Ecommerce Empresa InkaManu
 
 Prueba de docker con web service, realizare un merge de mi rama
 
