@@ -1,27 +1,27 @@
-# Usar la imagen oficial de .NET Core SDK como base
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
+# Usar la imagen oficial de .NET
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
+EXPOSE 80
 
-# Copiar el csproj y restaurar las dependencias
-COPY *.csproj ./
-RUN dotnet restore
+# Usar la imagen SDK para construir la app
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /src
+COPY ["proyecto-inkamanu-net.csproj", "./"]
+RUN dotnet restore "./proyecto-inkamanu-net.csproj"
+COPY . .
+WORKDIR "/src/."
+RUN dotnet build "proyecto-inkamanu-net.csproj" -c Release -o /app/build
 
-# Copiar todo y construir la aplicación
-COPY . ./
-RUN dotnet publish -c Release -o out
+FROM build AS publish
+RUN dotnet publish "proyecto-inkamanu-net.csproj" -c Release -o /app/publish
 
-# Usar la imagen oficial de .NET Core Runtime
-FROM mcr.microsoft.com/dotnet/aspnet:7.0
-
-# Instalar dependencias y wkhtmltopdf
-RUN apt-get update && apt-get install -y wget xfonts-75dpi xfonts-base libxrender1 libfontconfig1 libx11-xcb1 libxcb1
+# Instalar wkhtmltox y sus dependencias
+FROM base AS final
+RUN apt-get update && apt-get install -y wget xfonts-75dpi xfonts-base libxrender1 libfontconfig1 libx11-xcb1 libxcb1 fontconfig libjpeg62-turbo libxext6
 RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb
-RUN dpkg -i wkhtmltox_0.12.6-1.buster_amd64.deb && apt-get install -f
+RUN dpkg -i wkhtmltox_0.12.6-1.buster_amd64.deb || true
+RUN apt-get install -f
 
-# Establecer el directorio de trabajo y copiar la aplicación construida
 WORKDIR /app
-COPY --from=build-env /app/out .
-
-ENV APP_NET_CORE proyecto-inkamanu-net.dll
-
-CMD ASPNETCORE_URLS=http://*:$PORT dotnet $APP_NET_CORE
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "proyecto-inkamanu-net.dll"]
