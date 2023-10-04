@@ -13,8 +13,10 @@ RUN dotnet publish -c Release -o out
 # Usar la imagen oficial de .NET Core Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
 
-# Instalar libwkhtmltox
-RUN apt-get update && apt-get install -y libwkhtmltox
+# Instalar dependencias y wkhtmltopdf
+RUN apt-get update && apt-get install -y wget xfonts-75dpi xfonts-base libxrender1 libfontconfig1 libx11-xcb1 libxcb1
+RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb
+RUN dpkg -i wkhtmltox_0.12.6-1.buster_amd64.deb && apt-get install -f
 
 # Establecer el directorio de trabajo y copiar la aplicación construida
 WORKDIR /app
