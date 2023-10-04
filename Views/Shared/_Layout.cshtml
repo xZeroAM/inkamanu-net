@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="icon" href="~/images/logo.png"/>
+    <link rel="icon" href="~/images/img_logo_inkamanu.jpeg"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/proyecto_ecommerce_deportivo_net.styles.css" asp-append-version="true" />
 
@@ -307,8 +307,8 @@
     <header class="header">
         <div id="menu-btn" class="fas fa-bars"></div>
         <a class="logo" style="text-decoration: none;" asp-area="" asp-controller="Home" asp-action="Index">
-            <img src="~/images/logo.png" alt="Logo" style="height: 40px; width: 40px; border-radius:50%;" id="imgLogoEmpresa"> <!-- Añadiendo el logo al costado del nombre de la empresa -->
-            <span>Athleti</span>X </a>
+            <img src="~/images/img_logo_inkamanu.jpeg" alt="Logo" style="height: 40px; width: 40px; border-radius:50%;" id="imgLogoEmpresa"> <!-- Añadiendo el logo al costado del nombre de la empresa -->
+            <span>Inka</span>Manu </a>
         <nav class="navbar">
             <a class="nav-link text-dark" asp-area="" asp-controller="NoCliente" asp-action="Catalogo">Catalogo</a>
             <!--<a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AgregarProducto">Agregar
@@ -359,23 +359,23 @@
         <div class="box-container">
             <div class="box">
                 <h3>Enlaces Rápidos</h3>
-                <a href="#"> <i class="fas fa-arrow-right"></i> Principal </a>
-                <a href="#"> <i class="fas fa-arrow-right"></i> Productos </a>
-                <a href="#"> <i class="fas fa-arrow-right"></i> Descripción </a>
-                <a href="#"> <i class="fas fa-arrow-right"></i> Misión y Visión </a>
-                <a href="#"> <i class="fas fa-arrow-right"></i> Contactanos </a>
+                <a asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-arrow-right"></i> Principal </a>
+                <a asp-area="" asp-controller="NoCliente" asp-action="Catalogo"> <i class="fas fa-arrow-right"></i> Productos </a>
+                <a asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-arrow-right"></i> Descripción </a>
+                <a asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-arrow-right"></i> Misión y Visión </a>
+                <a asp-area="" asp-controller="Home" asp-action="Contacto"> <i class="fas fa-arrow-right"></i> Contactanos </a>
             </div>
 
             <div class="box">
                 <h3>Datos De Contacto</h3>
-                <a> <i class="fas fa-phone"></i> +51 927572267 </a>
-                <a> <i class="fas fa-envelope"></i> jesus_soria@gmail.com </a>
+                <a> <i class="fas fa-phone"></i> +51 927 572 267 </a>
+                <a> <i class="fas fa-envelope"></i> jesus_soria@usmp.pe </a>
                 <a> <i class="fas fa-map-marker-alt"></i> Av. Prol. Javier Prado Este 8680, Ate 15494 </a>
             </div>
 
             <div class="box">
                 <h3>Redes</h3>
-                <a href="https://www.facebook.com/profile.php?id=61552031275470"> <i class="fab fa-facebook-f"></i> Facebook </a>
+                <a href="https://www.facebook.com/profile.php?id=61552108551409"> <i class="fab fa-facebook-f"></i> Facebook </a>
                 <a href="https://api.whatsapp.com/send?phone=927572267" target="_blank"><i class="fab fa-whatsapp"></i>
                     WhatsApp</a>
                 <br><br>
@@ -386,13 +386,16 @@
 
             <div class="box">
                 <h3>Desarrolladores</h3>
-                <a> <i class="fas fa-laptop-code"></i> Matias N Araujo Vera </a>
-                <a> <i class="fas fa-cogs"></i> Yasser M. Avalos Montero </a>
-                <a> <i class="fas fa-laptop"></i> Kristell Y. Flores Huamani </a>
-                <a> <i class="fas fa-user-cog"></i> Jesús A. Soria Llantoy </a>
+                <a> <i class="fas fa-code"></i> Arturo T. Aliaga Silva </a>
+				<a> <i class="fas fa-laptop-code"></i> Matias N Araujo Vera </a>
+				<a> <i class="fas fa-cogs"></i> Yasser M. Avalos Montero </a>
+				<a> <i class="fas fa-terminal"></i> Lucas A. Espinoza Laurente </a>
+				<a> <i class="fas fa-laptop"></i> Kristell Y. Flores Huamani </a>
+				<a> <i class="fas fa-user-cog"></i> Jesús A. Soria Llantoy </a>
+				<a> <i class="fas fa-code-branch"></i> Brandon J. Viru Camones </a>
             </div>
         </div>
-        <div class="credit"> @@Copyright - Todos los derechos reservados - Grupo ROJO! </div>
+        <div class="credit"> @@Copyright - Todos los derechos reservados - Grupo 2! </div>
     </section>
     <!---------------------------- footer section ends  ---------------------------->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
