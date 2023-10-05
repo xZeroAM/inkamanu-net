@@ -74,7 +74,8 @@
 		color: var(--black);
 		font-weight: 500;
 		font-size: 1.7rem;
-		width: 250px;;
+		width: 250px;
+		;
 		cursor: pointer;
 		padding: .8rem 3rem;
 	}
@@ -109,12 +110,24 @@
 	}
 
 	.detalle_producto .single-product .col-2 img {
-		padding: 0;
+		width: 100%;
+		height: auto;
 		border: 1px solid var(--my-blue);
 	}
 
 	.detalle_producto .single-product .col-2 {
-		padding: 20px;
+		padding: 40px;
+		min-width: 300px; /* Ajusta según tus necesidades */
+	}
+
+	.detalle_producto .single-product .col-2 h1 {
+		font-size: 2rem;
+		white-space: normal;
+		overflow: visible;
+		text-overflow: clip;
+		font-weight: bold;
+		color: var(--black);
+		margin-bottom: 1rem; /* Ajusta según tus necesidades */
 	}
 
 
@@ -170,6 +183,8 @@
 	}
 
 
+
+
 	/*------------------ media queries sirve para hacer responsivo la pagina y que se pueda adapatar a cualquier tamaño de la pagina ---------------------- */
 
 	@@media (max-width:991px) {
@@ -178,6 +193,14 @@
 		/* SECTION AGREGADO  */
 		section {
 			padding: 2rem;
+		}
+
+		.detalle_producto .single-product .col-2 img {
+			width: 80%;
+		}
+
+		.detalle_producto .single-product .col-2 h1 {
+			font-size: 1.5rem;
 		}
 
 	}
@@ -189,6 +212,14 @@
 
 		.heading {
 			font-size: 3rem;
+		}
+
+		.detalle_producto .single-product .col-2 img {
+			width: 100%;
+		}
+
+		.detalle_producto .single-product .col-2 h1 {
+			font-size: 1.2rem;
 		}
 
 		/* ese codigo es hasta aca arriba */
@@ -222,6 +253,16 @@
 			line-height: 32px;
 		}
 
+		.detalle_producto .single-product .col-2 img {
+			width: 100%;
+			height: auto;
+			border: 1px solid var(--my-blue);
+		}
+
+		.detalle_producto .single-product .col-2 h1 {
+			font-size: 1.5rem;
+		}
+
 		/*------- ESTO LE PUSE EN EL TERCERv */
 	}
 </style>
@@ -233,23 +274,23 @@
 		<div class="row">
 			<div class="col-2">
 
-				<img class="d-block w-100 image-fit" id="ProductImg" width="96" height="150"
-					src="@Html.DisplayFor(model => model.Imagen)" alt="@Html.DisplayFor(model => model.Imagen)">
+				<img class="d-block w-100 image-fit" id="ProductImg" src="@Html.DisplayFor(model => model.Imagen)"
+					alt="@Html.DisplayFor(model => model.Imagen)">
 
 
 			</div>
 
 			<div class="col-2">
 				<h1>@Html.DisplayFor(model => model.Nombre)</h1>
-				<h4>@Html.DisplayFor(model => model.Precio)</h4>
+				<h4>Precio: S/. @Html.DisplayFor(model => model.Precio)</h4>
 
 				<!-- Inicia el formulario aquí -->
-                <form asp-action="AddCarrito" asp-route-id="@Model.id" method="post">
-                    <!-- Asegúrate de que el input de cantidad tenga el name "cantidad" -->
-                    <input type="number" name="cantidad" value="1" min="1">
-                    <!-- El botón de enviar el formulario -->
-                    <button type="submit" class="btn">Añadir al Carrito</button>
-                </form>
+				<form asp-action="AddCarrito" asp-route-id="@Model.id" method="post">
+					<!-- Asegúrate de que el input de cantidad tenga el name "cantidad" -->
+					<input type="number" name="cantidad" value="1" min="1">
+					<!-- El botón de enviar el formulario -->
+					<button type="submit" class="btn">Añadir al Carrito</button>
+				</form>
 
 				<h3>Detalle del producto <i class="fa fa-indent"></i> </h3>
 				<br>
