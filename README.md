@@ -24,3 +24,5 @@ Puse cambios el 03/10/2023 en la rama de jesus_avance7
 Puse cambios en la rama de jesus_ing1 el dia 04/10/2023
 
 Le puse el logo de inkamanu a los pdfs de reportes, lo subi a  firebase a un proyecto mio para almacenar ese logo 04/10/2023   17:24
+
+En jesus_ing3 arregle la vista detalleproducto.cshtml 05/10/2023
