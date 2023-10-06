@@ -84,12 +84,16 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
                 producto.Imagen = urlImagen;
                 producto.Precio = productoDTO.Precio;
                 producto.Stock = productoDTO.Stock;
+                producto.GraduacionAlcoholica = productoDTO.GraduacionAlcoholica;
+                producto.TipoCerveza = productoDTO.TipoCerveza;
+                producto.Volumen = productoDTO.Volumen;
+                producto.TipoEnvase = productoDTO.TipoEnvase;
                 producto.fechaCreacion = DateTime.Now.ToUniversalTime(); ;
                 producto.fechaActualizacion = null;
 
                 TempData["MessageRegistrandoProducto"]= "Se Registraron exitosamente los datos.";
 
-                _context.Producto.Add(producto);
+                _context.DataProducto.Add(producto);
                 _context.SaveChanges();
 
                 return RedirectToAction("AgregarProducto");
@@ -144,7 +148,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
 
             pageNumber = Math.Max(pageNumber, 1);// Con esto se asegura de que pageNumber nunca sea menor que 1
 
-            IPagedList listaPaginada = _context.Producto.ToPagedList(pageNumber, pageSize);
+            IPagedList listaPaginada = _context.DataProducto.ToPagedList(pageNumber, pageSize);
 
             return View("ListaDeProductos", listaPaginada);
         }
@@ -152,7 +156,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
         public async Task<ActionResult> EditarProducto(int? id)
         {
 
-            Producto? producto = await _context.Producto.FindAsync(id);
+            Producto? producto = await _context.DataProducto.FindAsync(id);
 
             if (producto == null)
             {
@@ -165,7 +169,10 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
             productoDTO.Descripcion = producto.Descripcion;
             productoDTO.Precio = producto.Precio;
             productoDTO.Stock = producto.Stock;
-
+            productoDTO.GraduacionAlcoholica = producto.GraduacionAlcoholica;
+            productoDTO.TipoCerveza = producto.TipoCerveza;
+            productoDTO.Volumen = producto.Volumen;
+            productoDTO.TipoEnvase = producto.TipoEnvase;
 
             return View("EditarProducto", productoDTO);
 
@@ -179,13 +186,17 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
             System.Console.Write(productoDTO.Nombre);
             if (result.IsValid)
             {
-                Producto? producto = _context.Producto.Find(id);
+                Producto? producto = _context.DataProducto.Find(id);
 
                 producto.Nombre = productoDTO.Nombre;
                 producto.Descripcion = productoDTO.Descripcion;
                 producto.fechaActualizacion = DateTime.Now.ToUniversalTime();
                 producto.Precio = productoDTO.Precio;
                 producto.Stock = productoDTO.Stock;
+                producto.GraduacionAlcoholica = productoDTO.GraduacionAlcoholica;
+                producto.TipoCerveza = productoDTO.TipoCerveza;
+                producto.Volumen = productoDTO.Volumen;
+                producto.TipoEnvase = productoDTO.TipoEnvase;
 
                 if (productoDTO.Imagen != null)
                 {
@@ -194,7 +205,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
                 }
 
                 TempData["MessageActualizandoProducto"] = "Se Actualizaron exitosamente los datos.";
-                _context.Producto.Update(producto);
+                _context.DataProducto.Update(producto);
                 _context.SaveChanges();
 
                 return RedirectToAction("EditarProducto", new { id = producto.id });
@@ -209,7 +220,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
         {
             try
             {
-                var products = _context.Producto.ToList();
+                var products = _context.DataProducto.ToList();
                 var html = @"
             <html>
                 <head>
@@ -319,7 +330,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
                 worksheet.Cells[1, 1].Style.Font.Bold = true;
 
                 // Cargar los datos en la fila 3 para dejar espacio para el título de Reporte de Productos
-                worksheet.Cells[3, 1].LoadFromCollection(_context.Producto.ToList(), true);
+                worksheet.Cells[3, 1].LoadFromCollection(_context.DataProducto.ToList(), true);
 
                 // Dar formato a la tabla Reporte de Productos
                 var dataRange = worksheet.Cells[2, 1, worksheet.Dimension.End.Row, worksheet.Dimension.End.Column];
@@ -356,7 +367,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
             try
             {
 
-                var product = _context.Producto.Find(id);
+                var product = _context.DataProducto.Find(id);
                 if (product == null)
                 {
                     return NotFound();
@@ -464,7 +475,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
         {
             try
             {
-                var product = _context.Producto.Find(id);
+                var product = _context.DataProducto.Find(id);
                 if (product == null)
                 {
                     return NotFound();
@@ -517,12 +528,12 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
         [HttpPost]
         public async Task<IActionResult> EliminarProducto(int id)
         {
-            var producto = await _context.Producto.FindAsync(id);
+            var producto = await _context.DataProducto.FindAsync(id);
             if (producto == null)
             {
                 return NotFound();
             }
-            _context.Producto.Remove(producto);
+            _context.DataProducto.Remove(producto);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(ListaDeProductos));
         }
@@ -538,13 +549,13 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
             {
                 if (string.IsNullOrWhiteSpace(query))
                 {
-                    var todosLosProductos = await _context.Producto.ToListAsync();
+                    var todosLosProductos = await _context.DataProducto.ToListAsync();
                     productosPagedList = todosLosProductos.ToPagedList(1, todosLosProductos.Count);
                 }
                 else
                 {
                     query = query.ToUpper();
-                    var productos = await _context.Producto
+                    var productos = await _context.DataProducto
                         .Where(p => p.Nombre.ToUpper().Contains(query))
                         .ToListAsync();
 
