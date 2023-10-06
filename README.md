@@ -26,3 +26,5 @@ Puse cambios en la rama de jesus_ing1 el dia 04/10/2023
 Le puse el logo de inkamanu a los pdfs de reportes, lo subi a  firebase a un proyecto mio para almacenar ese logo 04/10/2023   17:24
 
 En jesus_ing3 arregle la vista detalleproducto.cshtml 05/10/2023
+
+En jesus_ing4 agregue atributos en la tabla netusers y en la tabla productos, en sus formularios tambien agregue esos campos que eran necesarios
