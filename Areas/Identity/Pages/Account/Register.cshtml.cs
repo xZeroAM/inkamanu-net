@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using proyecto_inkamanu_net.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace proyecto_ecommerce_deportivo_net.Areas.Identity.Pages.Account
 {
@@ -103,11 +104,22 @@ namespace proyecto_ecommerce_deportivo_net.Areas.Identity.Pages.Account
             public string Nombres { get; set; }
 
             [Required]
-            public string Apellidos { get; set; }
+            public string ApellidoPat { get; set; }
+
+            [Required]
+            public string ApellidoMat { get; set; }
 
             [Required]
             public string Dni { get; set; }
 
+            [Required(ErrorMessage = "Por favor, selecciona un género.")]
+            public string Genero { get; set; }
+
+            [Required] // Esto asegura que el campo no puede ser null
+            public string? Celular { get; set; }
+
+            [Required]
+            public DateTime? fechaDeNacimiento { get; set; }
         }
 
 
@@ -171,8 +183,14 @@ namespace proyecto_ecommerce_deportivo_net.Areas.Identity.Pages.Account
             {
                 var user = Activator.CreateInstance<ApplicationUser>();
                 user.Nombres = Input.Nombres;
-                user.Apellidos = Input.Apellidos;
+                user.ApellidoPat = Input.ApellidoPat;
+                user.ApellidoMat = Input.ApellidoMat;
                 user.Dni = Input.Dni;
+                user.Celular = Input.Celular;
+                user.Genero = Input.Genero;
+                user.fechaDeNacimiento = DateTime.SpecifyKind(Input.fechaDeNacimiento.Value.Date, DateTimeKind.Utc);
+                user.fechaDeRegistro = DateTime.Now.ToUniversalTime(); 
+                user.fechaDeActualizacion = null;
                 user.Rol = "Cliente"; // esta línea es para asignar el rol por defecto al usuario
                 return user;
             }

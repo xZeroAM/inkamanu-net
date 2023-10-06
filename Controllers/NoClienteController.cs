@@ -38,7 +38,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
         [HttpGet]
         public IActionResult Catalogo()
         {
-            var productos = from o in _context.Producto select o;
+            var productos = from o in _context.DataProducto select o;
             return View(productos.ToList());
         }
 
@@ -56,7 +56,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
                 // Si no hay una consulta de búsqueda, retorna todos los productos.
                 if (string.IsNullOrWhiteSpace(query))
                 {
-                    var todosLosProductos = await _context.Producto.ToListAsync();
+                    var todosLosProductos = await _context.DataProducto.ToListAsync();
                     return View("Catalogo", todosLosProductos);
                 }
 
@@ -64,7 +64,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
                 query = query.ToUpper();
 
                 // Busca productos que coincidan con la consulta de búsqueda.
-                var productos = await _context.Producto
+                var productos = await _context.DataProducto
                     .Where(p => p.Nombre.ToUpper().Contains(query))
                     .ToListAsync();
 
@@ -90,7 +90,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
 
         public async Task<IActionResult> DetalleProducto(int? id)
         {
-            Producto objProduct = await _context.Producto.FindAsync(id);
+            Producto objProduct = await _context.DataProducto.FindAsync(id);
             if (objProduct == null)
             {
                 return NotFound();
@@ -112,7 +112,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
             else
             {
                 // ya está logueado
-                var producto = await _context.Producto.FindAsync(id);
+                var producto = await _context.DataProducto.FindAsync(id);
 
                 // Buscar una proforma existente para el usuario y producto
                 var proformaExistente = await _context.DataCarrito

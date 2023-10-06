@@ -16,5 +16,13 @@ namespace proyecto_inkamanu_net.Models.DTO
         public IFormFile Imagen { get; set; }
         public Double Precio { get; set; }
         public int Stock { get; set; }
+
+        public Double? GraduacionAlcoholica { get; set; }
+
+        public string? TipoCerveza { get; set; }
+
+        public Double? Volumen { get; set; }
+
+        public string? TipoEnvase { get; set; }
     }
 }

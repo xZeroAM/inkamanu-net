@@ -83,7 +83,7 @@
         margin: 0 auto;
         overflow-y: auto;
         /* Agregar desplazamiento vertical cuando el contenido excede la altura */
-        height: 50vh;
+        height: 87vh;
         width: 130vh;
         /* Altura máxima del formulario, ajusta según sea necesario */
     }
@@ -187,13 +187,58 @@
             <div class="input">
                 <span>Cantidad en Stock</span>
                 <input type="number" placeholder="Introduzca la cantidad" asp-for="Stock"
-                    value="0">@Html.ValidationMessageFor(model => model.Stock, null)
+                    value="0" min="1">@Html.ValidationMessageFor(model => model.Stock, null)
             </div>
 
             <div class="input">
                 <span>Precio del Producto</span>
                 <input type="number" placeholder="Ejemplo: S/.50 soles" asp-for="Precio"
-                    value="0.0">@Html.ValidationMessageFor(model => model.Precio, null)
+                    value="0.0" min="1">@Html.ValidationMessageFor(model => model.Precio, null)
+            </div>
+        </div>
+
+        <div class="inputBox">
+            <div class="input">
+                <span>Grado de Alcohol</span>
+                <input type="number" placeholder="Introduzca la cantidad" asp-for="GraduacionAlcoholica" value="0"
+                    step="0.01" min="0.01">
+            </div>
+
+            <div class="input">
+                <span>Tipo de Cerveza</span>
+                <select asp-for="TipoCerveza">
+                    <option value="" disabled selected>-- Seleccione un tipo de cerveza --</option>
+                    <option value="Lager">Lager</option>
+                    <option value="Ale">Ale</option>
+                    <option value="Cerveza de Trigo(Wheat Beer)">Cerveza de Trigo(Wheat Beer)</option>
+                    <option value="Cerveza de Abadia(Abbey Beer)">Cerveza de Abadia(Abbey Beer)</option>
+                    <option value="Cerveza Lambic">Cerveza Lambic</option>
+                    <option value="Cerveza de Especias">Cerveza de Especias</option>
+                    <option value="Cerveza de Temporada">Cerveza de Temporada</option>
+                    <option value="Cerveza Artesanal (Craft Beer)">Cerveza Artesanal (Craft Beer)</option>
+                    <option value="Sin Alcohol o Baja en Alcohol">Sin Alcohol o Baja en Alcohol</option>
+                    <option value="Sin Gluten">Sin Gluten</option>
+                    <option value="Híbrida o Experimental">Híbrida o Experimental</option>
+                </select>
+                <span asp-validation-for="TipoCerveza" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="inputBox">
+            <div class="input">
+                <span>Volumen</span>
+                <input type="number" placeholder="Introduzca la cantidad" asp-for="Volumen" value="0" min="1">
+            </div>
+
+            <div class="input">
+                <span>Tipo de Envase</span>
+                <select asp-for="TipoEnvase">
+                    <option value="" disabled selected>-- Seleccione un tipo de envase --</option>
+                    <option value="botellas">Botellas</option>
+                    <option value="latas">Latas</option>
+                    <option value="barriles">Barriles</option>
+                </select>
+                <span asp-validation-for="TipoEnvase" class="text-danger"></span>
             </div>
         </div>
 
