@@ -59,7 +59,7 @@
     /* registro de productos  */
 
     .register-product-form-container {
-        height: 100%;
+
         width: 100%;
         background: rgba(255, 255, 255, .9);
         display: flex;
@@ -80,11 +80,11 @@
         border: .1rem solid rgba(0, 0, 0, .2);
         background: #fff;
         padding: 1.5rem;
-        margin: 0 auto;
+        margin: 2rem auto;
         overflow-y: auto;
         /* Agregar desplazamiento vertical cuando el contenido excede la altura */
-        height: 87vh;
-        width: 130vh;
+       
+        width: 80%;
         /* Altura máxima del formulario, ajusta según sea necesario */
     }
 
@@ -162,6 +162,25 @@
     .register-product-form-container form .inputBox .input select:focus {
         border: .1rem solid var(--celeste);
     }
+
+    /* Media Queries */
+    @@media only screen and (max-width: 600px) {
+        .register-product-form-container form {
+            width: 95%;
+            /* Aumenta el ancho del formulario para dispositivos móviles */
+            padding: 1rem;
+        }
+
+        .register-product-form-container form .inputBox .input {
+            width: 100%;
+            /* Hace que los campos de entrada ocupen todo el ancho en dispositivos móviles */
+            margin-bottom: 1rem;
+        }
+
+        .register-product-form-container form .btn {
+            font-size: 1.4rem;
+        }
+    }
 </style>
 <!---------------------------- register product form  ---------------------------->
 
@@ -186,14 +205,14 @@
         <div class="inputBox">
             <div class="input">
                 <span>Cantidad en Stock</span>
-                <input type="number" placeholder="Introduzca la cantidad" asp-for="Stock"
-                    value="0" min="1">@Html.ValidationMessageFor(model => model.Stock, null)
+                <input type="number" placeholder="Introduzca la cantidad" asp-for="Stock" value="0"
+                    min="1">@Html.ValidationMessageFor(model => model.Stock, null)
             </div>
 
             <div class="input">
                 <span>Precio del Producto</span>
-                <input type="number" placeholder="Ejemplo: S/.50 soles" asp-for="Precio"
-                    value="0.0" min="1">@Html.ValidationMessageFor(model => model.Precio, null)
+                <input type="number" placeholder="Ejemplo: S/.50 soles" asp-for="Precio" value="0.0"
+                    min="1">@Html.ValidationMessageFor(model => model.Precio, null)
             </div>
         </div>
 

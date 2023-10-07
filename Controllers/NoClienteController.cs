@@ -116,7 +116,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
 
                 // Buscar una proforma existente para el usuario y producto
                 var proformaExistente = await _context.DataCarrito
-                    .Where(p => p.UserID == userID && p.Producto.id == id)
+                    .Where(p => p.UserID == userID && p.Producto.id == id && p.Status == "PENDIENTE")
                     .FirstOrDefaultAsync();
 
                 if (proformaExistente != null)
@@ -132,7 +132,8 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
                         Producto = producto,
                         Precio = producto.Precio,
                         Cantidad = cantidad, // Usa la cantidad pasada desde el formulario
-                        UserID = userID
+                        UserID = userID,
+                        Status = "PENDIENTE" // asegurandome con esto de que el estado es pendiente
                     };
                     _context.Add(proforma);
                 }

@@ -7,7 +7,7 @@ using proyecto_inkamanu_net.Models.Entity;
 
 namespace proyecto_inkamanu_net.Models
 {
-    public class CarritoService: ICarritoService
+    public class CarritoService : ICarritoService
     {
         private readonly ApplicationDbContext _context;
 
@@ -18,8 +18,13 @@ namespace proyecto_inkamanu_net.Models
 
         public async Task<IEnumerable<Proforma>> ObtenerItems(string userId)
         {
-            return await _context.DataCarrito
+            /*return await _context.DataCarrito
                 .Where(p => p.UserID == userId)
+                .Include(p => p.Producto)
+                .ToListAsync();*/
+
+            return await _context.DataCarrito
+                .Where(p => p.UserID == userId && p.Status == "PENDIENTE")
                 .Include(p => p.Producto)
                 .ToListAsync();
         }
