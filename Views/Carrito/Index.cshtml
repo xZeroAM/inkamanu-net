@@ -1,6 +1,6 @@
 @model proyecto_inkamanu_net.Models.Entity.CarritoViewModel
 @using System.Collections.Generic;
-
+@using Microsoft.AspNetCore.Mvc.ViewFeatures
 <Style>
     @@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
 
@@ -258,7 +258,7 @@
         <!---------------------------- TOTAL PRICE ---------------------------->
         <div class="total-price">
             <table>
-                <tr>
+                <!--<tr>
                     <td>Subtotal</td>
                     <td id="subtotal-general">S/. @Model.Subtotal.ToString("F2")</td>
                 </tr>
@@ -266,7 +266,7 @@
                 <tr>
                     <td>Descuento</td>
                     <td id="descuento">S/. @Model.Descuento.ToString("F2")</td>
-                </tr>
+                </tr>-->
 
                 <tr>
                     <td>Total</td>
@@ -274,10 +274,17 @@
                 </tr>
             </table>
         </div>
-        <input type="submit" value="Comprar" class="btnComprar">
+        <a class="btnComprar" style="text-decoration: none;" asp-area="" asp-controller="Pago" asp-action="Create" asp-route-monto="@Model.Total">Comprar</a>
         <a class="btnSeguirComprando" style="text-decoration: none;" asp-area="" asp-controller="NoCliente" asp-action="Catalogo">Seguir comprando</a>
     </div>
 </section>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
 <!---------------------------- cart ends ---------------------------->
 
 <!---------------------------- javascript para actualizar el carrito ---------------------------->

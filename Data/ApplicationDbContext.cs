@@ -15,4 +15,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser> {
     public DbSet<Proforma> DataCarrito { get; set; }
 
     public DbSet<Contacto> DataContactos { get; set; }
+
+    /* agregado estas 3 tablas */
+     public DbSet<Pago> DataPago { get; set; }
+
+    public DbSet<Pedido> DataPedido { get; set; }
+
+    public DbSet<DetallePedido> DataDetallePedido { get; set; } 
 }

@@ -59,7 +59,7 @@ namespace proyecto_inkamanu_net.Controllers
                     Items = items.ToList(),
                     Subtotal = subtotal,
                     Descuento = descuento,
-                    Total = total
+                    Total = total + descuento
                 };
 
                 return View(viewModel);
