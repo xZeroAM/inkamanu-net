@@ -28,3 +28,5 @@ Le puse el logo de inkamanu a los pdfs de reportes, lo subi a  firebase a un pro
 En jesus_ing3 arregle la vista detalleproducto.cshtml 05/10/2023
 
 En jesus_ing4 agregue atributos en la tabla netusers y en la tabla productos, en sus formularios tambien agregue esos campos que eran necesarios
+
+En jesus_ing5 agregue 3 tablas para la simulacion de la compra, que fueron el pago, el pedido y el detalle pedido el dia 07/10/2023
