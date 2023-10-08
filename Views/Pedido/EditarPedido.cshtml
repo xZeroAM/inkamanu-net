@@ -1,0 +1,264 @@
+@model proyecto_inkamanu_net.Models.Entity.Pedido
+
+@{
+    ViewData["Title"] = "Editar Pedido";
+}
+
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+
+    :root {
+        --my-blue: #0074E4;
+        --light-my-blue: #6FA6FF;
+        /* Aquí defines el tono más claro */
+        --celeste: #40E0D0;
+        --light-celeste: hsl(177, 72%, 70%);
+        --amarillo: #f9d806;
+        --light-amarillo: #ffee80;
+        --rojo: #FF0000;
+        --light-rojo: #FFAFAF;
+        --verde: #369681;
+        --light-verde: #00B050;
+        --black: #130f40;
+        --light-color: #666;
+        --border: .1rem solid rgba(0, 0, 0, .1);
+        --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+    }
+
+    section {
+        padding: 2rem 6%;
+    }
+
+    /* esto es para los productos */
+
+    .heading {
+        text-align: center;
+        padding-bottom: 2rem;
+        font-size: 4.5rem;
+        color: var(--black);
+    }
+
+    .heading span {
+        position: relative;
+        z-index: 0;
+    }
+
+    .heading span::before {
+        content: '';
+        position: absolute;
+        bottom: 1rem;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: -1;
+        background: var(--celeste);
+        clip-path: polygon(0 90%, 100% 80%, 100% 100%, 0% 100%);
+        /* CON ESTO PONGO LA LINEA AMARILLA ABAJO DE LA PALABRA Vehicles de color amarillo */
+    }
+
+    /* estilos para la tabla productos */
+
+    /* editando o actualizando productos  */
+
+    .editar-pedido-form-container {
+
+        width: 100%;
+        background: rgba(255, 255, 255, .9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .editar-pedido-form-container.active {
+        top: 0;
+    }
+
+    .editar-pedido-form-container form {
+        margin-top: 100px;
+        text-align: center;
+        max-width: 1000rem;
+        border-radius: .5rem;
+        box-shadow: var(--box-shadow);
+        border: .1rem solid rgba(0, 0, 0, .2);
+        background: #fff;
+        padding: 1.5rem;
+        margin: 2rem auto;
+        overflow-y: auto;
+        /* Agregar desplazamiento vertical cuando el contenido excede la altura */
+
+        width: 80%;
+        /* Altura máxima del formulario, ajusta según sea necesario */
+    }
+
+    .editar-pedido-form-container form .inputBox {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .editar-pedido-form-container form h3 {
+        color: var(--black);
+        font-size: 2.5rem;
+        padding-bottom: 1rem 0;
+        text-transform: uppercase;
+    }
+
+    .editar-pedido-form-container form .btn {
+        display: block;
+        width: 100%;
+        margin: .5rem 0;
+        background-color: var(--celeste);
+        /* Cambia el color de fondo */
+        color: var(--black);
+        /* Cambia el color del texto */
+        border: none;
+        border-radius: .5rem;
+        padding: 1rem;
+        font-size: 1.6rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .editar-pedido-form-container form .btn:hover {
+        background-color: var(--amarillo);
+        /* Cambia el color de fondo al pasar el mouse */
+    }
+
+    .editar-pedido-form-container form .btn2 {
+        display: block;
+        width: 100%;
+        margin: .5rem 0;
+        background-color: var(--my-blue);
+        /* Cambia el color de fondo */
+        color: var(--black);
+        /* Cambia el color del texto */
+        border: none;
+        border-radius: .5rem;
+        padding: 1rem;
+        font-size: 1.6rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .editar-pedido-form-container form .btn2:hover {
+        background-color: var(--light-my-blue);
+        /* Cambia el color de fondo al pasar el mouse */
+    }
+
+    .editar-pedido-form-container form .inputBox .input {
+        width: 49%;
+    }
+
+    .editar-pedido-form-container form .inputBox .input span {
+        display: block;
+        padding: .5rem 0;
+        font-size: 1.5rem;
+        color: var(--light-color);
+    }
+
+    .editar-pedido-form-container form .inputBox .input p {
+        background: #eee;
+        border-radius: .5rem;
+        padding: 1rem;
+        font-size: 1.6rem;
+        color: var(--black);
+        text-transform: none;
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+
+    .editar-pedido-form-container form .inputBox .input p:focus {
+        border: .1rem solid var(--celeste);
+    }
+
+    .editar-pedido-form-container form .inputBox .input select {
+        background: #eee;
+        border-radius: .5rem;
+        padding: 1rem;
+        font-size: 1.6rem;
+        color: var(--black);
+        text-transform: none;
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+
+    .editar-pedido-form-container form .inputBox .input select:focus {
+        border: .1rem solid var(--celeste);
+    }
+
+    /* Media Queries */
+    @@mediaonly screen and (max-width: 600px) {
+        .editar-pedido-form-container form {
+            width: 95%;
+            /* Aumenta el ancho del formulario para dispositivos móviles */
+            padding: 1rem;
+        }
+
+        .editar-pedido-form-container form .inputBox .input {
+            width: 100%;
+            /* Hace que los campos de entrada ocupen todo el ancho en dispositivos móviles */
+            margin-bottom: 1rem;
+        }
+
+        .editar-pedido-form-container form .btn,
+        .btn2 {
+            font-size: 1.4rem;
+        }
+    }
+</style>
+<!---------------------------- editar pedido form  ---------------------------->
+
+<div class="editar-pedido-form-container">
+    <form asp-controller="Pedido" asp-action="GuardarPedidoEditado" method="post">
+        <h3>ATENDIENDO PEDIDO Nro: @Model.ID</h3>
+        @if (TempData["MessageActualizandoPedido"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["MessageActualizandoPedido"]
+            </div>
+        }
+        <input type="text" asp-for="ID" type="hidden">
+        <div class="inputBox">
+            <div class="input">
+                <span>ID del Usuario</span>
+                <p>@Model.UserID</p>
+            </div>
+
+            <div class="input">
+                <span>Total</span>
+                <p>S/. @Model.Total.ToString("F2")</p>
+            </div>
+        </div>
+
+        <div class="inputBox">
+            <div class="input">
+                <span>Estado del Pedido</span>
+                <select asp-for="Status">
+                    <option value="" disabled selected>-- Seleccione un estado --</option>
+                    <option value="PENDIENTE">Pendiente</option>
+                    <option value="ENTREGADO">Entregado</option>
+                </select>
+            </div>
+        </div>
+
+        <input type="submit" value="Actualizar Pedido" class="btn">
+        <a class="btn2" style="text-decoration: none;" asp-area="" asp-controller="Pedido"
+            asp-action="ListaDePedidos">Volver</a>
+    </form>
+
+</div>
+<br>
+@if (TempData["MessageActualizandoPedido"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["MessageActualizandoPedido"]
+    </div>
+}
+
+@if (TempData["ErrorActualizandoPedido"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorActualizandoPedido"]
+    </div>
+}
+<!---------------------------- editar pedido form ---------------------------->
