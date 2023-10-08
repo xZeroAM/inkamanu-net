@@ -1,8 +1,8 @@
-@model proyecto_inkamanu_net.Models.Entity.CarritoViewModel
+@model proyecto_inkamanu_net.Models.Entity.PedidoViewModel
 @using System.Collections.Generic;
 @using Microsoft.AspNetCore.Mvc.ViewFeatures
 @{
-    ViewData["Title"] = "Carrito de compras";
+    ViewData["Title"] = "Detalle Pedido - CLIENTE";
 }
 <Style>
     @@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
@@ -170,7 +170,7 @@
         text-align: right;
     }
 
-    .btnComprar {
+    .btnRegresar {
         display: inline-block;
         float: right;
         /* Alinea a la derecha */
@@ -184,28 +184,10 @@
         padding: .8rem 3rem;
     }
 
-    .btnComprar:hover {
+    .btnRegresar:hover {
         background: var(--celeste);
     }
 
-    .btnSeguirComprando {
-        display: inline-block;
-        float: right;
-        /* Alinea a la derecha */
-        margin-top: 1rem;
-        border-radius: .5rem;
-        background: var(--light-my-blue);
-        color: var(--black);
-        font-weight: 500;
-        font-size: 1.7rem;
-        cursor: pointer;
-        padding: .8rem 3rem;
-        margin: 1rem;
-    }
-
-    .btnSeguirComprando:hover {
-        background: var(--my-blue);
-    }
 
     /*---------------------- cambios ---------------------- */
 
@@ -220,13 +202,47 @@
         object-fit: cover;
         /* Puedes ajustar el grosor y el color del borde según tus preferencias */
     }
+
+    /* para la mclase xdxd que tiene la etiqeuta p donde se muestra la cantidad de productos comprados o pedidos */
+
+    td .xdxd {
+        width: 60px;
+        height: 30px;
+        padding: 5px;
+        border: 1px solid var(--my-blue);
+        font-size: 14px;
+    }
+
+    /* estilos para el estado */
+
+    .inputBox .input span {
+        display: block;
+        padding: .5rem 0;
+        font-size: 1.5rem;
+        color: var(--my-blue);
+    }
+
+    .inputBox .input p {
+        background: #eee;
+        border-radius: .5rem;
+        padding: 1rem;
+        font-size: 1.6rem;
+        color: var(--black);
+        text-transform: none;
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+
+    .inputBox .input p:focus {
+        border: .1rem solid var(--my-blue);
+    }
 </Style>
 
 <!---------------------------- cart items details  ---------------------------->
 <br>
 <section class="carrito" id="carrito">
     <div class="small-container cart-page">
-        <h1 class="heading"> <span>Carrito de Compras</span></h1>
+        <h1 class="heading"> <span>Pedido Nro. @Model.ID </span></h1>
         <table>
             <tr>
                 <th>Productos</th>
@@ -238,22 +254,19 @@
                 <tr>
                     <td>
                         <div class="cart-info">
-                            <img src="@item.Producto.Imagen" class="d-block w-100 image-fit">
+                            <img src="@item.ImagenProducto" class="d-block w-100 image-fit">
                             <div>
-                                <p>@item.Producto.Nombre</p>
-                                <small>Precio: S/. @item.Precio.ToString("F2")</small>
+                                <p>@item.NombreProducto</p>
+                                <small>Precio: S/. @item.PrecioUnitario.ToString("F2")</small>
                                 <br>
-                                <a href="@Url.Action("QuitarDelCarrito", "Carrito", new { id = item.Id })">Quitar</a>
+
                             </div>
                         </div>
                     </td>
                     <td>
-                        <form method="post" action="@Url.Action("ActualizarCantidad", "Carrito")" onchange="this.submit()">
-                            <input type="number" name="cantidad" value="@item.Cantidad" min="1">
-                            <input type="hidden" name="id" value="@item.Id">
-                        </form>
+                        <p class="xdxd">@item.Cantidad</p>
                     </td>
-                    <td>S/. @(((double)item.Precio * item.Cantidad).ToString("F2")) </td>
+                    <td>S/. @(((double)item.PrecioUnitario * item.Cantidad).ToString("F2")) </td>
                 </tr>
             }
         </table>
@@ -261,15 +274,7 @@
         <!---------------------------- TOTAL PRICE ---------------------------->
         <div class="total-price">
             <table>
-                <!--<tr>
-                    <td>Subtotal</td>
-                    <td id="subtotal-general">S/. @Model.Subtotal.ToString("F2")</td>
-                </tr>
 
-                <tr>
-                    <td>Descuento</td>
-                    <td id="descuento">S/. @Model.Descuento.ToString("F2")</td>
-                </tr>-->
 
                 <tr>
                     <td>Total</td>
@@ -277,8 +282,14 @@
                 </tr>
             </table>
         </div>
-        <a class="btnComprar" style="text-decoration: none;" asp-area="" asp-controller="Pago" asp-action="Create" asp-route-monto="@Model.Total">Comprar</a>
-        <a class="btnSeguirComprando" style="text-decoration: none;" asp-area="" asp-controller="NoCliente" asp-action="Catalogo">Seguir comprando</a>
+        <div class="inputBox">
+            <div class="input">
+                <span>Estado del Pedido:</span>
+                <p>@Model.Status</p>
+            </div>
+        </div>
+        <a class="btnRegresar" style="text-decoration: none;" asp-area="" asp-controller="MisPedidos"
+            asp-action="MisPedidos">Volver</a>
     </div>
 </section>
 

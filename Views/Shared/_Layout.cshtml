@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="icon" href="~/images/img_logo_inkamanu.jpeg"/>
+    <link rel="icon" href="~/images/img_logo_inkamanu.jpeg" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/proyecto_ecommerce_deportivo_net.styles.css" asp-append-version="true" />
 
@@ -295,7 +295,7 @@
             /* ese codigo es hasta aca arriba */
         }
 
-        #imgLogoEmpresa{
+        #imgLogoEmpresa {
             border-radius: 50%;
         }
     </style>
@@ -307,7 +307,8 @@
     <header class="header">
         <div id="menu-btn" class="fas fa-bars"></div>
         <a class="logo" style="text-decoration: none;" asp-area="" asp-controller="Home" asp-action="Index">
-            <img src="~/images/img_logo_inkamanu.jpeg" alt="Logo" style="height: 40px; width: 40px; border-radius:50%;" id="imgLogoEmpresa"> <!-- Añadiendo el logo al costado del nombre de la empresa -->
+            <img src="~/images/img_logo_inkamanu.jpeg" alt="Logo" style="height: 40px; width: 40px; border-radius:50%;"
+                id="imgLogoEmpresa"> <!-- Añadiendo el logo al costado del nombre de la empresa -->
             <span>Inka</span>Manu </a>
         <nav class="navbar">
             <a class="nav-link text-dark" asp-area="" asp-controller="NoCliente" asp-action="Catalogo">Catalogo</a>
@@ -317,6 +318,9 @@
                 Productos</a>
                 <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ListaDeUsuarios">Lista De
                 Usuarios</a>
+
+            <a class="nav-link text-dark" asp-area="" asp-controller="Pedido" asp-action="ListaDePedidos">Lista De
+                Pedidos</a>
             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contacto">Contactame</a>
         </nav>
 
@@ -324,24 +328,31 @@
         <div class="iconosxd">
             @if (SignInManager.IsSignedIn(User))
             {
+                <div>
+                    <a class="fas fa-shopping-bag" asp-area="" asp-controller="MisPedidos" asp-action="MisPedidos"></a>
+                </div>
 
                 <div>
                     <a class="fas fa-shopping-cart" asp-area="" asp-controller="Carrito" asp-action="Index"></a>
                 </div>
                 <div class="nav-item custom-user-info">
-                    <a class="nav-link text-dark" style="text-decoration: none;" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hola
+                    <a class="nav-link text-dark" style="text-decoration: none;" asp-area="Identity"
+                        asp-page="/Account/Manage/Index" title="Manage">Hola
                         @User.Identity?.Name!</a>
                 </div>
                 <div>
-                    <a class="fas fa-sign-out-alt" style="text-decoration: none;" asp-area="Identity" asp-page="/Account/Logout"
+                    <a class="fas fa-sign-out-alt" style="text-decoration: none;" asp-area="Identity"
+                        asp-page="/Account/Logout"
                         asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })"></a>
                 </div>
             }
             else
             {
 
-                <a class="fas fa-user-plus" style="text-decoration: none;" asp-area="Identity" asp-page="/Account/Register"></a>
-                <a class="fas fa-sign-in-alt" style="text-decoration: none;" asp-area="Identity" asp-page="/Account/Login"></a>
+                <a class="fas fa-user-plus" style="text-decoration: none;" asp-area="Identity"
+                    asp-page="/Account/Register"></a>
+                <a class="fas fa-sign-in-alt" style="text-decoration: none;" asp-area="Identity"
+                    asp-page="/Account/Login"></a>
             }
         </div>
 
@@ -365,11 +376,16 @@
         <div class="box-container">
             <div class="box">
                 <h3>Enlaces Rápidos</h3>
-                <a asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-arrow-right"></i> Principal </a>
-                <a asp-area="" asp-controller="NoCliente" asp-action="Catalogo"> <i class="fas fa-arrow-right"></i> Productos </a>
-                <a asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-arrow-right"></i> Descripción </a>
-                <a asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-arrow-right"></i> Misión y Visión </a>
-                <a asp-area="" asp-controller="Home" asp-action="Contacto"> <i class="fas fa-arrow-right"></i> Contactanos </a>
+                <a asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-arrow-right"></i> Principal
+                </a>
+                <a asp-area="" asp-controller="NoCliente" asp-action="Catalogo"> <i class="fas fa-arrow-right"></i>
+                    Productos </a>
+                <a asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-arrow-right"></i> Descripción
+                </a>
+                <a asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-arrow-right"></i> Misión y
+                    Visión </a>
+                <a asp-area="" asp-controller="Home" asp-action="Contacto"> <i class="fas fa-arrow-right"></i>
+                    Contactanos </a>
             </div>
 
             <div class="box">
@@ -381,24 +397,29 @@
 
             <div class="box">
                 <h3>Redes</h3>
-                <a href="https://www.facebook.com/profile.php?id=61552108551409"> <i class="fab fa-facebook-f"></i> Facebook </a>
+                <a href="https://www.facebook.com/profile.php?id=61552108551409"> <i class="fab fa-facebook-f"></i>
+                    Facebook </a>
                 <a href="https://api.whatsapp.com/send?phone=927572267" target="_blank"><i class="fab fa-whatsapp"></i>
                     WhatsApp</a>
                 <br><br>
                 <h3>Legal</h3>
-                <a href="https://usmppe-my.sharepoint.com/:b:/g/personal/kristell_flores_usmp_pe/EfV9JOOj-AlDgWp05erVrdUBGm1LmTAl6swl3DMjNWw7Pg?e=IPs6ED"> <i class="fa fa-gavel"></i> Términos y Condiciones </a>
-                <a href="https://usmppe-my.sharepoint.com/:b:/g/personal/kristell_flores_usmp_pe/ES4JN6-xJLRHuqRkKrOMwnsBpnhXgHAlQk7ii0GmIRbp5Q?e=tJDQI8"> <i class="fa fa-lock"></i> Politicas de privacidad </a>
+                <a
+                    href="https://usmppe-my.sharepoint.com/:b:/g/personal/kristell_flores_usmp_pe/EfV9JOOj-AlDgWp05erVrdUBGm1LmTAl6swl3DMjNWw7Pg?e=IPs6ED">
+                    <i class="fa fa-gavel"></i> Términos y Condiciones </a>
+                <a
+                    href="https://usmppe-my.sharepoint.com/:b:/g/personal/kristell_flores_usmp_pe/ES4JN6-xJLRHuqRkKrOMwnsBpnhXgHAlQk7ii0GmIRbp5Q?e=tJDQI8">
+                    <i class="fa fa-lock"></i> Politicas de privacidad </a>
             </div>
 
             <div class="box">
                 <h3>Desarrolladores</h3>
                 <a> <i class="fas fa-code"></i> Arturo T. Aliaga Silva </a>
-				<a> <i class="fas fa-laptop-code"></i> Matias N Araujo Vera </a>
-				<a> <i class="fas fa-cogs"></i> Yasser M. Avalos Montero </a>
-				<a> <i class="fas fa-terminal"></i> Lucas A. Espinoza Laurente </a>
-				<a> <i class="fas fa-laptop"></i> Kristell Y. Flores Huamani </a>
-				<a> <i class="fas fa-user-cog"></i> Jesús A. Soria Llantoy </a>
-				<a> <i class="fas fa-code-branch"></i> Brandon J. Viru Camones </a>
+                <a> <i class="fas fa-laptop-code"></i> Matias N Araujo Vera </a>
+                <a> <i class="fas fa-cogs"></i> Yasser M. Avalos Montero </a>
+                <a> <i class="fas fa-terminal"></i> Lucas A. Espinoza Laurente </a>
+                <a> <i class="fas fa-laptop"></i> Kristell Y. Flores Huamani </a>
+                <a> <i class="fas fa-user-cog"></i> Jesús A. Soria Llantoy </a>
+                <a> <i class="fas fa-code-branch"></i> Brandon J. Viru Camones </a>
             </div>
         </div>
         <div class="credit"> @@Copyright - Todos los derechos reservados - Grupo 2! </div>
