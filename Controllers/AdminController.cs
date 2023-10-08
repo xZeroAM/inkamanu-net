@@ -91,7 +91,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
                 producto.fechaCreacion = DateTime.Now.ToUniversalTime(); ;
                 producto.fechaActualizacion = null;
 
-                TempData["MessageRegistrandoProducto"]= "Se Registraron exitosamente los datos.";
+                TempData["MessageRegistrandoProducto"] = "Se Registraron exitosamente los datos.";
 
                 _context.DataProducto.Add(producto);
                 _context.SaveChanges();
@@ -581,12 +581,45 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
         }
 
 
-        public IActionResult ListaDeUsuarios() {
-            var listaDeUsuarios = _context.Users.ToList();
+        // public IActionResult ListaDeUsuarios()
+        // {
+        //     var listaDeUsuarios = _context.Users.ToList();
 
-            Console.Write(listaDeUsuarios + "HOLAAAAAAAA");
+        //     Console.Write(listaDeUsuarios + "HOLAAAAAAAA");
 
-            return View("ListaDeUsuarios", listaDeUsuarios);
+        //     return View("ListaDeUsuarios", listaDeUsuarios);
+        // }
+
+        public ActionResult ListaDeUsuarios(int? page)
+        {
+            int pageNumber = (page ?? 1); // Si no se especifica la página, asume la página 1
+            int pageSize = 2; // maximo 3 productos por pagina
+
+
+            pageNumber = Math.Max(pageNumber, 1);// Con esto se asegura de que pageNumber nunca sea menor que 1
+
+            IPagedList listaPaginada = _context.Users.ToPagedList(pageNumber, pageSize);
+
+            return View("ListaDeUsuarios", listaPaginada);
+        }
+
+        // public IActionResult EditarUsuario() {
+
+        // }
+
+        [HttpPost]
+        public async Task<IActionResult> EliminarUsuario(string id)
+        {
+            var usuario = await _context.Users.FindAsync(id);
+
+            if (usuario != null)
+            {
+                _context.Users.Remove(usuario);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(ListaDeUsuarios));
+            }
+
+            return NotFound();
         }
     }
 

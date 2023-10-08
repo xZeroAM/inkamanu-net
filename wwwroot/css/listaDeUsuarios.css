@@ -1,0 +1,284 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+
+:root {
+    --my-blue: #0074E4;
+    --light-my-blue: #6FA6FF;
+    /* Aquí defines el tono más claro */
+    --celeste: #40E0D0;
+    --light-celeste: hsl(177, 72%, 70%);
+    --amarillo: #f9d806;
+    --light-amarillo: #ffee80;
+    --rojo: #FF0000;
+    --light-rojo: #FFAFAF;
+    --verde: #369681;
+    --light-verde: #00B050;
+    --black: #130f40;
+    --light-color: #666;
+    --border: .1rem solid rgba(0, 0, 0, .1);
+    --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+}
+
+section {
+    padding: 0;
+}
+
+/* esto es para los productos */
+
+.heading {
+    text-align: center;
+    padding-bottom: 2rem;
+    font-size: 4.5rem;
+    color: var(--black);
+}
+
+.heading span {
+    position: relative;
+    z-index: 0;
+}
+
+.heading span::before {
+    content: '';
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    background: var(--celeste);
+    clip-path: polygon(0 90%, 100% 80%, 100% 100%, 0% 100%);
+    /* CON ESTO PONGO LA LINEA AMARILLA ABAJO DE LA PALABRA Vehicles de color amarillo */
+}
+
+/* estilos para la tabla productos */
+body {
+    background: #eee;
+}
+
+.table-product-form-container {
+    align-items: center;
+    justify-content: center;
+}
+
+.table-product-form-container table {
+    background-color: white;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.table-product-form-container th,
+td {
+    padding: 10px;
+    /* Aumenta el espaciado para mejorar la legibilidad */
+    border: 1px solid #ddd;
+    /* Agrega un borde en todas las celdas */
+    font-size: 1.95rem;
+}
+
+.table-product-form-container thead {
+    background-color: #000000;
+    /*#246355*/
+    border-bottom: solid 5px var(--light-celeste);
+    color: white;
+}
+
+.table-product-form-container tr:nth-child(even) {
+    background-color: #ddd;
+}
+
+.table-product-form-container tr:hover {
+    background-color: var(--my-blue);
+    color: white;
+}
+
+.table-product-form-container tr:hover td a {
+    color: white;
+}
+
+/* los buscadores */
+.listar_product .table-product-form-container .Buscador {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--my-blue);
+    border-radius: 0.5rem;
+    box-shadow: var(--box-shadow);
+    padding: 10px;
+
+    /* Agregar margen superior para separar del encabezado */
+    max-width: 100%;
+}
+
+.listar_product .table-product-form-container .Buscador span {
+    font-weight: bold;
+    margin: 10px;
+    font-size: 16px;
+    color: var(--black);
+
+    border: none;
+}
+
+.listar_product .table-product-form-container .Buscador .btnBuscar {
+    display: inline-block;
+    margin-top: 1rem;
+    border-radius: .5rem;
+    background: var(--light-celeste);
+    color: var(--black);
+    font-weight: 500;
+    font-size: 1.7rem;
+    cursor: pointer;
+    padding: .5rem 1.5rem;
+}
+
+.listar_product .table-product-form-container .Buscador .btnBuscar:hover {
+    background: var(--celeste);
+}
+
+.listar_product .table-product-form-container .Buscador .btnAgregar {
+    display: inline-block;
+    margin-top: 1rem;
+    border-radius: .5rem;
+    background: var(--light-amarillo);
+    color: var(--black);
+    font-weight: 500;
+    font-size: 1.7rem;
+    cursor: pointer;
+    padding: .5rem 1.5rem;
+}
+
+.listar_product .table-product-form-container .Buscador .btnAgregar:hover {
+    background: var(--amarillo);
+}
+
+
+.listar_product .table-product-form-container .Buscador .btnPDF {
+    display: inline-block;
+    margin-top: 1rem;
+    border-radius: .5rem;
+    background: var(--light-rojo);
+    color: var(--black);
+    font-weight: 500;
+    font-size: 1.7rem;
+    cursor: pointer;
+    padding: .5rem 1.5rem;
+}
+
+.listar_product .table-product-form-container .Buscador .btnPDF:hover {
+    background: var(--rojo);
+}
+
+.listar_product .table-product-form-container .Buscador .btnExcel {
+    display: inline-block;
+    margin-top: 1rem;
+    border-radius: .5rem;
+    background: var(--light-verde);
+    color: var(--black);
+    font-weight: 500;
+    font-size: 1.7rem;
+    cursor: pointer;
+    padding: .5rem 1.5rem;
+}
+
+.listar_product .table-product-form-container .Buscador .btnExcel:hover {
+    background: var(--verde);
+}
+
+.listar_product .table-product-form-container .Buscador input[type="text"] {
+    flex: 0.5;
+    padding: 8px;
+    border: none;
+    border-radius: 0.5rem;
+    margin-right: 10px;
+    font-weight: 500;
+    font-size: 1.7rem;
+}
+
+
+/* Personalización de la Paginación */
+.pagination-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination li {
+    display: inline;
+}
+
+.pagination li a,
+.pagination li span {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    font-size: 18px;
+    /* Ajusta el tamaño de la fuente aquí */
+}
+
+.pagination li.active a,
+.pagination li.active span {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+.pagination li a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.pagination li.disabled a,
+.pagination li.disabled span {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+/* estilo para el boton editar y eliminar */
+
+.btnEditar {
+    display: inline-block;
+    margin-top: 1rem;
+    border-radius: .5rem;
+    background: var(--light-verde);
+    color: var(--black);
+
+    font-size: 1.7rem;
+    cursor: pointer;
+    padding: .2rem 1rem;
+}
+
+.btnEditar:hover {
+    background: var(--verde);
+}
+
+.btnEliminar {
+    display: inline-block;
+    margin-top: 1rem;
+    border-radius: .5rem;
+    background: var(--light-rojo);
+    color: var(--black);
+
+    font-size: 1.7rem;
+    cursor: pointer;
+    padding: .2rem 1rem;
+}
+
+.btnEliminar:hover {
+    background: var(--rojo);
+    color: white;
+}
+
+table, thead, tbody, tr, td, th {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+.table-product-form-container {
+    margin: 0 auto;
+}
+
+.Buscador {
+    width: 100%;
+}
