@@ -326,6 +326,9 @@
         <div class="iconosxd">
             @if (SignInManager.IsSignedIn(User))
             {
+                <div>
+                    <a class="fas fa-shopping-bag" asp-area="" asp-controller="MisPedidos" asp-action="MisPedidos"></a>
+                </div>
 
                 <div>
                     <a class="fas fa-shopping-cart" asp-area="" asp-controller="Carrito" asp-action="Index"></a>

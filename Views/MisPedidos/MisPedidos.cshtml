@@ -6,7 +6,7 @@
 @model IPagedList<proyecto_inkamanu_net.Models.Entity.Pedido>;
 
 @{
-    ViewData["Title"] = "Lista de Pedidos";
+    ViewData["Title"] = "Mis Pedidos";
 }
 
 @if (TempData["MessageDeRespuesta"] != null)
@@ -184,7 +184,7 @@
         background: var(--verde);
     }
 
-    .listar_pedido .table-pedido-form-container .Buscador input[type="text"] {
+    .listar_pedido .table-pedido-form-container .Buscador input[type="number"] {
         flex: 0.5;
         padding: 8px;
         border: none;
@@ -284,15 +284,15 @@
 
     /* hasta aqui */
 </style>
-<!---------------------------- listar pedidos stars  ---------------------------->
+<!---------------------------- listar mis pedidos stars  ---------------------------->
 <section class="listar_pedido" id="listar_pedido">
     <div class="table-pedido-form-container">
-        <h1 class="heading"> <span>Lista de Pedidos</span></h1>
+        <h1 class="heading"> <span>Mis Pedidos</span></h1>
 
         <div class="Buscador">
             <span>Buscar Pedido</span>
-            <form asp-controller="Pedido" asp-action="BuscarPedido" method="get">
-                <input type="text" name="searchUsername" placeholder="Por Cliente" />
+            <form asp-controller="MisPedidos" asp-action="BuscarPedido" method="get">
+                <input type="number" name="searchPedidoID" placeholder="Por PedidoID" />
                 <select name="orderStatus">
                     <option value="">Todos</option>
                     <option value="PENDIENTE">Pendiente</option>
@@ -301,9 +301,9 @@
                 <button type="submit" class="btnBuscar">Buscar</button>
             </form>
 
-            <a style="text-decoration: none;" asp-area="" asp-controller="Pedido" asp-action="ExportarPedidosEnPDF"
+            <a style="text-decoration: none;" asp-area="" asp-controller="MisPedidos" asp-action="ExportarPedidosEnPDF"
                 class="btnPDF">Exportar en PDF</a>
-            <a style="text-decoration: none;" asp-area="" asp-controller="Pedido" asp-action="ExportarPedidosEnExcel"
+            <a style="text-decoration: none;" asp-area="" asp-controller="MisPedidos" asp-action="ExportarPedidosEnExcel"
                 class="btnExcel">Exportar en Excel</a>
         </div>
         <br>
@@ -315,8 +315,7 @@
                     <th>Total</th>
                     <th>Estado</th>
                     <!-- Agrega aquí los demás atributos que necesites -->
-                    <th>Atender</th>
-                    <th>Detalle</th>
+                    <th>Ver</th>
                     <th>Acciones de exportar</th>
                 </tr>
             </thead>
@@ -330,24 +329,13 @@
                         <td>@pedido.Status</td>
                         <!-- Agrega aquí los demás atributos que necesites -->
                         <td>
-                            <!-- Botón de Editar -->
-                            <a asp-controller="Pedido" asp-action="EditarPedido" asp-route-id="@pedido.ID"
-                                class="btnEditar">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                        </td>
-
-                        <td>
-                            <!-- Botón de detalle -->
-                            <a asp-controller="Pedido" asp-action="VerPedido" asp-route-id="@pedido.ID">
-                                Detalle
-                            </a>
+                            <!-- Botón de Ver pedido -->
+                            <a asp-controller="MisPedidos" class="btn" asp-action="VerPedido" asp-route-id="@pedido.ID">Ver Pedido</a>
                         </td>
                         <td>
-                             <!-- Acciones para exportar en pdf y excel  -->
-                            <a asp-controller="Pedido" asp-action="ExportarUnSoloPedidoEnPDF"
+                            <a asp-controller="MisPedidos" asp-action="ExportarUnSoloPedidoEnPDF"
                                 asp-route-id="@pedido.ID">PDF</a>
-                            <a asp-controller="Pedido" asp-action="ExportarUnSoloPedidoEnExcel"
+                            <a asp-controller="MisPedidos" asp-action="ExportarUnSoloPedidoEnExcel"
                                 asp-route-id="@pedido.ID">EXcel</a>
                         </td>
                     </tr>
@@ -358,28 +346,28 @@
         <div class="pagination-container">
             <ul class="pagination">
                 <li class="page-item @(Model.IsFirstPage ? "disabled" : "")">
-                    <a class="page-link" href="@Url.Action("ListaDePedidos", new { page = 1 })">Primera</a>
+                    <a class="page-link" href="@Url.Action("MisPedidos", new { page = 1 })">Primera</a>
                 </li>
                 <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
                     <a class="page-link"
-                        href="@Url.Action("ListaDePedidos", new { page = Model.PageNumber - 1 })">&laquo;</a>
+                        href="@Url.Action("MisPedidos", new { page = Model.PageNumber - 1 })">&laquo;</a>
                 </li>
                 @for (var pageNumber = 1; pageNumber <= Model.PageCount; pageNumber++)
                 {
                     <li class="page-item @(pageNumber == Model.PageNumber ? "active" : "")">
-                        <a class="page-link" href="@Url.Action("ListaDePedidos", new { page = pageNumber })">@pageNumber</a>
+                        <a class="page-link" href="@Url.Action("MisPedidos", new { page = pageNumber })">@pageNumber</a>
                     </li>
                 }
                 <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
                     <a class="page-link"
-                        href="@Url.Action("ListaDePedidos", new { page = Model.PageNumber + 1 })">&raquo;</a>
+                        href="@Url.Action("MisPedidos", new { page = Model.PageNumber + 1 })">&raquo;</a>
                 </li>
                 <li class="page-item @(Model.IsLastPage ? "disabled" : "")">
                     <a class="page-link"
-                        href="@Url.Action("ListaDePedidos", new { page = Model.PageCount })">&Uacute;ltima</a>
+                        href="@Url.Action("MisPedidos", new { page = Model.PageCount })">&Uacute;ltima</a>
                 </li>
             </ul>
         </div>
     </div>
 </section>
-<!---------------------------- listar pedidos ends  ---------------------------->
+<!---------------------------- listar mis pedidos ends  ---------------------------->
