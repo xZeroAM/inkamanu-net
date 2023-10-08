@@ -621,6 +621,32 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
 
             return NotFound();
         }
+
+        [HttpGet]
+        public async Task<ActionResult> EditarUsuarios(string? id)
+        {
+
+            ApplicationUser? usuarioEditar = await _context.Users.FindAsync(id);
+
+            if (usuarioEditar == null)
+            {
+                Console.Write("No se encontro");
+                return NotFound();
+            }
+
+            UsuarioDTO usuarioEditarDTO = new UsuarioDTO();
+            usuarioEditarDTO.Id = usuarioEditar.Id;
+            usuarioEditarDTO.Nombres = usuarioEditar.Nombres;
+            usuarioEditarDTO.ApellidoPaterno = usuarioEditar.ApellidoPat;
+            usuarioEditarDTO.ApellidoMaterno = usuarioEditar.ApellidoMat;
+            usuarioEditarDTO.Email = usuarioEditar.Email;
+            usuarioEditarDTO.Dni = usuarioEditar.Dni;
+            usuarioEditarDTO.Celular = usuarioEditar.Celular;
+            usuarioEditarDTO.Genero = usuarioEditar.Genero;
+            return View("EditarUsuario", usuarioEditarDTO);
+
+        }
+
     }
 
 }
