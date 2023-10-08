@@ -579,6 +579,15 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
             // Retorna la vista con productosPagedList, que siempre tendrá un valor asignado.
             return View("ListaDeProductos", productosPagedList);
         }
+
+
+        public IActionResult ListaDeUsuarios() {
+            var listaDeUsuarios = _context.Users.ToList();
+
+            Console.Write(listaDeUsuarios + "HOLAAAAAAAA");
+
+            return View("ListaDeUsuarios", listaDeUsuarios);
+        }
     }
 
 }
