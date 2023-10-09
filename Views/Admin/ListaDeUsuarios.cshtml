@@ -11,19 +11,14 @@
     <div class="table-product-form-container">
         <div class="Buscador">
             <span>Buscar Producto</span>
-            <form asp-controller="Admin" asp-action="BuscarProducto" method="get">
+            <form asp-controller="Admin" asp-action="BuscarUsuario" method="get">
                 <input type="text" name="query" />
                 <button type="submit" class="btnBuscar">Buscar</button>
             </form>
 
-            <a style="text-decoration: none;" asp-area="" asp-controller="Admin" asp-action="AgregarUsuario"
-                class="btnAgregar">
-                Agregar Producto
-            </a>
-
-            <a style="text-decoration: none;" asp-area="" asp-controller="Admin" asp-action="ExportarProductosEnPDF"
+            <a style="text-decoration: none;" asp-area="" asp-controller="Admin" asp-action="ExportarUsuariosEnPDF"
                 class="btnPDF">Exportar en PDF</a>
-            <a style="text-decoration: none;" asp-area="" asp-controller="Admin" asp-action="ExportarProductosEnExcel"
+            <a style="text-decoration: none;" asp-area="" asp-controller="Admin" asp-action="ExportarUsuariosEnExcel"
                 class="btnExcel">Exportar en Excel</a>
         </div>
 
