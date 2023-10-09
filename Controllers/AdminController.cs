@@ -316,7 +316,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
             }
         }
 
-     
+
         public IActionResult ExportarProductosEnExcel()
         {
             try
@@ -623,7 +623,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> EditarUsuarios(string? id)
+        public async Task<ActionResult> EditarUsuario(string? id)
         {
 
             ApplicationUser? usuarioEditar = await _context.Users.FindAsync(id);
@@ -644,6 +644,39 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
             usuarioEditarDTO.Celular = usuarioEditar.Celular;
             usuarioEditarDTO.Genero = usuarioEditar.Genero;
             return View("EditarUsuario", usuarioEditarDTO);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GuardarUsuarioEditado(UsuarioDTO usuarioDTO)
+        {
+
+            UsuarioValidator validator = new UsuarioValidator();
+            ValidationResult result = validator.Validate(usuarioDTO);
+
+            if (result.IsValid)
+            {
+                ApplicationUser? user = await _context.Users.FindAsync(usuarioDTO.Id);
+                user.Nombres = usuarioDTO.Nombres;
+                user.ApellidoPat = usuarioDTO.ApellidoPaterno;
+                user.ApellidoMat = usuarioDTO.ApellidoMaterno;
+                user.Email = usuarioDTO.Email;
+                user.Dni = usuarioDTO.Dni;
+                user.Celular = usuarioDTO.Celular;
+                user.Genero = usuarioDTO.Genero;
+
+                TempData["MessageActualizandoUsuario"] = "Se Actualizaron exitosamente los datos.";
+                _context.Users.Update(user);
+                _context.SaveChanges();
+
+                return RedirectToAction("EditarUsuario", new { id = usuarioDTO.Id });
+            }
+
+            foreach (var failure in result.Errors)
+            {
+                ModelState.AddModelError(failure.PropertyName, failure.ErrorMessage);
+            }
+            return View("EditarUsuario", usuarioDTO);
 
         }
 

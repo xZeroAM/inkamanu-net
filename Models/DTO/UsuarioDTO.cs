@@ -6,17 +6,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation;
 
-namespace proyecto_inkamanu_net.Models.DTO {
+namespace proyecto_inkamanu_net.Models.DTO
+{
 
-    public class UsuarioDTO {
-        public string? Id;
-        public string? Nombres;
-        public string? ApellidoPaterno;
-        public string? ApellidoMaterno;
-        public string? Email;
-        public string? Dni;
-        public string? Celular;
-        public string? Genero;
+    public class UsuarioDTO
+    {
+        public string Id { get; set; }
+        public string Nombres { get; set; }
+        public string ApellidoPaterno { get; set; }
+        public string ApellidoMaterno { get; set; }
+        public string Email { get; set; }
+        public string Dni { get; set; }
+        public string Celular {get; set;}
+        public string Genero {get; set;}
     }
 
 }

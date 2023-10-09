@@ -1,7 +1,7 @@
-@model proyecto_inkamanu_net.Models.DTO.UsuarioDTO
+@model proyecto_inkamanu_net.Models.DTO.UsuarioDTO;
 
 @{
-    ViewData["Title"] = "Editar Producto";
+    ViewData["Title"] = "Editar Usuario";
 }
 
 <style>
@@ -187,56 +187,55 @@
 <!---------------------------- editar producto form  ---------------------------->
 
 <div class="editar-product-form-container">
-    <form asp-controller="Admin" asp-action="GuardarProductoEditado" method="post" enctype="multipart/form-data">
+    <form asp-controller="Admin" asp-action="GuardarUsuarioEditado" method="post">
         <h3>Editar Usuario</h3>
         <h3>@ViewData["Message"]</h3>
-        <input type="text" asp-for="Id" type="hidden">
+        <input type="text" asp-for="Id" type="hidden" name="Id">
         <div class="inputBox">
             <div class="input">
                 <span>Nombres</span>
                 <input type="text" asp-for="Nombres">
-                @Html.ValidationMessageFor(model => model.Nombres, null)
+                <span asp-validation-for="Nombres" class="text-danger"></span>
             </div>
 
             <div class="input">
                 <span>Apellido Paterno</span>
                 <input type="text" asp-for="ApellidoPaterno">
-                @Html.ValidationMessageFor(model => model.ApellidoPaterno, null)
+                <span asp-validation-for="ApellidoPaterno" class="text-danger"></span>
             </div>
         </div>
 
         <div class="inputBox">
             <div class="input">
                 <span>Apellido Materno</span>
-                <input type="number" asp-for="ApellidoMaterno">
-                @Html.ValidationMessageFor(model => model.ApellidoMaterno, null)
+                <input type="text" asp-for="ApellidoMaterno">
+                <span asp-validation-for="ApellidoMaterno" class="text-danger"></span>
             </div>
 
             <div class="input">
                 <span>Email</span>
-                <input type="number" asp-for="Email">
-                @Html.ValidationMessageFor(model => model.Email, null)
+                <input type="text" asp-for="Email">
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
         </div>
 
         <div class="inputBox">
             <div class="input">
                 <span>DNI</span>
-                <input type="number" placeholder="Introduzca la cantidad" asp-for="Dni" step="0.01" min="0.01">
-                @Html.ValidationMessageFor(model => model.Dni, null)
+                <input type="text" placeholder="Introduzca la cantidad" asp-for="Dni">
+                <span asp-validation-for="Dni" class="text-danger"></span>
             </div>
 
             <div class="input">
                 <span>Celular</span>
-                <input type="number" placeholder="Introduzca la cantidad" asp-for="Dni" step="0.01" min="0.01">
-                @Html.ValidationMessageFor(model => model.Celular, null)
+                <input type="text" placeholder="Introduzca la cantidad" asp-for="Celular">
+                <span asp-validation-for="Celular" class="text-danger"></span>
             </div>
         </div>
 
         <div class="inputBox">
-
             <div class="input">
-                <span>Tipo de Envase</span>
+                <span>Genero</span>
                 <select asp-for="Genero">
                     <option value="" disabled selected>-- Seleccione un tipo de envase --</option>
                     <option value="Masculino">Masculino</option>
@@ -245,7 +244,7 @@
                 <span asp-validation-for="Genero" class="text-danger"></span>
             </div>
         </div>
-        <input type="submit" value="Actualizar Producto" class="btn">
+        <input type="submit" value="Actualizar Usuario" class="btn">
     </form>
 </div>
 <br>
