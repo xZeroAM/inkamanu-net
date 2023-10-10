@@ -336,8 +336,12 @@
                     <a class="fas fa-shopping-cart" asp-area="" asp-controller="Carrito" asp-action="Index"></a>
                 </div>
                 <div class="nav-item custom-user-info">
-                    <a class="nav-link text-dark" style="text-decoration: none;" asp-area="Identity"
+                    @*<a class="nav-link text-dark" style="text-decoration: none;" asp-area="Identity"
                         asp-page="/Account/Manage/Index" title="Manage">Hola
+                        @User.Identity?.Name!</a>*@
+                    <a class="nav-link text-dark" style="text-decoration: none;"
+                        asp-controller="Cliente" asp-action="EditarUsuario" asp-route-id="@UserManager.GetUserId(User)">
+                        Hola
                         @User.Identity?.Name!</a>
                 </div>
                 <div>
