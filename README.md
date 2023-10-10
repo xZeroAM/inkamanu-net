@@ -32,3 +32,5 @@ En jesus_ing4 agregue atributos en la tabla netusers y en la tabla productos, en
 En jesus_ing5 agregue 3 tablas para la simulacion de la compra, que fueron el pago, el pedido y el detalle pedido el dia 07/10/2023
 
 En jesus_ing6 ya deje toda las vistas de listar pedidos, mis pedidos, detalle del pedido, atender el pedido listas y funcionando 08/10/2023
+
+En jesus_ing7 deje funcionando el stock de los productos para que funcionen correctamente al hacer un pedido despues de pagar 10/10/2023
