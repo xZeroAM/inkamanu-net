@@ -299,4 +299,11 @@
 		</div>
 	</div>
 </section>
-<!---------------------------- home section ends ---------------------------->
+<!---------------------------- section detalle_producto ends ---------------------------->
+
+@if (TempData["ErrorSTOCK"] != null)
+{
+  <div class="alert alert-danger">
+    @TempData["ErrorSTOCK"]
+  </div>
+}

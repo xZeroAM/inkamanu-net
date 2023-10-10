@@ -6,11 +6,13 @@
 @model IPagedList<ApplicationUser>;
 
 <link rel="stylesheet" href="~/css/listaDeUsuarios.css" />
-
+@{
+    ViewData["Title"] = "Lista de Clientes";
+}
 <section class="listar_product" id="listar_product">
     <div class="table-product-form-container">
         <div class="Buscador">
-            <span>Buscar Producto</span>
+            <span>Buscar Usuario</span>
             <form asp-controller="Admin" asp-action="BuscarUsuario" method="get">
                 <input type="text" name="query" />
                 <button type="submit" class="btnBuscar">Buscar</button>
