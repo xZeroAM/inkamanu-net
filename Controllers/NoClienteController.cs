@@ -114,6 +114,13 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
                 // ya está logueado
                 var producto = await _context.DataProducto.FindAsync(id);
 
+                // Verificar si hay suficiente stock del producto
+                if (producto.Stock < cantidad)
+                {
+                    TempData["ErrorSTOCK"] = $"No hay suficiente stock disponible. Solo hay {producto.Stock} unidades en stock.";
+                    return RedirectToAction("DetalleProducto", new { id = id }); // Esto redirige a la vista DetalleProducto si no se cumple la condicion
+                }
+
                 // Buscar una proforma existente para el usuario y producto
                 var proformaExistente = await _context.DataCarrito
                     .Where(p => p.UserID == userID && p.Producto.id == id && p.Status == "PENDIENTE")
