@@ -47,11 +47,16 @@ namespace proyecto_inkamanu_net.Models
             return items.Sum(item => item.Precio * item.Cantidad);
         }
 
-        public async Task<double> ObtenerDescuento(string userId)
+        /*public async Task<double> ObtenerDescuento(string userId)
         {
             var subtotal = await ObtenerSubtotal(userId);
             return CalcularDescuento(subtotal);
         }
+
+        private double CalcularDescuento(double subtotal)
+        {
+            return subtotal * 0.10;
+        }*/
 
         public async Task<double> ObtenerTotal(string userId)
         {
@@ -60,9 +65,19 @@ namespace proyecto_inkamanu_net.Models
             return subtotal - descuento;
         }
 
-        private double CalcularDescuento(double subtotal)
+        public async Task<double> ObtenerDescuento(string userId)
         {
-            return subtotal * 0.10;
+            var cantidadBotellas = await ObtenerCantidadTotalBotellas(userId);
+            return CalcularDescuento(cantidadBotellas);
+        }
+
+        private double CalcularDescuento(int cantidadBotellas)
+        {
+            if (cantidadBotellas >= 36)
+            {
+                return 0.30 * cantidadBotellas;
+            }
+            return 0.0;
         }
 
         public async Task<bool> QuitarDelCarrito(int id, string userId)
@@ -76,5 +91,13 @@ namespace proyecto_inkamanu_net.Models
             }
             return false;
         }
+
+        /* metodo nuevo */
+        public async Task<int> ObtenerCantidadTotalBotellas(string userId)
+        {
+            var items = await ObtenerItems(userId);
+            return items.Sum(item => item.Cantidad);
+        }
+
     }
 }

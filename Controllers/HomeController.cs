@@ -42,9 +42,31 @@ public class HomeController : Controller
 
         var message = $"Estimado {objContacto.Nombre}, te estaremos contactando pronto";
         TempData["MessageCONTACTO"] = message;
+        var message1 = $@"
+            Estimado(a) {objContacto.Nombre},
 
-        await _emailSender.SendEmailAsync(objContacto.Email, "Gracias por contactarnos", message);
+            ¡Gracias por ponerte en contacto con nosotros!
 
+            Hemos recibido tu solicitud y uno de nuestros representantes se pondrá en contacto contigo a la brevedad. 
+            Valoramos tu interés y nos esforzamos por responder todas las consultas lo más rápido posible.
+
+            Tu mensaje fue:
+            {objContacto.Mensaje}
+
+            Tu Número Telefónico fue: {objContacto.Phone}
+            Tu Correo electronico fue: {objContacto.Email}
+
+            Mientras tanto, te invitamos a explorar nuestro sitio web o nuestras redes sociales para obtener más información sobre nuestros productos y servicios.
+
+            ¡Gracias por elegirnos!
+
+            Saludos cordiales,
+
+            [La Empresa Cervezera Inkamanu]
+        ";
+
+        //await _emailSender.SendEmailAsync(objContacto.Email, "Gracias por contactarnos", message);
+        await _emailSender.SendEmailAsync(objContacto.Email, "" + objContacto.Asunto, message1);
         return View("~/Views/Home/Contacto.cshtml");
     }
 

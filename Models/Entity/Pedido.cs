@@ -21,5 +21,10 @@ namespace proyecto_inkamanu_net.Models.Entity
         public Pago? pago { get; set; }
 
         public string? Status { get; set; }
+
+        // añadiendo esto para los beneficios de los regalos y descuentos que pueden ser valores nulos ? 
+        public string? Regalo { get; set; }
+
+        public Double? Descuento { get; set; }
     }
 }
