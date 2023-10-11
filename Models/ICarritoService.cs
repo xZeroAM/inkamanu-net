@@ -15,5 +15,7 @@ namespace proyecto_inkamanu_net.Models
         Task<double> ObtenerTotal(string userId);
 
         Task<bool> QuitarDelCarrito(int id, string userId);
+
+        Task<int> ObtenerCantidadTotalBotellas(string userId);
     }
 }

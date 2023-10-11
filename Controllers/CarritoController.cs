@@ -52,14 +52,50 @@ namespace proyecto_inkamanu_net.Controllers
                 var items = await _carritoService.ObtenerItems(userId);
                 var subtotal = await _carritoService.ObtenerSubtotal(userId);
                 var descuento = await _carritoService.ObtenerDescuento(userId);
-                var total = await _carritoService.ObtenerTotal(userId);
 
+                var total = await _carritoService.ObtenerTotal(userId);
+                var cantidadBotellas = await _carritoService.ObtenerCantidadTotalBotellas(userId);
+
+                /*Random random = new Random();
+                int numeroAleatorio = random.Next(1, 11); // el 11 es el 10 como maximo
+
+                string? regalo = null;
+
+                if (cantidadBotellas >= 12 && cantidadBotellas <= 35)
+                {
+                    if (numeroAleatorio >= 1 && numeroAleatorio <= 5)
+                    {
+                        regalo = "destapador";
+                    }
+                    else if (numeroAleatorio >= 6 && numeroAleatorio <= 10)
+                    {
+                        regalo = "vaso";
+                    }
+                }*/
+
+                int primerDigito = int.Parse(total.ToString()[0].ToString());
+
+                string? regalo = null;
+
+                if (cantidadBotellas >= 12 && cantidadBotellas <= 35)
+                {
+                    if (primerDigito >= 1 && primerDigito <= 4)
+                    {
+                        regalo = "Vaso de cerveza";
+                    }
+                    else if (primerDigito >= 5 && primerDigito <= 9)
+                    {
+                        regalo = "Destapador de la marca personalizada";
+                    }
+                }
+                
                 var viewModel = new CarritoViewModel
                 {
                     Items = items.ToList(),
                     Subtotal = subtotal,
                     Descuento = descuento,
-                    Total = total + descuento
+                    Regalo = regalo,
+                    Total = total
                 };
 
                 return View(viewModel);

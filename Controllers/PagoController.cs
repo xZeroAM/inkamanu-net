@@ -20,11 +20,17 @@ namespace proyecto_inkamanu_net.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
-        public PagoController(ILogger<PagoController> logger, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        private readonly ICarritoService _carritoService;
+
+        public PagoController(ILogger<PagoController> logger, UserManager<ApplicationUser> userManager, ApplicationDbContext context, ICarritoService carritoService)
         {
             _logger = logger;
             _userManager = userManager;
             _context = context;
+
+            /**/
+
+            _carritoService = carritoService;
         }
 
         public IActionResult Create(Double monto)
@@ -115,7 +121,27 @@ namespace proyecto_inkamanu_net.Controllers
                         {
                             TempData["Error"] = $"No hay suficiente stock para el producto {item.Producto.Nombre}.";
                             transaction.Rollback(); // Revertir transacción
-                            return RedirectToAction("Carrito"); // Suponiendo que tienes una vista de carrito
+                            return RedirectToAction("Carrito"); // ir a la vista carrito
+                        }
+                    }
+
+                    var descuento = await _carritoService.ObtenerDescuento(_userManager.GetUserName(User));
+
+                    var cantidadBotellas = await _carritoService.ObtenerCantidadTotalBotellas(_userManager.GetUserName(User));
+
+                    int primerDigito = int.Parse(pago.MontoTotal.ToString()[0].ToString());
+
+                    string? regalo = null;
+
+                    if (cantidadBotellas >= 12 && cantidadBotellas <= 35)
+                    {
+                        if (primerDigito >= 1 && primerDigito <= 4)
+                        {
+                            regalo = "Vaso de cerveza";
+                        }
+                        else if (primerDigito >= 5 && primerDigito <= 9)
+                        {
+                            regalo = "Destapador de la marca personalizada";
                         }
                     }
 
@@ -124,6 +150,8 @@ namespace proyecto_inkamanu_net.Controllers
                         UserID = pago.UserID,
                         Total = pago.MontoTotal,
                         pago = pago,
+                        Regalo = regalo,
+                        Descuento = descuento,
                         Status = "PENDIENTE"
                     };
                     _context.Add(pedido);

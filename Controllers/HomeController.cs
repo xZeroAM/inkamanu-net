@@ -53,6 +53,9 @@ public class HomeController : Controller
             Tu mensaje fue:
             {objContacto.Mensaje}
 
+            Tu Número Telefónico fue: {objContacto.Phone}
+            Tu Correo electronico fue: {objContacto.Email}
+
             Mientras tanto, te invitamos a explorar nuestro sitio web o nuestras redes sociales para obtener más información sobre nuestros productos y servicios.
 
             ¡Gracias por elegirnos!

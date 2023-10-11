@@ -302,6 +302,11 @@
 
 </head>
 
+@{
+    var user = await UserManager.GetUserAsync(User);
+    //var roles = user != null ? await UserManager.GetRolesAsync(user) : new List<string>();
+}
+
 <body>
     <!---------------------------- header section stars ---------------------------->
     <header class="header">
@@ -311,38 +316,45 @@
                 id="imgLogoEmpresa"> <!-- Añadiendo el logo al costado del nombre de la empresa -->
             <span>Inka</span>Manu </a>
         <nav class="navbar">
-            <a class="nav-link text-dark" asp-area="" asp-controller="NoCliente" asp-action="Catalogo">Catalogo</a>
-            <!--<a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AgregarProducto">Agregar
-                Producto</a>-->
-            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ListaDeProductos">Lista De
-                Productos</a>
-                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ListaDeUsuarios">Lista De
-                Usuarios</a>
+            @if (!SignInManager.IsSignedIn(User) || user.Rol.Equals("Cliente"))
+            {
+                <a class="nav-link text-dark" asp-area="" asp-controller="NoCliente" asp-action="Catalogo">Catalogo</a>
+            
+                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contacto">Contactame</a>
+            }
 
-            <a class="nav-link text-dark" asp-area="" asp-controller="Pedido" asp-action="ListaDePedidos">Lista De
-                Pedidos</a>
-            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contacto">Contactame</a>
+            @if (SignInManager.IsSignedIn(User) && user.Rol.Equals("Administrador"))
+            {
+                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ListaDeProductos">Lista De
+                    Productos</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="ListaDeUsuarios">Lista De
+                    Usuarios</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Pedido" asp-action="ListaDePedidos">Lista De
+                    Pedidos</a>
+            }
+
+           
         </nav>
 
 
         <div class="iconosxd">
             @if (SignInManager.IsSignedIn(User))
             {
-                <div>
-                    <a class="fas fa-shopping-bag" style="text-decoration: none;" asp-area="" asp-controller="MisPedidos" asp-action="MisPedidos"></a>
-                </div>
+                if (user.Rol.Equals("Cliente"))
+                {
+                    <div>
+                        <a class="fas fa-shopping-bag" style="text-decoration: none;" asp-area="" asp-controller="MisPedidos"
+                            asp-action="MisPedidos"></a>
+                    </div>
 
+                    <div>
+                        <a class="fas fa-shopping-cart" style="text-decoration: none;" asp-area="" asp-controller="Carrito"
+                            asp-action="Index"></a>
+                    </div>
+                }
                 <div>
-                    <a class="fas fa-shopping-cart" style="text-decoration: none;" asp-area="" asp-controller="Carrito" asp-action="Index"></a>
-                </div>
-                <div class="nav-item custom-user-info">
-                    @*<a class="nav-link text-dark" style="text-decoration: none;" asp-area="Identity"
-                        asp-page="/Account/Manage/Index" title="Manage">Hola
-                        @User.Identity?.Name!</a>*@
-                    <a class="nav-link text-dark" style="text-decoration: none;"
-                        asp-controller="Cliente" asp-action="EditarUsuario" asp-route-id="@UserManager.GetUserId(User)">
-                        Hola
-                        @User.Identity?.Name!</a>
+                    <a class="fas fa-user" style="text-decoration: none;" asp-controller="Cliente"
+                        asp-action="EditarUsuario" asp-route-id="@UserManager.GetUserId(User)"></a>
                 </div>
                 <div>
                     <a class="fas fa-sign-out-alt" style="text-decoration: none;" asp-area="Identity"
@@ -352,7 +364,6 @@
             }
             else
             {
-
                 <a class="fas fa-user-plus" style="text-decoration: none;" asp-area="Identity"
                     asp-page="/Account/Register"></a>
                 <a class="fas fa-sign-in-alt" style="text-decoration: none;" asp-area="Identity"

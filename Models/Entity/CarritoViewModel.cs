@@ -11,5 +11,7 @@ namespace proyecto_inkamanu_net.Models.Entity
         public double Subtotal { get; set; }
         public double Descuento { get; set; }
         public double Total { get; set; }
+
+        public string? Regalo { get; set; }
     }
 }
