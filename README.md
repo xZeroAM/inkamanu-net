@@ -34,3 +34,5 @@ En jesus_ing5 agregue 3 tablas para la simulacion de la compra, que fueron el pa
 En jesus_ing6 ya deje toda las vistas de listar pedidos, mis pedidos, detalle del pedido, atender el pedido listas y funcionando 08/10/2023
 
 En jesus_ing7 deje funcionando el stock de los productos para que funcionen correctamente al hacer un pedido despues de pagar 10/10/2023, jesus_ing8
+
+En jesus_ing9 deje funcionando el confirmar email y restablecer contraseña, 10/10/2023 - 11/10/2023 - 12/10/2023
