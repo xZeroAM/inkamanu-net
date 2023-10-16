@@ -5,229 +5,79 @@
     ViewData["Title"] = "InkaManu";
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<style>
-    /* codigo comun */
-    @@importurl('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+<link rel="stylesheet" href="~/css/index.css" />
 
-    :root {
-        --my-blue: #0074E4;
-        --light-my-blue: #6FA6FF;
-        /* Aquí defines el tono más claro */
-        --celeste: #40E0D0;
-        --light-celeste: hsl(177, 72%, 70%);
-        --amarillo: #f9d806;
-        --light-amarillo: #ffee80;
-        --rojo: #FF0000;
-        --light-rojo: #FFAFAF;
-        --verde: #369681;
-        --light-verde: #00B050;
-        --black: #130f40;
-        --light-color: #666;
-        --border: .1rem solid rgba(0, 0, 0, .1);
-        --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
-    }
-
-    * {
-        font-family: 'Poppins', sans-serif;
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        outline: none;
-        border: none;
-        text-decoration: none;
-        transition: all .2s linear;
-    }
-
-    section {
-        padding: 2rem 6%;
-    }
-
-    .heading {
-        text-align: center;
-        padding-bottom: 2rem;
-        font-size: 4.5rem;
-        color: var(--black);
-    }
-
-    .heading span {
-        position: relative;
-        z-index: 0;
-    }
-
-    .heading span::before {
-        content: '';
-        position: absolute;
-        bottom: 1rem;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        z-index: -1;
-        background: var(--celeste);
-        clip-path: polygon(0 90%, 100% 80%, 100% 100%, 0% 100%);
-        /* CON ESTO PONGO LA LINEA AMARILLA ABAJO DE LA PALABRA Vehicles de color amarillo */
-    }
-
-    .btn {
-        display: inline-block;
-        margin-top: 1rem;
-        border-radius: .5rem;
-        background: var(--light-celeste);
-        color: var(--black);
-        font-weight: 500;
-        font-size: 1.7rem;
-        width: 250px;
-        ;
-        cursor: pointer;
-        padding: .8rem 3rem;
-    }
-
-    .btn:hover {
-        background: var(--celeste);
-    }
-
-    /* para mision vision y descripcion codigo */
-
-    #mision {
-        padding: 1rem;
-    }
-
-    #descripcion {
-        padding: 1rem;
-    }
-
-    /* CSS DE ICONS EN EL MINUTO 36:40 */
-    .icons-container {
-
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-        gap: 1.5rem;
-
-    }
-
-    .icons-container .icons {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        padding: 2rem;
-        background: #fff;
-        box-shadow: var(--box-shadow);
-        border-radius: .5rem;
-    }
-
-    .icons-container .icons i {
-        height: 6rem;
-        width: 12rem;
-        line-height: 6rem;
-        font-size: 2.5rem;
-        border-radius: 50%;
-        background: #eee;
-        color: var(--black);
-        text-align: center;
-    }
-
-    .icons-container .icons .content h3 {
-        color: var(--celeste);
-        font-size: 2.5rem;
-    }
-
-    .icons-container .icons .content p {
-        color: var(--light-color);
-        font-size: 1.5rem;
-    }
-
-    .icons-container .icons:hover {
-        background: var(--black);
-    }
-
-    .icons-container .icons:hover i {
-        background: var(--celeste);
-    }
-
-    .icons-container .icons:hover .content h3 {
-        color: #fff;
-    }
-
-    .icons-container .icons:hover .content p {
-        color: #eee;
-    }
-
-    /* mensaje de bienvenido */
-    .Bienvenido {
-        font-size: 5.5rem;
-        background: var(--celeste);
-        color: #fff;
-        display: inline-block;
-        padding: .5rem 3rem;
-        clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0% 100%, 7% 50%, 0% 0%);
-    }
-</style>
 @if (TempData["MessageLOGUEARSE"] != null)
 {
     <div class="alert alert-danger" style="font-size: 16px; padding: 10px;">
         @TempData["MessageLOGUEARSE"]
     </div>
 }
-<div class="text-center">
-    @if (SignInManager.IsSignedIn(User))
-    {
-        var userId = UserManager.GetUserId(User); // Obtén el ID del usuario autenticado
-        var user = await UserManager.FindByIdAsync(userId); // Busca el usuario en la base de datos por ID
 
-        // Si el usuario está autenticado, muestra un mensaje de bienvenida personalizado
-        <h1 class="display-4"><span class="Bienvenido">Bienvenido @user.Nombres @user.ApellidoPat!</span></h1>
-        <p>DNI: @user.Dni</p>
-        <!--<p>Obtenga información <a href="https://docs.microsoft.com/aspnet/core">sobre cómo crear aplicaciones web con
-                            ASP.NET Core</a>.</p>-->
-    }
-    else
-    {
-    // Si el usuario no está autenticado, muestra un mensaje de bienvenida genérico
-        <h1 class="display-4"><span class="Bienvenido">Bienvenido</span></h1>
-        <!--<p>Obtenga información <a href="https://docs.microsoft.com/aspnet/core">sobre cómo crear aplicaciones web con
-                            ASP.NET Core</a>.</p>-->
-    }
-</div>
+<body>
+    <section class="content bienvenida">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            var userId = UserManager.GetUserId(User); // Obtén el ID del usuario autenticado
+            var user = await UserManager.FindByIdAsync(userId); // Busca el usuario en la base de datos por ID
 
+            // Si el usuario está autenticado, muestra un mensaje de bienvenida personalizado
+            <h2 class="title">
+                <span class="wellcome">Bienvenido @user.Nombres @user.ApellidoPat!</span>
+            </h2>
+            <p class="codigo">COD. DE USUARIO: @user.Dni</p>
+            <!--<p>Obtenga información <a href="https://docs.microsoft.com/aspnet/core">sobre cómo crear aplicaciones web con
+                                    ASP.NET Core</a>.</p>-->
+        }
+        else
+        {
+            // Si el usuario no está autenticado, muestra un mensaje de bienvenida genérico
+            <h1 class="title">
+                <span class="wellcome">Bienvenido</span>
+            </h1>
+            <!--<p>Obtenga información <a href="https://docs.microsoft.com/aspnet/core">sobre cómo crear aplicaciones web con
+                                    ASP.NET Core</a>.</p>-->
+        }
+        <p class="gracias">¡GRACIAS POR FORMAR PARTE DE LA FAMILIA INKAMANU, BRINDEMOS POR MAS MOMENTOS JUNTOS!</p>
+        <p class="conoce">CONOCE UN POCO MAS SOBRE NOSOTROS:</p>
+    </section>
 
-<!---------------------------- descripcion section stars ---------------------------->
-<h1 class="heading" id="descripcion"> <span>Descripción de la empresa</span></h1>
-<section class="icons-container">
-    <div class="icons">
-        <i class="fas fa-home"></i>
-        <div class="content">
-            <h3>C&L Team SAC</h3>
-            <p>Es una empresa peruana cervecera originaria del distrito Caraz del departamento de Ancash, fundada en
-                el 2021 por el ingeniero Manuel Chincha. El junto a su enamorada y su padre, brindan cerveza de
-                calidad con agradable sabor y responsable con en el medio ambiente. Además, continúa innovando sus
-                productos para llegar a más personas y expandirse haciéndose conocido por la experiencia de su
-                servicio y el sabor sus cervezas.</p>
-        </div>
-    </div>
-</section>
-<!---------------------------- descripcion section ends ---------------------------->
+    <section class="content libre">
+        <h2 class="title">C&L Team SAC</h2>
+        <p class="p">Es una empresa peruana cervecera originaria del distrito Caraz del departamento de Ancash, fundada
+            en
+            el 2021 por el ingeniero Manuel Chincha. El junto a su enamorada y su padre, brindan cerveza de
+            calidad con agradable sabor y responsable con en el medio ambiente. Además, continúa innovando sus
+            productos para llegar a más personas y expandirse haciéndose conocido por la experiencia de su
+            servicio y el sabor sus cervezas.
+        </p>
+    </section>
 
-<!---------------------------- mision y vision section stars---------------------------->
-<h1 class="heading" id="mision"> <span>Misión y Visión</span></h1>
-<section class="icons-container">
-    <div class="icons">
-        <i class="fas fa-home"></i>
-        <div class="content">
-            <h3>Misión</h3>
-            <p>Buscamos ser un producto consumido a nivel nacional por brindar una cerveza artesanal que mantenga
-                los estándares de calidad y se distinga por su sabor, aroma y sobre todo por ser un producto
-                eco-amigable para la contribución de la responsabilidad social. Deseamos posicionarnos como una
-                cerveza preferencial para acompañar comidas y momentos placenteros.</p>
-        </div>
-    </div>
+    <section class="content descripcion">
+        <h2 class="title">Descripción de la empresa</h2>
+        <p class="p">AthletiX es una empresa pionera en el campo de la nutrición deportiva. Nos
+            especializamos en la venta de
+            una amplia gama de productos, desde proteínas y aminoácidos hasta suplementos pre-entrenamiento y
+            vitaminas. Nuestra plataforma de ecommerce facilita a los clientes el acceso a productos de alta
+            calidad, garantizando una experiencia de compra cómoda y eficiente. En AthletiX, creemos en el poder de
+            la nutrición adecuada para potenciar el rendimiento y apoyar un estilo de vida activo y saludable
+        </p>
+    </section>
 
-    <div class="icons">
-        <i class="fas fa-home"></i>
-        <div class="content">
-            <h3>Visión</h3>
-            <p>La empresa tiene por objetivo ser la marca líder en el mercado nacional de la cerveza artesanal
-                trabajando en la innovación de sabores y aromas para ofrecer a la cultura cervecera nuestros
-                productos.</p>
-        </div>
-    </div>
-</section>
-<!---------------------------- mision y vision section ends ---------------------------->
+    <section class="content mision">
+        <h2 class="title">Misión</h2>
+        <p class="p">Buscamos ser un producto consumido a nivel nacional por brindar una cerveza artesanal que mantenga
+            los estándares de calidad y se distinga por su sabor, aroma y sobre todo por ser un producto
+            eco-amigable para la contribución de la responsabilidad social. Deseamos posicionarnos como una
+            cerveza preferencial para acompañar comidas y momentos placenteros.
+        </p>
+    </section>
+
+    <section class="content vision">
+        <h2 class="title">Visión</h2>
+        <p class="p">La empresa tiene por objetivo ser la marca líder en el mercado nacional de la cerveza artesanal
+            trabajando en la innovación de sabores y aromas para ofrecer a la cultura cervecera nuestros
+            productos.
+        </p>
+    </section>
+</body>
