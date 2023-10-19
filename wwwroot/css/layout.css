@@ -203,6 +203,10 @@ section {
     .logo-text {
         display: none;
     }
+
+    #imgLogoEmpresa{
+        display: none;
+    }
 }
 
 /*---------------------------------------------- MAIN ----------------------------------------------------*/
@@ -259,3 +263,6 @@ section {
     background-color: var(--white);
 }
 
+#img-div{
+    display: inline-block;
+}

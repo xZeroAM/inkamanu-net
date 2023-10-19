@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+
+:root {
+    --my-blue: #0074E4;
+    --light-my-blue: #6FA6FF;
+    /* Aquí defines el tono más claro */
+    --celeste: #40E0D0;
+    --light-celeste: hsl(177, 72%, 70%);
+    --amarillo: #f9d806;
+    --light-amarillo: #ffee80;
+    --rojo: #FF0000;
+    --light-rojo: #FFAFAF;
+    --verde: #369681;
+    --light-verde: #00B050;
+    --black: #130f40;
+    --light-color: #666;
+    --border: .1rem solid rgba(0, 0, 0, .1);
+    --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+
+
+    --white: #ffffff;
+    --grey-blue: #00796B;
+    --sky-blue: #00BFFF;
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+}
+
+/*UTIL*/
+#detalle_producto{
+    background-image: url("https://lh3.googleusercontent.com/u/0/drive-viewer/AK7aPaBZnVexRjxiRiDu-nUYsVphLkcoD0xEmt5DULrr5gZ-Zg3BDf_sXy5pQmMgdcKzNftxYj4yy7HQ36g3TQSM6QdThLzf=w1908-h897");
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/*UTIL*/
+.heading span {
+    position: relative;
+    z-index: 0;
+    line-height: 1em;
+}
+
+/*UTIL*/
+.heading span::before {
+    content: '';
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    background: var(--sky-blue);
+    clip-path: polygon(0 95%, 100% 95%, 100% 100%, 0% 100%);
+    line-height: 1.5em;
+    /* CON ESTO PONGO LA LINEA AMARILLA ABAJO DE LA PALABRA Vehicles de color amarillo */
+}
+
+/*UTIL*/
+.btn {
+    display: inline-block;
+    margin: 2rem 0;
+    border-radius: 1rem;
+    background: #00BFFF;
+    color: var(--black);
+    font-weight: 500;
+    font-size: 2.5rem;
+    width: 250px;
+    cursor: pointer;
+    padding: 1rem 3rem;
+    text-decoration: none;
+    text-transform: capitalize;
+    position: relative;
+    transition: background 0.5s linear; /* Cambiamos "color" a "background" */
+}
+
+/*UTIL*/
+.btn:hover {
+    background: var(--white); /* Cambiamos el orden de los colores */
+}
+
+/*UTIL*/
+#nom-prod{
+    font-size: 4rem;
+    text-transform: uppercase;
+    color: var(--white);
+    padding: 0;
+    margin: 25px 0;
+}
+
+/*UTIL*/
+.row {
+    padding: 0px;
+    margin: 0px;
+    height: contain;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/*UTIL*/
+.detalle_producto .single-product input {
+    width: 80px;
+    height: 50px;
+    padding-left: 10px;
+    margin-right: 10px;
+    border: 1.5px solid var(--my-blue);
+    border-radius: 7px;
+    font-weight: 500;
+    font-size: 2.5rem;
+    text-decoration: none;
+    text-transform: capitalize;
+    position: relative;
+}
+
+/*UTIL*/
+#price {
+    font-size: 25px;
+    color: #817f7f;
+    padding: 0;
+    margin: 0px 0;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/*UTIL*/
+#desc_prod_h3 {
+    font-size: 19px;
+    margin: 0;
+    padding: 0;
+    color: #817f7f;
+}
+
+/*UTIL*/
+#desc_prod_p {
+    font-size: 15px;
+    color: #817f7f;
+    margin: 0;
+    padding: 0;
+}
+
+@media only screen and (max-width: 600px) {
+    /*UTIL*/
+    .row {
+        text-align: center;
+        align-items: center;
+        display: inline-block;
+    }
+
+    /*UTIL*/
+    .single-product h1 {
+        line-height: 32px;
+    }
+    
+    /*UTIL*/
+    .detalle_producto .single-product .contenedores h1 {
+        font-size: 1.5rem;
+    }
+    
+    /*UTIL*/
+    #div-cont{
+        background-color: var(--white);
+        display: inline-block;
+        width: 275px;
+        height: 275px;
+    }
+
+    /*UTIL*/
+    #det_prod_h1{
+        font-size: 40px;
+    }
+
+    #nom-prod{
+        margin: 10px 0;
+    }
+}
+
+.single-product .heading {
+    color: var(--white);
+    text-align: center;
+    font-size: 6.5rem;
+}
+
+.detalle_producto .single-product .contenedores img {
+    border: 2.5px solid var(--sky-blue);
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.detalle_producto .single-product .contenedores {
+    width: auto;
+    display: inline-block;
+    margin: 0px 0px;
+}
+
+#text-all{
+    display: flex;
+    flex-direction: column; /* Establece la disposición en columna */
+    justify-content: flex-start;
+}
+
+.detalle_producto .single-product .contenedores h1 {
+    font-size: 2rem;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    font-weight: bold;
+    color: var(--black);
+    margin-bottom: 1rem;
+}
+
+#div-cont{
+    background-color: var(--white);
+    display: inline-block;
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    margin: 25px;
+}
+
+#form{
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido del formulario */
+    justify-content: space-between;
+}

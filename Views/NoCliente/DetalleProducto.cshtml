@@ -2,308 +2,44 @@
 @{
 	ViewData["Title"] = "Detalle Producto";
 }
-
-<style>
-	/* codigo comun */
-	@@importurl('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
-
-	:root {
-		--my-blue: #0074E4;
-		--light-my-blue: #6FA6FF;
-		/* Aquí defines el tono más claro */
-		--celeste: #40E0D0;
-		--light-celeste: hsl(177, 72%, 70%);
-		--amarillo: #f9d806;
-		--light-amarillo: #ffee80;
-		--rojo: #FF0000;
-		--light-rojo: #FFAFAF;
-		--verde: #369681;
-		--light-verde: #00B050;
-		--black: #130f40;
-		--light-color: #666;
-		--border: .1rem solid rgba(0, 0, 0, .1);
-		--box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
-	}
-
-	* {
-		font-family: 'Poppins', sans-serif;
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-		outline: none;
-		border: none;
-		text-decoration: none;
-		text-transform: capitalize;
-		transition: all .2s linear;
-	}
-
-	section {
-		padding: 2rem 6%;
-	}
-
-	.heading {
-		text-align: center;
-		padding-bottom: 2rem;
-		font-size: 4.5rem;
-		color: var(--black);
-	}
-
-	.heading span {
-		position: relative;
-		z-index: 0;
-	}
-
-	.heading span::before {
-		content: '';
-		position: absolute;
-		bottom: 1rem;
-		left: 0;
-		height: 100%;
-		width: 100%;
-		z-index: -1;
-		background: var(--celeste);
-		clip-path: polygon(0 90%, 100% 80%, 100% 100%, 0% 100%);
-		/* CON ESTO PONGO LA LINEA AMARILLA ABAJO DE LA PALABRA Vehicles de color amarillo */
-	}
-
-	.btn {
-		display: inline-block;
-		margin-top: 1rem;
-		border-radius: .5rem;
-		background: var(--light-celeste);
-		color: var(--black);
-		font-weight: 500;
-		font-size: 1.7rem;
-		width: 250px;
-		;
-		cursor: pointer;
-		padding: .8rem 3rem;
-	}
-
-	.btn:hover {
-		background: var(--celeste);
-	}
-
-
-	/* detalle producto */
-
-
-	.detalle_producto {
-		padding-top: 1rem;
-	}
-
-	.detalle_producto h1 {
-		font-size: 4vw;
-		text-transform: uppercase;
-		color: var(--black);
-	}
-
-	.detalle_producto .single-product {
-		margin-top: 10px;
-	}
-
-	.row {
-		display: flex;
-		align-items: center;
-		flex-wrap: wrap;
-		justify-content: flex-start;
-	}
-
-	.detalle_producto .single-product .col-2 img {
-		width: 100%;
-		height: auto;
-		border: 1px solid var(--my-blue);
-	}
-
-	.detalle_producto .single-product .col-2 {
-		padding: 40px;
-		min-width: 300px; /* Ajusta según tus necesidades */
-	}
-
-	.detalle_producto .single-product .col-2 h1 {
-		font-size: 2rem;
-		white-space: normal;
-		overflow: visible;
-		text-overflow: clip;
-		font-weight: bold;
-		color: var(--black);
-		margin-bottom: 1rem; /* Ajusta según tus necesidades */
-	}
-
-
-
-	.detalle_producto .single-product h4 {
-		margin: 20px 0;
-		font-size: 22px;
-		font-weight: bold;
-	}
-
-	.detalle_producto .single-product input {
-		width: 80px;
-		height: 40px;
-		padding-left: 10px;
-		font-size: 20px;
-		margin-right: 10px;
-		border: 1px solid var(--my-blue);
-	}
-
-	input:focus {
-		outline: none;
-	}
-
-	h3 {
-		font-size: 19px;
-		margin-top: 15px;
-	}
-
-	h4 {
-		font-size: 25px;
-		color: #555;
-		font-weight: normal;
-	}
-
-
-	.col-2 p {
-		font-size: 15px;
-	}
-
-	.single-product .fa {
-		color: var(--my-blue);
-		margin-left: 10px;
-	}
-
-	.small-img-row {
-		display: flex;
-		justify-content: space-between;
-	}
-
-	.small-img-col {
-		flex-basis: 24%;
-		cursor: pointer;
-	}
-
-
-
-
-	/*------------------ media queries sirve para hacer responsivo la pagina y que se pueda adapatar a cualquier tamaño de la pagina ---------------------- */
-
-	@@media (max-width:991px) {
-
-
-		/* SECTION AGREGADO  */
-		section {
-			padding: 2rem;
-		}
-
-		.detalle_producto .single-product .col-2 img {
-			width: 80%;
-		}
-
-		.detalle_producto .single-product .col-2 h1 {
-			font-size: 1.5rem;
-		}
-
-	}
-
-
-
-	@@media (max-width:450px) {
-		/* este codigo lo puse */
-
-		.heading {
-			font-size: 3rem;
-		}
-
-		.detalle_producto .single-product .col-2 img {
-			width: 100%;
-		}
-
-		.detalle_producto .single-product .col-2 h1 {
-			font-size: 1.2rem;
-		}
-
-		/* ese codigo es hasta aca arriba */
-	}
-
-	/*------- media query for less than 600 screen size -------  */
-
-	@@media only screen and (max-width: 600px) {
-		.row {
-			text-align: center;
-		}
-
-		.col-2,
-		.col-3,
-		.col-4 {
-			flex-basis: 100%;
-		}
-
-		/*------- ESTO LE PUSE EN EL TERCERv */
-
-		.single-product .row {
-			text-align: left;
-		}
-
-		.single-product .col-2 {
-			padding: 20px 0;
-		}
-
-		.single-product h1 {
-			font-size: 26px;
-			line-height: 32px;
-		}
-
-		.detalle_producto .single-product .col-2 img {
-			width: 100%;
-			height: auto;
-			border: 1px solid var(--my-blue);
-		}
-
-		.detalle_producto .single-product .col-2 h1 {
-			font-size: 1.5rem;
-		}
-
-		/*------- ESTO LE PUSE EN EL TERCERv */
-	}
-</style>
+<link rel="stylesheet" href="~/css/detalleproducto.css" />
 
 <!---------------------------- section detalle_producto stars ---------------------------->
 <section class="detalle_producto" id="detalle_producto">
-	<div class="small-container single-product">
-		<h1 class="heading"> <span>Detalle del Producto</span></h1>
-		<div class="row">
-			<div class="col-2">
-
-				<img class="d-block w-100 image-fit" id="ProductImg" src="@Html.DisplayFor(model => model.Imagen)"
-					alt="@Html.DisplayFor(model => model.Imagen)">
-
-
+	<div class="single-product">
+		<h1 class="heading">
+			<span id="det_prod_h1">Detalle del Producto</span>
+		</h1>
+		<div class="row align-items-start">
+			<div class="contenedores">
+				<div id="div-cont">
+					<img class="d-block w-100 image-fit" id="ProductImg" src="@Html.DisplayFor(model => model.Imagen)"
+						alt="@Html.DisplayFor(model => model.Imagen)">
+				</div>
 			</div>
+			<div class="contenedores">
+				<div id="text-all">
+					<h1 id="nom-prod">@Html.DisplayFor(model => model.Nombre)</h1>
+					<h4 id="price">Precio: S/. @Html.DisplayFor(model => model.Precio)</h4>
 
-			<div class="col-2">
-				<h1>@Html.DisplayFor(model => model.Nombre)</h1>
-				<h4>Precio: S/. @Html.DisplayFor(model => model.Precio)</h4>
-
-				<!-- Inicia el formulario aquí -->
-				<form asp-action="AddCarrito" asp-route-id="@Model.id" method="post">
-					<!-- Asegúrate de que el input de cantidad tenga el name "cantidad" -->
-					<input type="number" name="cantidad" value="1" min="1">
-					<!-- El botón de enviar el formulario -->
-					<button type="submit" class="btn">Añadir al Carrito</button>
-				</form>
-
-				<h3>Detalle del producto <i class="fa fa-indent"></i> </h3>
-				<br>
-				<p>@Html.DisplayFor(model => model.Descripcion)</p>
+					<!-- Inicia el formulario aquí -->
+					<form id="form" asp-action="AddCarrito" asp-route-id="@Model.id" method="post">
+						<!-- Asegúrate de que el input de cantidad tenga el name "cantidad" -->
+						<input type="number" name="cantidad" value="1" min="1">
+						<!-- El botón de enviar el formulario -->
+						<button type="submit" class="btn">Añadir al Carrito</button>
+					</form>
+					<h3 id="desc_prod_h3">Descripción del producto</h3>
+					<p id="desc_prod_p">@Html.DisplayFor(model => model.Descripcion)</p>
+				</div>
 			</div>
 		</div>
 	</div>
 </section>
 <!---------------------------- section detalle_producto ends ---------------------------->
-
 @if (TempData["ErrorSTOCK"] != null)
 {
-  <div class="alert alert-danger">
-    @TempData["ErrorSTOCK"]
-  </div>
+	<div class="alert alert-danger">
+		@TempData["ErrorSTOCK"]
+	</div>
 }
