@@ -38,8 +38,8 @@
         <nav class="navbar">
             @if (!SignInManager.IsSignedIn(User) || user.Rol.Equals("Cliente"))
             {
-                <a class="nav-link text-dark" asp-area="" asp-controller="NoCliente" asp-action="Catalogo">Catalogo</a>
-                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contacto">Contactame</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="NoCliente" asp-action="Catalogo">Catálogo de Productos</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contacto">Contáctanos</a>
             }
 
             @if (SignInManager.IsSignedIn(User) && user.Rol.Equals("Administrador"))
@@ -104,13 +104,13 @@
                 <a id="detalles-footer" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-arrow-right"></i> Principal
                 </a>
                 <a id="detalles-footer" asp-area="" asp-controller="NoCliente" asp-action="Catalogo"> <i class="fas fa-arrow-right"></i>
-                    Productos </a>
+                    Catálogo de Productos </a>
                 <a id="detalles-footer" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-arrow-right"></i> Descripción
                 </a>
                 <a id="detalles-footer" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-arrow-right"></i> Misión y
                     Visión </a>
                 <a id="detalles-footer" asp-area="" asp-controller="Home" asp-action="Contacto"> <i class="fas fa-arrow-right"></i>
-                    Contactanos </a>
+                    Contáctanos </a>
             </div>
 
             <div class="box">

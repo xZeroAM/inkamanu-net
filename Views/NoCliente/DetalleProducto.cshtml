@@ -21,6 +21,7 @@
 				<div id="text-all">
 					<h1 id="nom-prod">@Html.DisplayFor(model => model.Nombre)</h1>
 					<h4 id="price">Precio: S/. @Html.DisplayFor(model => model.Precio)</h4>
+					<h3 id="stock">Stock: @Html.DisplayFor(model => model.Stock)</h3>
 
 					<!-- Inicia el formulario aquí -->
 					<form id="form" asp-action="AddCarrito" asp-route-id="@Model.id" method="post">

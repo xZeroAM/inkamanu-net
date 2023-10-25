@@ -129,6 +129,15 @@
     font-weight: bold;
 }
 
+#stock {
+    font-size: 25px;
+    color: #817f7f;
+    padding: 0;
+    margin: 0px 0;
+    font-size: 22px;
+    font-weight: bold;
+}
+
 /*UTIL*/
 #desc_prod_h3 {
     font-size: 19px;

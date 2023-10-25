@@ -1,6 +1,6 @@
 ﻿@model proyecto_inkamanu_net.Models.Entity.Contacto
 @{
-    ViewData["Title"] = "Contactanos";
+    ViewData["Title"] = "Contáctanos";
 }
 <style>
     /* codigo comun */
@@ -32,7 +32,7 @@
         outline: none;
         border: none;
         text-decoration: none;
-        text-transform: capitalize;
+     
         transition: all .2s linear;
     }
 
@@ -124,7 +124,7 @@
         <form asp-controller="Home" asp-action="Create" method="post">
             <h3>Ponerse En Contacto</h3>
             <input type="text" placeholder="Nombre Completo" class="box" id="Nombre" name="Nombre" required>
-            <input type="email" placeholder="Correo electronico" class="box" id="Email" name="Email" required>
+            <input type="email" placeholder="Correo electrónico" class="box" id="Email" name="Email" required>
             <input type="number" placeholder="Número de Teléfono" class="box" id="Phone" name="Phone" required>
             <input type="text" placeholder="Asunto" class="box" id="Asunto" name="Asunto" required>
             <textarea placeholder="Mensaje" class="box" rows="10" cols="30" id="Mensaje" name="Mensaje"
