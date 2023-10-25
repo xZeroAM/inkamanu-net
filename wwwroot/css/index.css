@@ -101,3 +101,14 @@ body {
     color: #000000;
     line-height: 2;
 }
+
+@media (max-width: 600px) {
+    .title{
+        font-size: 35px;
+        padding: 0 20px;
+    }
+
+    .gracias .p{
+        font-size: 10px;
+    }
+}

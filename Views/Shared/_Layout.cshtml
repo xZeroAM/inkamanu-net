@@ -33,7 +33,7 @@
         <a class="logo" style="text-decoration: none;" asp-area="" asp-controller="Home" asp-action="Index">
             <img src="~/images/img_logo_inkamanu.jpeg" alt="Logo" style="height: 40px; width: 40px; border-radius:50%;"
                 id="imgLogoEmpresa"> <!-- Añadiendo el logo al costado del nombre de la empresa -->
-            <span>Inka</span><span style="color: white;">Manu</span>
+            <span class="span-logo">Inka</span><span class="span-logo" style="color: white;">Manu</span>
         </a>
         <nav class="navbar">
             @if (!SignInManager.IsSignedIn(User) || user.Rol.Equals("Cliente"))
@@ -66,16 +66,40 @@
                         <a class="fas fa-shopping-cart" style="text-decoration: none;" asp-area="" asp-controller="Carrito"
                             asp-action="Index"></a>
                     </div>
+                    <style>
+                        @@media (max-width: 600px) {
+                            .span-logo {
+                                display: none;
+                            }
+                        }
+                    </style>
                 }
                 <div class="icono-login">
                     <a class="fas fa-user" style="text-decoration: none;" asp-controller="Cliente"
                         asp-action="EditarUsuario" asp-route-id="@UserManager.GetUserId(User)"></a>
                 </div>
                 <div class="icono-logout">
-                    <a class="fas fa-sign-out-alt" style="text-decoration: none;" asp-area="Identity"
-                        asp-page="/Account/Logout"
-                        asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })"></a>
+                    <button id="mostrarTarjeta">
+                        <a class="fas fa-sign-out-alt" style="text-decoration: none;"></a>
+                    </button>
                 </div>
+
+                <div class="tarjeta" id="tarjeta">
+                    <div id="tarjeta-sesion">
+                        <div id="cerrar-sesion">
+                            <h1>¿Deseas cerrar sesión?</h1>
+                        </div>
+                        <div id="botones">
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+                                asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                                <button type="submit">Cerrar Sesión</button>
+                            </form>
+                            <button id="cerrarTarjeta">Mantener Sesión</button>
+                        </div>
+                    </div>
+                </div>
+
+                <script src="~/js/script.js"></script>
             }
             else
             {
