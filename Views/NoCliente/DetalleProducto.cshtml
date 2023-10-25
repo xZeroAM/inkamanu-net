@@ -23,16 +23,19 @@
 					<h4 id="price">Precio: S/. @Html.DisplayFor(model => model.Precio)</h4>
 					<h3 id="stock">Stock: @Html.DisplayFor(model => model.Stock)</h3>
 
-					<!-- Inicia el formulario aquí -->
-					<form id="form" asp-action="AddCarrito" asp-route-id="@Model.id" method="post">
-						<!-- Asegúrate de que el input de cantidad tenga el name "cantidad" -->
-						<input type="number" name="cantidad" value="1" min="1">
-						<!-- El botón de enviar el formulario -->
-						<button type="submit" class="btn">Añadir al Carrito</button>
-					</form>
-					<h3 id="desc_prod_h3">Descripción del producto</h3>
-					<p id="desc_prod_p">@Html.DisplayFor(model => model.Descripcion)</p>
+					<div id="formulario">
+						<form id="form" asp-action="AddCarrito" asp-route-id="@Model.id" method="post">
+							<!-- Asegúrate de que el input de cantidad tenga el name "cantidad" -->
+							<input type="number" name="cantidad" value="1" min="1">
+							<!-- El botón de enviar el formulario -->
+							<button type="submit" class="boton">Añadir al Carrito</button>
+						</form>
+					</div>
 				</div>
+			</div>
+			<div id="descripcion-text">
+				<h3 id="desc_prod_h3">Descripción del producto</h3>
+				<p id="desc_prod_p">@Html.DisplayFor(model => model.Descripcion)</p>
 			</div>
 		</div>
 	</div>

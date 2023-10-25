@@ -34,7 +34,7 @@
 }
 
 /*UTIL*/
-#detalle_producto{
+#detalle_producto {
     background-image: url("https://lh3.googleusercontent.com/u/0/drive-viewer/AK7aPaBZnVexRjxiRiDu-nUYsVphLkcoD0xEmt5DULrr5gZ-Zg3BDf_sXy5pQmMgdcKzNftxYj4yy7HQ36g3TQSM6QdThLzf=w1908-h897");
     background-attachment: fixed;
     background-size: cover;
@@ -63,30 +63,31 @@
 }
 
 /*UTIL*/
-.btn {
-    display: inline-block;
-    margin: 2rem 0;
+.boton {
+    margin: 2rem 2rem;
     border-radius: 1rem;
     background: #00BFFF;
     color: var(--black);
     font-weight: 500;
     font-size: 2.5rem;
-    width: 250px;
-    cursor: pointer;
-    padding: 1rem 3rem;
-    text-decoration: none;
-    text-transform: capitalize;
-    position: relative;
-    transition: background 0.5s linear; /* Cambiamos "color" a "background" */
+    width: auto;
+    transition: background 0.5s linear;
+    /* Cambiamos "color" a "background" */
+    display: flex;
+    justify-content: center;
+    /* Alineación horizontal */
+    align-items: center;
+    padding: 0 3rem;
 }
 
 /*UTIL*/
-.btn:hover {
-    background: var(--white); /* Cambiamos el orden de los colores */
+.boton:hover {
+    background: var(--white);
+    /* Cambiamos el orden de los colores */
 }
 
 /*UTIL*/
-#nom-prod{
+#nom-prod {
     font-size: 4rem;
     text-transform: uppercase;
     color: var(--white);
@@ -96,12 +97,11 @@
 
 /*UTIL*/
 .row {
-    padding: 0px;
-    margin: 0px;
-    height: contain;
+    height: auto;
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin: 0%;
 }
 
 /*UTIL*/
@@ -109,7 +109,7 @@
     width: 80px;
     height: 50px;
     padding-left: 10px;
-    margin-right: 10px;
+    margin: 2rem 0;
     border: 1.5px solid var(--my-blue);
     border-radius: 7px;
     font-weight: 500;
@@ -123,8 +123,6 @@
 #price {
     font-size: 25px;
     color: #817f7f;
-    padding: 0;
-    margin: 0px 0;
     font-size: 22px;
     font-weight: bold;
 }
@@ -132,8 +130,6 @@
 #stock {
     font-size: 25px;
     color: #817f7f;
-    padding: 0;
-    margin: 0px 0;
     font-size: 22px;
     font-weight: bold;
 }
@@ -141,8 +137,6 @@
 /*UTIL*/
 #desc_prod_h3 {
     font-size: 19px;
-    margin: 0;
-    padding: 0;
     color: #817f7f;
 }
 
@@ -150,11 +144,10 @@
 #desc_prod_p {
     font-size: 15px;
     color: #817f7f;
-    margin: 0;
-    padding: 0;
 }
 
 @media only screen and (max-width: 600px) {
+
     /*UTIL*/
     .row {
         text-align: center;
@@ -166,14 +159,14 @@
     .single-product h1 {
         line-height: 32px;
     }
-    
+
     /*UTIL*/
     .detalle_producto .single-product .contenedores h1 {
         font-size: 1.5rem;
     }
-    
+
     /*UTIL*/
-    #div-cont{
+    #div-cont {
         background-color: var(--white);
         display: inline-block;
         width: 275px;
@@ -181,12 +174,35 @@
     }
 
     /*UTIL*/
-    #det_prod_h1{
+    #det_prod_h1 {
         font-size: 40px;
     }
 
-    #nom-prod{
+    #nom-prod {
         margin: 10px 0;
+    }
+
+    #detalle_producto {
+        margin: 0%;
+        padding: 0%;
+    }
+
+    .boton {
+        margin-right: 0;
+    }
+
+    #desc_prod_p {
+        margin: 0 3rem;
+        margin-bottom: 3rem;
+    }
+
+    #desc_prod_h3{
+        padding-top: 1rem;
+    }
+    
+    #formulario {
+        display: flex;
+        justify-content: center;
     }
 }
 
@@ -194,6 +210,7 @@
     color: var(--white);
     text-align: center;
     font-size: 6.5rem;
+    padding-top: 2rem;
 }
 
 .detalle_producto .single-product .contenedores img {
@@ -209,10 +226,12 @@
     margin: 0px 0px;
 }
 
-#text-all{
+#text-all {
     display: flex;
-    flex-direction: column; /* Establece la disposición en columna */
+    flex-direction: column;
+    /* Establece la disposición en columna */
     justify-content: flex-start;
+    width: 100%;
 }
 
 .detalle_producto .single-product .contenedores h1 {
@@ -225,7 +244,7 @@
     margin-bottom: 1rem;
 }
 
-#div-cont{
+#div-cont {
     background-color: var(--white);
     display: inline-block;
     width: 250px;
@@ -234,12 +253,12 @@
     margin: 25px;
 }
 
-#form{
+#form {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
 }
-#form > * {
-    display: flex; /* Asegúrate de que los elementos internos también sean elementos flexibles */
+
+#form>* {
+    display: flex;
+    /* Asegúrate de que los elementos internos también sean elementos flexibles */
 }
+
