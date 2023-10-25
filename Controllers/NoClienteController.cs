@@ -106,7 +106,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
             if (userID == null)
             {
                 // no se ha logueado
-                TempData["MessageLOGUEARSE"] = "Por favor debe loguearse antes de agregar un producto";
+                TempData["MessageLOGUEARSE"] = "Por favor, inicie sesión antes de agregar un producto.";
                 return View("~/Views/Home/Index.cshtml");
             }
             else
