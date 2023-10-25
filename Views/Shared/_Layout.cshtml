@@ -100,6 +100,14 @@
                 </div>
 
                 <script src="~/js/script.js"></script>
+
+                <style>
+                        @@media (max-width: 600px) {
+                            #imgLogoEmpresa {
+                                display: none;
+                            }
+                        }
+                </style>
             }
             else
             {
@@ -111,6 +119,13 @@
                     <a class="fas fa-sign-in-alt" style="text-decoration: none;" asp-area="Identity"
                         asp-page="/Account/Login"></a>
                 </div>
+                <style>
+                        @@media (max-width: 600px) {
+                            #imgLogoEmpresa {
+                                display: none;
+                            }
+                        }
+                </style>
             }
         </div>
     </header>
@@ -169,7 +184,7 @@
                 <a id="detalles-footer"> <i class="fas fa-code-branch"></i> Brandon J. Viru Camones </a>
             </div>
         </div>
-        <div class="credit"> @@Copyright - Todos los derechos reservados - Grupo 2! </div>
+        <div class="credit">@@Copyright - Todos los derechos reservados - Grupo 2</div>
     </section>
     <!---------------------------- footer section ends  ---------------------------->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
