@@ -71,7 +71,7 @@ td {
     /* Aumenta el espaciado para mejorar la legibilidad */
     border: 1px solid #ddd;
     /* Agrega un borde en todas las celdas */
-    font-size: 1.95rem;
+    font-size: 1.5rem;
 }
 
 .table-product-form-container thead {

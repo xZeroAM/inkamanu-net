@@ -89,7 +89,7 @@
         /* Aumenta el espaciado para mejorar la legibilidad */
         border: 1px solid #ddd;
         /* Agrega un borde en todas las celdas */
-        font-size: 1.95rem;
+        font-size: 1.5rem;
     }
 
     .table-product-form-container thead {
@@ -337,15 +337,24 @@
                         <td>@producto.id</td>
                         <td><img src="@producto.Imagen" width="100px" height="100px" /></td>
                         <td>@producto.Nombre</td>
-                        <td>@producto.Descripcion</td>
+                        @*<td>@producto.Descripcion</td>*@
+
+                        @{
+                            string descripcionCorta = string.Join(" ", producto.Descripcion.Split().Take(12));
+                            if (producto.Descripcion.Split().Length > 12)
+                            {
+                                descripcionCorta += "...";
+                            }
+                        }
+                        <td style="font-size: 10px;">@descripcionCorta</td>
+
                         <td>@producto.Precio</td>
                         <td>@producto.Stock</td>
                         <td>@producto.fechaCreacion</td>
                         <td>@producto.fechaActualizacion</td>
                         <td>
                             <!-- Botón de Detalle -->
-                            <a asp-controller="Admin" asp-action="DetalleProducto" asp-route-id="@producto.id"
-                                class="">
+                            <a asp-controller="Admin" asp-action="DetalleProducto" asp-route-id="@producto.id" class="">
                                 <i class="fa-solid fa-circle-info" style="color: #000000;"></i>
                             </a>
                         </td>
