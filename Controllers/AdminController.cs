@@ -869,6 +869,17 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
                 return StatusCode(500, "Ocurrió un error al exportar los productos a Excel. Por favor, inténtelo de nuevo más tarde.");
             }
         }
+
+        public async Task<IActionResult> DetalleProducto(int? id)
+        {
+            Producto objProduct = await _context.DataProducto.FindAsync(id);
+            if (objProduct == null)
+            {
+                return NotFound();
+            }
+            return View(objProduct);
+        }
+
     }
 
 }

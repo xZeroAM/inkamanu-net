@@ -1,0 +1,42 @@
+@model proyecto_inkamanu_net.Models.Entity.Producto
+@{
+	ViewData["Title"] = "Detalle Producto";
+}
+<link rel="stylesheet" href="~/css/detalleproducto.css" />
+
+<!---------------------------- section detalle_producto stars ---------------------------->
+<section class="detalle_producto" id="detalle_producto">
+	<div class="single-product">
+		<h1 class="heading">
+			<span id="det_prod_h1">Detalle del Producto</span>
+		</h1>
+		<div class="row align-items-start">
+			<div class="contenedores">
+				<div id="div-cont">
+					<img class="d-block w-100 image-fit" id="ProductImg" src="@Html.DisplayFor(model => model.Imagen)"
+						alt="@Html.DisplayFor(model => model.Imagen)">
+				</div>
+			</div>
+			<div class="contenedores">
+				<div id="text-all">
+					<h1 id="nom-prod">@Html.DisplayFor(model => model.Nombre)</h1>
+					<h4 id="price">Precio: S/. @Html.DisplayFor(model => model.Precio)</h4>
+					<h3 id="stock">Stock: @Html.DisplayFor(model => model.Stock)</h3>
+					<h3 id="stock">Fecha de Creación: @Html.DisplayFor(model => model.fechaCreacion)</h3>
+					<h3 id="stock">Fecha de Actualización: @Html.DisplayFor(model => model.fechaActualizacion)</h3>
+				</div>
+			</div>
+			<div id="descripcion-text">
+				<h3 id="desc_prod_h3">Descripción del producto</h3>
+				<p id="desc_prod_p">@Html.DisplayFor(model => model.Descripcion)</p>
+			</div>
+		</div>
+	</div>
+</section>
+<!---------------------------- section detalle_producto ends ---------------------------->
+@if (TempData["ErrorSTOCK"] != null)
+{
+	<div class="alert alert-danger">
+		@TempData["ErrorSTOCK"]
+	</div>
+}

@@ -324,6 +324,7 @@
                     <th>Stock</th>
                     <th>Fecha de registro</th>
                     <th>Fecha de actualización</th>
+                    <th>Detalle</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                     <th>Acciones de exportar</th>
@@ -341,6 +342,13 @@
                         <td>@producto.Stock</td>
                         <td>@producto.fechaCreacion</td>
                         <td>@producto.fechaActualizacion</td>
+                        <td>
+                            <!-- Botón de Detalle -->
+                            <a asp-controller="Admin" asp-action="DetalleProducto" asp-route-id="@producto.id"
+                                class="">
+                                <i class="fa-solid fa-circle-info" style="color: #000000;"></i>
+                            </a>
+                        </td>
                         <td>
                             <!-- Botón de Editar -->
                             <a asp-controller="Admin" asp-action="EditarProducto" asp-route-id="@producto.id"
@@ -401,5 +409,5 @@
 <!---------------------------- listar producto ends  ---------------------------->
 
 <!---------------------------- javascript  stars  ---------------------------->
-
+<script src="https://kit.fontawesome.com/c37024d023.js" crossorigin="anonymous"></script>
 <!---------------------------- javascript  ends  ---------------------------->
