@@ -19,7 +19,7 @@
 }
 
 section {
-    padding: 0;
+    padding: 2rem 6%;
 }
 
 /* esto es para los productos */
@@ -71,7 +71,7 @@ td {
     /* Aumenta el espaciado para mejorar la legibilidad */
     border: 1px solid #ddd;
     /* Agrega un borde en todas las celdas */
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .table-product-form-container thead {

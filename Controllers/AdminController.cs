@@ -593,7 +593,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
         public ActionResult ListaDeUsuarios(int? page)
         {
             int pageNumber = (page ?? 1); // Si no se especifica la página, asume la página 1
-            int pageSize = 2; // maximo 3 productos por pagina
+            int pageSize = 5; // maximo 5 usuarios por pagina
 
 
             pageNumber = Math.Max(pageNumber, 1);// Con esto se asegura de que pageNumber nunca sea menor que 1
