@@ -4,22 +4,29 @@
 @{
     ViewData["Title"] = "Log in";
 }
+<head>
+    <link rel="stylesheet" href="~/css/login.css" />
+</head>
 
-<h1>@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-4">
+<div id="title">
+    <h1>@ViewData["Title"]</h1>
+</div>
+<div id="row">
+    <div>
         <section>
             <form id="account" method="post">
                 <h2>Utilice una cuenta local para iniciar sesión.</h2>
-                <hr />
+                <hr/>
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="form-floating mb-3">
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true"
+                        placeholder="name@example.com" />
                     <label asp-for="Input.Email" class="form-label">Email</label>
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
                 <div class="form-floating mb-3">
-                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password"
+                        aria-required="true" placeholder="password" />
                     <label asp-for="Input.Password" class="form-label">Password</label>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
@@ -38,10 +45,12 @@
                         <a id="forgot-password" asp-page="./ForgotPassword">¿Olvidaste tu contraseña?</a>
                     </p>
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registrarse como nuevo usuario</a>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registrarse como nuevo
+                            usuario</a>
                     </p>
                     <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Reenviar confirmación por correo electrónico</a>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Reenviar confirmación por
+                            correo electrónico</a>
                     </p>
                 </div>
             </form>
@@ -51,30 +60,30 @@
         <section>
             <h3>Utilice otro servicio para iniciar sesión.</h3>
             <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            No hay servicios de autenticación externos configurados. Mira esto <a href="https://go.microsoft.com/fwlink/?LinkID=532715">artículo
-                            acerca de la configuración de esta aplicación ASP.NET para admitir el inicio de sesión a través de servicios externos</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
+    @{
+        if ((Model.ExternalLogins?.Count ?? 0) == 0)
+        {
+                            <div>
+                                <p>
+                                    No hay servicios de autenticación externos configurados. Mira esto <a href="https://go.microsoft.com/fwlink/?LinkID=532715">artículo
+                                    acerca de la configuración de esta aplicación ASP.NET para admitir el inicio de sesión a través de servicios externos</a>.
+                                </p>
+                            </div>
+        }
+        else
+        {
+                            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                <div>
+                                    <p>
+                        @foreach (var provider in Model.ExternalLogins!)
+                        {
+                                                <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                        }
+                                    </p>
+                                </div>
+                            </form>
+        }
+    }
         </section>
     </div>-->
 </div>

@@ -1,0 +1,17 @@
+#title{
+    padding-top: 2rem;
+    width: 100%;
+    text-align: center;
+}
+
+#title h1{
+    font-size: 3rem;
+}
+
+#row{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 3rem;
+}
