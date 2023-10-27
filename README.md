@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+</p>
+
 # Ecommerce Empresa InkaManu
 
 Prueba de docker con web service, realizare un merge de mi rama
@@ -36,3 +40,7 @@ En jesus_ing6 ya deje toda las vistas de listar pedidos, mis pedidos, detalle de
 En jesus_ing7 deje funcionando el stock de los productos para que funcionen correctamente al hacer un pedido despues de pagar 10/10/2023, jesus_ing8
 
 En jesus_ing9 deje funcionando el confirmar email y restablecer contraseña, 10/10/2023 - 11/10/2023 - 12/10/2023
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+</p>
