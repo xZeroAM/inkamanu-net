@@ -213,7 +213,7 @@
         <h3>ATENDIENDO PEDIDO Nro: @Model.ID</h3>
         @if (TempData["MessageActualizandoPedido"] != null)
         {
-            <div class="alert alert-success">
+            <div class="alert alert-success" id="MensajesVerdeRojo">
                 @TempData["MessageActualizandoPedido"]
             </div>
         }
@@ -250,14 +250,14 @@
 <br>
 @if (TempData["MessageActualizandoPedido"] != null)
 {
-    <div class="alert alert-success">
+    <div class="alert alert-success" id="MensajesVerdeRojo">
         @TempData["MessageActualizandoPedido"]
     </div>
 }
 
 @if (TempData["ErrorActualizandoPedido"] != null)
 {
-    <div class="alert alert-danger">
+    <div class="alert alert-danger" id="MensajesVerdeRojo">
         @TempData["ErrorActualizandoPedido"]
     </div>
 }

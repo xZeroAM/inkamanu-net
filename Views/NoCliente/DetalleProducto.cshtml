@@ -43,7 +43,7 @@
 <!---------------------------- section detalle_producto ends ---------------------------->
 @if (TempData["ErrorSTOCK"] != null)
 {
-	<div class="alert alert-danger">
+	<div class="alert alert-danger" id="MensajesVerdeRojo">
 		@TempData["ErrorSTOCK"]
 	</div>
 }

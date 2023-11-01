@@ -12,5 +12,11 @@ namespace proyecto_inkamanu_net.Models.Entity
         public string? Status { get; set; }
         public List<DetallePedidoViewModel> Items { get; set; }
         public double Total { get; set; }
+
+        public double? Subtotal { get; set; }
+
+        public double? Descuento { get; set; }
+
+        public string? Regalo { get; set; }
     }
 }

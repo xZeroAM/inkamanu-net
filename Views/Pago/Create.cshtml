@@ -204,7 +204,7 @@
     <h3>PAGO</h3>
     @if (TempData["MessagePago"] != null)
     {
-      <div class="alert alert-success">
+      <div class="alert alert-success" id="MensajesVerdeRojo">
         @TempData["MessagePago"]
       </div>
     }
@@ -246,7 +246,7 @@
 <br>
 @if (TempData["MessagePago"] != null)
 {
-  <div class="alert alert-success">
+  <div class="alert alert-success" id="MensajesVerdeRojo">
     @TempData["MessagePago"]
   </div>
 }

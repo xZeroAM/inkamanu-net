@@ -284,14 +284,14 @@
 
 @if (TempData["Error"] != null)
 {
-    <div class="alert alert-danger" style="font-size: 22px; padding: 10px;">
+    <div class="alert alert-danger" id="MensajesVerdeRojo">
         @TempData["Error"]
     </div>
 }
 
 @if (!string.IsNullOrEmpty(Model.Regalo))
 {
-    <div class="alert alert-success" style="font-size: 22px; padding: 10px;">
+    <div class="alert alert-success" id="MensajesVerdeRojo">
         Al realizar esta compra como regalo obtendrás un @Model.Regalo! ¡Felicidades!
     </div>
 }

@@ -118,7 +118,7 @@
     <h1 class="heading"> <span>Contáctanos</span></h1>
     <div class="row">
         <iframe class="map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3902.031292261987!2d-76.93455222707215!3d-12.041366688194957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c6a67667e425%3A0x937f2051f03452a1!2sReal%20Plaza%20Puruchuco!5e0!3m2!1ses!2spe!4v1690722522448!5m2!1ses!2spe"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.5854482620507!2d-76.94473582703425!3d-12.072018542367156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c6e79034dc63%3A0x393610bdc506718b!2sFacultad%20de%20Ingenier%C3%ADa%20y%20Arquitectura%20-%20USMP!5e0!3m2!1ses!2spe!4v1698767104135!5m2!1ses!2spe"
             allowfullscreen="" loading="lazy"></iframe>
 
         <form asp-controller="Home" asp-action="Create" method="post">
@@ -134,7 +134,7 @@
 
         @if (TempData["MessageCONTACTO"] != null)
         {
-            <div class="alert alert-success" style="font-size: 18px; padding: 10px;">
+            <div class="alert alert-success" id="MensajesVerdeRojo">
                 @TempData["MessageCONTACTO"]
             </div>
         }
