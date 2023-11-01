@@ -274,7 +274,17 @@
         <!---------------------------- TOTAL PRICE ---------------------------->
         <div class="total-price">
             <table>
-                
+                <tr>
+                    <td>Subtotal</td>
+                    <td id="subtotal-general">S/. @(Model.Subtotal.HasValue ? Model.Subtotal.Value.ToString("F2") :
+                        "0.00")</td>
+                </tr>
+
+                <tr>
+                    <td>Descuento</td>
+                    <td id="descuento">S/. @(Model.Descuento.HasValue ? Model.Descuento.Value.ToString("F2") : "0.00")
+                    </td>
+                </tr>
 
                 <tr>
                     <td>Total</td>
@@ -286,6 +296,10 @@
             <div class="input">
                 <span>Estado del Pedido:</span>
                 <p>@Model.Status</p>
+                @if (!string.IsNullOrEmpty(Model.Regalo))
+                {
+                    <p>De Regalo: @Model.Regalo</p>
+                }
             </div>
         </div>
         <a class="btnRegresar" style="text-decoration: none;" asp-area="" asp-controller="MisPedidos"
