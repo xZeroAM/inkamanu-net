@@ -41,6 +41,16 @@ En jesus_ing7 deje funcionando el stock de los productos para que funcionen corr
 
 En jesus_ing9 deje funcionando el confirmar email y restablecer contraseña, 10/10/2023 - 11/10/2023 - 12/10/2023
 
+## IMAGENES DEL PEDIDO O FACTURA Nro 24
+En PDF
+![Alt text](image.png)
+
+En Excel
+![Alt text](image-1.png)
+
+En la web
+![Alt text](image-2.png)
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 </p>
