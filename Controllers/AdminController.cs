@@ -789,8 +789,8 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
                     <td>{user.Email}</td>
                     <td>{user.fechaDeRegistro}</td>
                     <td>{user.fechaDeActualizacion}</td>
-                    <td>{user.Rol}</td>
                     <td>{user.Celular}</td>
+                    <td>{user.Rol}</td>
                 </tr>";
                 }
 
