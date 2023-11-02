@@ -34,8 +34,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Drawing;
 using OfficeOpenXml.Style;
 
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
+
 namespace proyecto_inkamanu_net.Controllers
 {
 
@@ -550,8 +549,10 @@ namespace proyecto_inkamanu_net.Controllers
 
                 // Descargar la imagen del logo
                 using var client = new HttpClient();
-                var originalLogoBytes = await client.GetByteArrayAsync("https://firebasestorage.googleapis.com/v0/b/proyectos-cb445.appspot.com/o/img_logo_inkamanu.jpeg?alt=media&token=3b834c39-f2ee-4555-8770-4f5a2bc88066&_gl=1*gxgr9z*_ga*MTcyOTkyMjIwMS4xNjk2NDU2NzU2*_ga_CW55HF8NVT*MTY5NjQ1Njc1NS4xLjEuMTY5NjQ1NzkyMy40OC4wLjA.");
-                var logoBytes = RoundImageEdges(originalLogoBytes);
+                var logoBytes = await client.GetByteArrayAsync("https://firebasestorage.googleapis.com/v0/b/proyectos-cb445.appspot.com/o/img_logo_inkamanu_redondeado.png?alt=media&token=18299219-bc91-40b6-aebe-1c554fa6612c&_gl=1*wy7j2e*_ga*MTcyOTkyMjIwMS4xNjk2NDU2NzU2*_ga_CW55HF8NVT*MTY5ODk1Mjg2Ny41LjEuMTY5ODk1MzM5MS4xNC4wLjA.");
+                
+
+                // https://pinetools.com/es/redondear-esquinas-imagen link para redondear y poner transparente una imagen
 
                 // Agregar la imagen al archivo Excel
                 var image = worksheet.Drawings.AddPicture("Logo", new MemoryStream(logoBytes));
@@ -674,25 +675,7 @@ namespace proyecto_inkamanu_net.Controllers
         }
 
 
-        private byte[] RoundImageEdges(byte[] imageBytes)
-        {
-            using MemoryStream ms = new MemoryStream(imageBytes);
-            using Image originalImage = Image.FromStream(ms);
-            using Bitmap roundedImage = new Bitmap(originalImage.Width, originalImage.Height);
-            using Graphics g = Graphics.FromImage(roundedImage);
-            g.Clear(Color.Transparent);
-
-            using TextureBrush brush = new TextureBrush(originalImage);
-            using GraphicsPath gp = new GraphicsPath();
-
-            gp.AddEllipse(0, 0, originalImage.Width, originalImage.Height);
-            g.FillPath(brush, gp);
-
-            using MemoryStream resultStream = new MemoryStream();
-            roundedImage.Save(resultStream, ImageFormat.Png);
-
-            return resultStream.ToArray();
-        }
+      
 
 
         /* Hasta aqui son los metodos para exportar */

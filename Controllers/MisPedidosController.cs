@@ -575,7 +575,7 @@ namespace proyecto_inkamanu_net.Controllers
 
                 // Descargar la imagen del logo
                 using var client = new HttpClient();
-                var logoBytes = await client.GetByteArrayAsync("https://firebasestorage.googleapis.com/v0/b/proyectos-cb445.appspot.com/o/img_logo_inkamanu.jpeg?alt=media&token=3b834c39-f2ee-4555-8770-4f5a2bc88066&_gl=1*gxgr9z*_ga*MTcyOTkyMjIwMS4xNjk2NDU2NzU2*_ga_CW55HF8NVT*MTY5NjQ1Njc1NS4xLjEuMTY5NjQ1NzkyMy40OC4wLjA.");
+                var logoBytes = await client.GetByteArrayAsync("https://firebasestorage.googleapis.com/v0/b/proyectos-cb445.appspot.com/o/img_logo_inkamanu_redondeado.png?alt=media&token=18299219-bc91-40b6-aebe-1c554fa6612c&_gl=1*wy7j2e*_ga*MTcyOTkyMjIwMS4xNjk2NDU2NzU2*_ga_CW55HF8NVT*MTY5ODk1Mjg2Ny41LjEuMTY5ODk1MzM5MS4xNC4wLjA.");
 
                 // Agregar la imagen al archivo Excel
                 var image = worksheet.Drawings.AddPicture("Logo", new MemoryStream(logoBytes));
