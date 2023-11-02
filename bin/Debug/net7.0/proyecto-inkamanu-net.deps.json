@@ -24,6 +24,7 @@
           "Microsoft.Extensions.Http": "7.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "7.0.10",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.11",
+          "System.Drawing.Common": "7.0.0",
           "X.PagedList.Mvc": "8.0.7",
           "X.PagedList.Mvc.Core": "8.4.7",
           "itext7": "8.0.1"

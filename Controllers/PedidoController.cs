@@ -33,6 +33,9 @@ using Microsoft.AspNetCore.Identity;
 
 using System.Drawing;
 using OfficeOpenXml.Style;
+
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 namespace proyecto_inkamanu_net.Controllers
 {
 
@@ -152,7 +155,7 @@ namespace proyecto_inkamanu_net.Controllers
 
                 var globalSettings = new GlobalSettings
                 {
-                    ColorMode = ColorMode.Color,
+                    ColorMode = DinkToPdf.ColorMode.Color,
                     Orientation = Orientation.Portrait,
                     PaperSize = PaperKind.A4,
                 };
@@ -419,7 +422,7 @@ namespace proyecto_inkamanu_net.Controllers
 
                 var globalSettings = new GlobalSettings
                 {
-                    ColorMode = ColorMode.Color,
+                    ColorMode = DinkToPdf.ColorMode.Color,
                     Orientation = Orientation.Portrait,
                     PaperSize = PaperKind.A4,
                 };
@@ -547,7 +550,8 @@ namespace proyecto_inkamanu_net.Controllers
 
                 // Descargar la imagen del logo
                 using var client = new HttpClient();
-                var logoBytes = await client.GetByteArrayAsync("https://firebasestorage.googleapis.com/v0/b/proyectos-cb445.appspot.com/o/img_logo_inkamanu.jpeg?alt=media&token=3b834c39-f2ee-4555-8770-4f5a2bc88066&_gl=1*gxgr9z*_ga*MTcyOTkyMjIwMS4xNjk2NDU2NzU2*_ga_CW55HF8NVT*MTY5NjQ1Njc1NS4xLjEuMTY5NjQ1NzkyMy40OC4wLjA.");
+                var originalLogoBytes = await client.GetByteArrayAsync("https://firebasestorage.googleapis.com/v0/b/proyectos-cb445.appspot.com/o/img_logo_inkamanu.jpeg?alt=media&token=3b834c39-f2ee-4555-8770-4f5a2bc88066&_gl=1*gxgr9z*_ga*MTcyOTkyMjIwMS4xNjk2NDU2NzU2*_ga_CW55HF8NVT*MTY5NjQ1Njc1NS4xLjEuMTY5NjQ1NzkyMy40OC4wLjA.");
+                var logoBytes = RoundImageEdges(originalLogoBytes);
 
                 // Agregar la imagen al archivo Excel
                 var image = worksheet.Drawings.AddPicture("Logo", new MemoryStream(logoBytes));
@@ -667,6 +671,27 @@ namespace proyecto_inkamanu_net.Controllers
                 _logger.LogError(ex, $"Error al exportar el pedido {id} a Excel");
                 return StatusCode(500, $"Ocurrió un error al exportar el pedido {id} a Excel. Por favor, inténtelo de nuevo más tarde.");
             }
+        }
+
+
+        private byte[] RoundImageEdges(byte[] imageBytes)
+        {
+            using MemoryStream ms = new MemoryStream(imageBytes);
+            using Image originalImage = Image.FromStream(ms);
+            using Bitmap roundedImage = new Bitmap(originalImage.Width, originalImage.Height);
+            using Graphics g = Graphics.FromImage(roundedImage);
+            g.Clear(Color.Transparent);
+
+            using TextureBrush brush = new TextureBrush(originalImage);
+            using GraphicsPath gp = new GraphicsPath();
+
+            gp.AddEllipse(0, 0, originalImage.Width, originalImage.Height);
+            g.FillPath(brush, gp);
+
+            using MemoryStream resultStream = new MemoryStream();
+            roundedImage.Save(resultStream, ImageFormat.Png);
+
+            return resultStream.ToArray();
         }
 
 
