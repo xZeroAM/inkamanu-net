@@ -796,7 +796,7 @@ namespace proyecto_inkamanu_net.Controllers
                     Status = pedido.Status,
                     Items = detalles,
                     Regalo = pedido.Regalo,
-                    Subtotal = pedido.Total - (pedido.Descuento ?? 0.0),
+                    Subtotal = pedido.Total + (pedido.Descuento ?? 0.0),
                     Descuento = pedido.Descuento ?? 0.0,
                     Total = pedido.Total
                 };
