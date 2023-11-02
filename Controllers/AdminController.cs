@@ -819,9 +819,9 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
             catch (Exception ex)
             {
                 // Loguear el error para obtener más detalles
-                _logger.LogError(ex, "Error al exportar productos a PDF");
+                _logger.LogError(ex, "Error al exportar Usuarios a PDF");
                 // Retornar un mensaje de error al usuario
-                return StatusCode(500, "Ocurrió un error al exportar los productos a PDF. Por favor, inténtelo de nuevo más tarde.");
+                return StatusCode(500, "Ocurrió un error al exportar los Usuarios a PDF. Por favor, inténtelo de nuevo más tarde.");
             }
         }
 
@@ -838,10 +838,10 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
                 worksheet.Cells[1, 1].Style.Font.Size = 20;
                 worksheet.Cells[1, 1].Style.Font.Bold = true;
 
-                // Cargar los datos en la fila 3 para dejar espacio para el título de Reporte de Productos
+                // Cargar los datos en la fila 3 para dejar espacio para el título de Reporte de Usuarios
                 worksheet.Cells[3, 1].LoadFromCollection(_context.Users.ToList(), true);
 
-                // Dar formato a la tabla Reporte de Productos
+                // Dar formato a la tabla Reporte de Usuarios
                 var dataRange = worksheet.Cells[2, 1, worksheet.Dimension.End.Row, worksheet.Dimension.End.Column];
                 var table = worksheet.Tables.Add(dataRange, "Usuarios");
                 table.ShowHeader = true;
@@ -864,9 +864,9 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
             catch (Exception ex)
             {
                 // Loguear el error para obtener más detalles
-                _logger.LogError(ex, "Error al exportar productos a Excel");
+                _logger.LogError(ex, "Error al exportar Usuarios a Excel");
                 // Retornar un mensaje de error al usuario
-                return StatusCode(500, "Ocurrió un error al exportar los productos a Excel. Por favor, inténtelo de nuevo más tarde.");
+                return StatusCode(500, "Ocurrió un error al exportar los Usuarios a Excel. Por favor, inténtelo de nuevo más tarde.");
             }
         }
 
