@@ -75,7 +75,7 @@ namespace proyecto_ecommerce_deportivo_net.Controllers
                 }
                 else
                 {
-                    TempData["MessageDeRespuesta1"] = "Si se encontraron productos que coincidan con la búsqueda.";
+                    TempData["MessageDeRespuesta1"] = "Se encontraron los siguientes productos que coinciden con la búsqueda.";
                 }
                 // Retorna la vista Catalogo con la lista de productos.
                 return View("Catalogo", productos);

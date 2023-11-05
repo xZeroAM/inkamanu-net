@@ -1,0 +1,121 @@
+/* codigo comun */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+
+:root {
+    --my-blue: #0074E4;
+    --light-my-blue: #6FA6FF;
+    /* Aquí defines el tono más claro */
+    --celeste: #40E0D0;
+    --light-celeste: hsl(177, 72%, 70%);
+    --amarillo: #f9d806;
+    --light-amarillo: #ffee80;
+    --rojo: #FF0000;
+    --light-rojo: #FFAFAF;
+    --verde: #369681;
+    --light-verde: #00B050;
+    --black: #130f40;
+    --light-color: #666;
+    --border: .1rem solid rgba(0, 0, 0, .1);
+    --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    transition: all .2s linear;
+}
+
+body {
+    background: url("https://lh3.googleusercontent.com/u/0/drive-viewer/AK7aPaA1DqApdFa1jfZIt4o4pKFK0TJBmft-Hty7PQZYM0s33V_qB4mBBDgnCJHnjW9eejEMUL3DLQ3nfCDLIQGw9qK2_zQs=w1908-h897");
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+section {
+    padding: 2rem 6%;
+}
+
+.heading {
+    text-align: center;
+    font-size: 4.5rem;
+    color: #000000;
+    background-color: #ffffff;
+    width: fit-content;
+    padding: 10px 20px;
+    margin: 10px auto;
+    border-radius: 4rem;
+}
+
+.heading span {
+    position: relative;
+    z-index: 0;
+}
+
+/* contact section SU CODIGO DE CSS  */
+
+.contact .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.contact .row .map {
+    flex: 1 1 42rem;
+    width: 100%;
+    padding: 2rem;
+    border: var(--border);
+    border-radius: 3rem;
+    box-shadow: var(--box-shadow);
+    background-color: #f7f9fa;
+}
+
+.contact .row form {
+    flex: 1 1 42rem;
+    padding: 2rem;
+    border: var(--border);
+    border-radius: 3rem;
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    background-color: #f7f9fa;
+}
+
+.contact .row form h3 {
+    font-size: 3rem;
+    color: #000000;
+}
+
+.contact .row form .box {
+    margin: .7rem 0;
+    width: 100%;
+    border: var(--border);
+    padding: 1rem;
+    font-size: 1.6rem;
+    color: var(--black);
+    text-transform: none;
+    border-radius: .5rem;
+}
+
+.contact .row form textarea {
+    height: 15rem;
+    resize: none;
+}
+
+.btn{
+    font-size: 17px;
+    background-color: #00BFFF;
+    color: #000000;
+    font-weight: 500;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    transition: background 0.3s linear;
+    margin: 0.5rem;
+}
+
+.btn:hover{
+    background-color: #ffffff;
+}

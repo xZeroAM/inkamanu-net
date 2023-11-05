@@ -9,10 +9,14 @@
 
 @if (TempData["MessageLOGUEARSE"] != null)
 {
-    <div class="alert alert-danger" id="MensajesVerdeRojo">
+    <div class="alerta">
         @TempData["MessageLOGUEARSE"]
     </div>
 }
+
+<style>
+        
+</style>
 
 <body>
     <section class="content bienvenida">
@@ -27,7 +31,7 @@
             </h2>
             <p class="codigo">COD. DE USUARIO: @user.Dni</p>
             <!--<p>Obtenga información <a href="https://docs.microsoft.com/aspnet/core">sobre cómo crear aplicaciones web con
-                                        ASP.NET Core</a>.</p>-->
+                                                ASP.NET Core</a>.</p>-->
         }
         else
         {
@@ -36,7 +40,7 @@
                 <span class="wellcome">Bienvenido</span>
             </h1>
             <!--<p>Obtenga información <a href="https://docs.microsoft.com/aspnet/core">sobre cómo crear aplicaciones web con
-                                        ASP.NET Core</a>.</p>-->
+                                                ASP.NET Core</a>.</p>-->
         }
         <p class="gracias">¡GRACIAS POR FORMAR PARTE DE LA FAMILIA INKAMANU, BRINDEMOS POR MÁS MOMENTOS JUNTOS!</p>
         <p class="conoce">CONOCE UN POCO MÁS SOBRE NOSOTROS:</p>
@@ -44,39 +48,39 @@
 
     <section class="content libre">
         <h2 class="title">C&L Team S.A.C.</h2>
-        <p class="p">Somos una empresa cervecera peruana con raíces en el distrito de Caraz, 
-            en el departamento de Ancash. Fundada en 2021 por el ingeniero Manuel Chincha, 
-            junto con su pareja y su padre, nos dedicamos a la elaboración de cervezas de 
-            alta calidad, con un delicioso sabor y un compromiso ecológico. Continuamente 
-            innovamos en nuestros productos para llegar a un público más amplio y expandirnos, 
-            ganándonos una reputación por la excelencia de nuestro servicio y el inigualable 
+        <p class="p">Somos una empresa cervecera peruana con raíces en el distrito de Caraz,
+            en el departamento de Ancash. Fundada en 2021 por el ingeniero Manuel Chincha,
+            junto con su pareja y su padre, nos dedicamos a la elaboración de cervezas de
+            alta calidad, con un delicioso sabor y un compromiso ecológico. Continuamente
+            innovamos en nuestros productos para llegar a un público más amplio y expandirnos,
+            ganándonos una reputación por la excelencia de nuestro servicio y el inigualable
             sabor de nuestras cervezas.
         </p>
     </section>
 
     <section class="content descripcion">
         <h2 class="title">Compromiso con el medio ambiente</h2>
-        <p class="p">Impulsamos la sostenibilidad de nuestros desechos. Recicla con nosotros. 
-            Acércate a los puntos de recogida más cercanos donde se distribuyen nuestras cervezas 
+        <p class="p">Impulsamos la sostenibilidad de nuestros desechos. Recicla con nosotros.
+            Acércate a los puntos de recogida más cercanos donde se distribuyen nuestras cervezas
             y entrega tus botellas a cambio de vasos hechos a partir de botellas recicladas.
         </p>
     </section>
 
     <section class="content mision">
         <h2 class="title">Misión</h2>
-        <p class="p">Buscamos convertirnos en un producto de consumo a nivel nacional al ofrecer 
-            una cerveza artesanal que cumple con los más altos estándares de calidad. 
-            Nos destacamos por nuestro excepcional sabor y aroma, y, sobre todo, por ser un 
-            producto respetuoso con el medio ambiente como parte de nuestro compromiso con la 
-            responsabilidad social. Aspiramos a ser la cerveza preferida para acompañar comidas 
+        <p class="p">Buscamos convertirnos en un producto de consumo a nivel nacional al ofrecer
+            una cerveza artesanal que cumple con los más altos estándares de calidad.
+            Nos destacamos por nuestro excepcional sabor y aroma, y, sobre todo, por ser un
+            producto respetuoso con el medio ambiente como parte de nuestro compromiso con la
+            responsabilidad social. Aspiramos a ser la cerveza preferida para acompañar comidas
             y disfrutar de momentos placenteros.
         </p>
     </section>
 
     <section class="content vision">
         <h2 class="title">Visión</h2>
-        <p class="p">Nuestro objetivo como empresa es convertirnos en la marca líder en el mercado 
-            nacional de la cerveza artesanal. Trabajamos constantemente en la innovación de sabores 
+        <p class="p">Nuestro objetivo como empresa es convertirnos en la marca líder en el mercado
+            nacional de la cerveza artesanal. Trabajamos constantemente en la innovación de sabores
             y aromas para ofrecer nuestros productos a la comunidad cervecera.
         </p>
     </section>

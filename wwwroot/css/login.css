@@ -1,3 +1,9 @@
+.formulario {
+    background-image: url("https://lh3.googleusercontent.com/u/0/drive-viewer/AK7aPaCadtT2rUNpBItGgUAkiCCdJ0nf3aTOqGzUmpMOjPRGWrsKf7UpDjRimPo3nSkltNUt-v45ymbzr9BDyrokOkIonY_QGg=w1908-h897");
+    background-attachment: fixed;
+    background-size: cover;
+}
+
 .formulario form {
     width: 50%;
 }
@@ -37,6 +43,7 @@
     .formulario {
         display: block;
         padding: 0 4rem;
+        background: #ffffff;
     }
 
     .formulario form {
