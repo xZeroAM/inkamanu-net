@@ -639,7 +639,7 @@ namespace proyecto_inkamanu_net.Controllers
                 worksheet.Cells[filaInicio + 3, 5].Value = igv;
 
                 worksheet.Cells[filaInicio + 4, 4].Value = "Total:";
-                worksheet.Cells[filaInicio + 4, 5].Value = detalles.Sum(d => d.Importe) - descuento + igv; // Ajusta esto para considerar el descuento y el IGV
+                worksheet.Cells[filaInicio + 4, 5].Value = detalles.Sum(d => d.Importe) - descuento; // Ajusta esto para considerar el descuento y el IGV
 
 
                 // Aplicar el estilo headerStyle a las celdas "Subtotal", "Descuento", "IGV" y "Total"
