@@ -39,7 +39,7 @@
             @if (!SignInManager.IsSignedIn(User) || user.Rol.Equals("Cliente"))
             {
                 <a class="nav-link text-dark" asp-area="" asp-controller="NoCliente" asp-action="Catalogo">Catálogo de Productos</a>
-                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contacto">Contáctanos</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contacto">Solicitar Cotización</a>
             }
 
             @if (SignInManager.IsSignedIn(User) && user.Rol.Equals("Administrador"))
@@ -149,12 +149,12 @@
                 <a id="detalles-footer" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-arrow-right"></i> Misión y
                     Visión </a>
                 <a id="detalles-footer" asp-area="" asp-controller="Home" asp-action="Contacto"> <i class="fas fa-arrow-right"></i>
-                    Contáctanos </a>
+                    Solicitar Cotización </a>
             </div>
 
             <div class="box">
                 <h3>Datos De Contacto</h3>
-                <a id="detalles-footer" > <i class="fas fa-phone"></i> +51 927 572 267 </a>
+                <a id="detalles-footer" > <i class="fas fa-phone"></i> +51 949 713 428 </a>
                 <a id="detalles-footer" > <i class="fas fa-envelope"></i> jesus_soria@usmp.pe </a>
                 <a id="detalles-footer"> <i class="fas fa-map-marker-alt"></i> La Molina, Av. la Fontana 1250, Lima 15024 </a>
             </div>
