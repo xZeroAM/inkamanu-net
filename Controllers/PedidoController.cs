@@ -839,7 +839,7 @@ namespace proyecto_inkamanu_net.Controllers
                     Regalo = pedido.Regalo,
                     Subtotal = pedido.Total + (pedido.Descuento ?? 0.0),
                     Descuento = pedido.Descuento ?? 0.0,
-                    Igv = pedido.Total * 0.18,
+                    Igv = (pedido.Total - ((pedido.Descuento ?? 0.0))) * 0.18,
                     Total = pedido.Total
                 };
 
