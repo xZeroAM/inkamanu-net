@@ -12,6 +12,8 @@ namespace proyecto_inkamanu_net.Models.Entity
         public double Descuento { get; set; }
         public double Total { get; set; }
 
+        public double Igv { get; set; }
+
         public string? Regalo { get; set; }
     }
 }

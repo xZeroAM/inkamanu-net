@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Carrito de compras";
 }
-<Style>
+<style>
     @@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
 
     :root {
@@ -220,7 +220,7 @@
         object-fit: cover;
         /* Puedes ajustar el grosor y el color del borde según tus preferencias */
     }
-</Style>
+</style>
 
 <!---------------------------- cart items details  ---------------------------->
 <br>
@@ -231,6 +231,7 @@
             <tr>
                 <th>Productos</th>
                 <th>Cantidad</th>
+                <th>IGV</th>
                 <th>Subtotal</th>
             </tr>
             @foreach (var item in Model.Items)
@@ -242,6 +243,7 @@
                             <div>
                                 <p>@item.Producto.Nombre</p>
                                 <small>Precio: S/. @item.Precio.ToString("F2")</small>
+                                <small>IGV x Und. (Incluido en el precio) : S/. @((((double)item.Precio)*0.18).ToString("F2"))</small>
                                 <br>
                                 <a href="@Url.Action("QuitarDelCarrito", "Carrito", new { id = item.Id })">Quitar</a>
                             </div>
@@ -252,6 +254,9 @@
                             <input type="number" name="cantidad" value="@item.Cantidad" min="1">
                             <input type="hidden" name="id" value="@item.Id">
                         </form>
+                    </td>
+                    <td>
+                        S/. @((((double)@item.Precio * @item.Cantidad) - ((double)item.Precio * @item.Cantidad)/1.18).ToString("F2"))
                     </td>
                     <td>S/. @(((double)item.Precio * item.Cantidad).ToString("F2")) </td>
                 </tr>
@@ -265,12 +270,14 @@
                     <td>Subtotal</td>
                     <td id="subtotal-general">S/. @Model.Subtotal.ToString("F2")</td>
                 </tr>
-
+                <tr>
+                    <td>IGV (Ya incluido) </td>
+                    <td id="igv">S/. @(@Model.Igv.ToString("F2"))</td>
+                </tr>
                 <tr>
                     <td>Descuento</td>
                     <td id="descuento">S/. @Model.Descuento.ToString("F2")</td>
                 </tr>
-
                 <tr>
                     <td>Total</td>
                     <td id="total">S/. @Model.Total.ToString("F2")</td>
