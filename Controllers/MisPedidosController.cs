@@ -32,6 +32,7 @@ using Microsoft.AspNetCore.Identity;
 
 using System.Drawing;
 using OfficeOpenXml.Style;
+using OfficeOpenXml.Table.PivotTable;
 
 namespace proyecto_inkamanu_net.Controllers
 {
@@ -371,6 +372,7 @@ namespace proyecto_inkamanu_net.Controllers
                                 .description-column {{
                                     max-width: 250px; /* o el ancho máximo que desees */
                                     word-wrap: break-word;
+                                    font-size : 12px;
                                 }}
                                 
                             </style>
@@ -417,9 +419,9 @@ namespace proyecto_inkamanu_net.Controllers
                 }
 
                 double subtotal = detalles.Sum(d => d.Importe);
-                double impuesto = 0; // Aquí puedes calcular el impuesto si lo tienes.
+                double impuesto = Math.Round(subtotal * 0.18, 2); // Aquí puedes calcular el impuesto si lo tienes.
                 double descuento = pedido.Descuento ?? 0.0; // Aquí puedes calcular el descuento si lo tienes.
-                double total = subtotal + impuesto - descuento;
+                double total = subtotal - descuento;
 
                 html += $@"
                                     <tr>
@@ -427,7 +429,7 @@ namespace proyecto_inkamanu_net.Controllers
                                         <td>S/ {subtotal}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan='4' style='text-align:right;'><strong>Impuesto:</strong></td>
+                                        <td colspan='4' style='text-align:right;'><strong>Impuesto (Ya incluido):</strong></td>
                                         <td>S/ {impuesto}</td>
                                     </tr>
                                     <tr>
@@ -658,7 +660,7 @@ namespace proyecto_inkamanu_net.Controllers
                 worksheet.Cells[filaInicio + 2, 5].Value = descuento;
 
                 worksheet.Cells[filaInicio + 3, 4].Value = "IGV:";
-                worksheet.Cells[filaInicio + 3, 5].Value = igv;
+                worksheet.Cells[filaInicio + 3, 5].Value = pedido.Total * 0.18;
 
                 worksheet.Cells[filaInicio + 4, 4].Value = "Total:";
                 worksheet.Cells[filaInicio + 4, 5].Value = detalles.Sum(d => d.Importe) - descuento + igv; // Ajusta esto para considerar el descuento y el IGV
@@ -701,7 +703,7 @@ namespace proyecto_inkamanu_net.Controllers
         /* Hasta aqui son los metodos para exportar */
 
 
-         /* metodo para buscar PEDIDO */
+        /* metodo para buscar PEDIDO */
         /// <summary>
         /// Busca pedidos basados en el nombre de usuario(segun correo) y/o el estado del pedido. 
         /// Utiliza LINQ para filtrar los resultados en la base de datos. 
@@ -797,6 +799,7 @@ namespace proyecto_inkamanu_net.Controllers
                     Items = detalles,
                     Regalo = pedido.Regalo,
                     Subtotal = pedido.Total + (pedido.Descuento ?? 0.0),
+                    Igv = pedido.Total * 0.18,
                     Descuento = pedido.Descuento ?? 0.0,
                     Total = pedido.Total
                 };

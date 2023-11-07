@@ -247,6 +247,7 @@
             <tr>
                 <th>Productos</th>
                 <th>Cantidad</th>
+                <th>IGV</th>
                 <th>Subtotal</th>
             </tr>
             @foreach (var item in Model.Items)
@@ -258,13 +259,17 @@
                             <div>
                                 <p>@item.NombreProducto</p>
                                 <small>Precio: S/. @item.PrecioUnitario.ToString("F2")</small>
+                                <small>IGV x Und. (Incluido en el precio) : S/.
+                                    @((((double)item.PrecioUnitario) * 0.18).ToString("F2"))</small>
                                 <br>
-
                             </div>
                         </div>
                     </td>
                     <td>
                         <p class="xdxd">@item.Cantidad</p>
+                    </td>
+                    <td>
+                        S/. @((((double)@item.PrecioUnitario * @item.Cantidad) * 0.18).ToString("F2"))
                     </td>
                     <td>S/. @(((double)item.PrecioUnitario * item.Cantidad).ToString("F2")) </td>
                 </tr>
@@ -279,7 +284,10 @@
                     <td id="subtotal-general">S/. @(Model.Subtotal.HasValue ? Model.Subtotal.Value.ToString("F2") :
                         "0.00")</td>
                 </tr>
-
+                <tr>
+                    <td>IGV (Ya incluido)</td>
+                    <td id="subtotal-general">S/. @(Model.Igv.ToString("F2"))</td>
+                </tr>
                 <tr>
                     <td>Descuento</td>
                     <td id="descuento">S/. @(Model.Descuento.HasValue ? Model.Descuento.Value.ToString("F2") : "0.00")

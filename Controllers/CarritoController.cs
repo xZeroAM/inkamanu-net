@@ -52,7 +52,7 @@ namespace proyecto_inkamanu_net.Controllers
                 var items = await _carritoService.ObtenerItems(userId);
                 var subtotal = await _carritoService.ObtenerSubtotal(userId);
                 var descuento = await _carritoService.ObtenerDescuento(userId);
-                var igv = subtotal - (subtotal/1.18);
+                var igv = subtotal * 0.18;
                 var total = await _carritoService.ObtenerTotal(userId);
                 var cantidadBotellas = await _carritoService.ObtenerCantidadTotalBotellas(userId);
 

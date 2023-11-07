@@ -256,7 +256,7 @@
                         </form>
                     </td>
                     <td>
-                        S/. @((((double)@item.Precio * @item.Cantidad) - ((double)item.Precio * @item.Cantidad)/1.18).ToString("F2"))
+                        S/. @((((double)@item.Precio * @item.Cantidad) * 0.18).ToString("F2"))
                     </td>
                     <td>S/. @(((double)item.Precio * item.Cantidad).ToString("F2")) </td>
                 </tr>

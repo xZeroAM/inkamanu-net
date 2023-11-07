@@ -345,6 +345,7 @@ namespace proyecto_inkamanu_net.Controllers
                                 .description-column {{
                                     max-width: 250px; /* o el ancho máximo que desees */
                                     word-wrap: break-word;
+                                    font-size: 12px;
                                 }}
                                 
                             </style>
@@ -391,9 +392,9 @@ namespace proyecto_inkamanu_net.Controllers
                 }
 
                 double subtotal = detalles.Sum(d => d.Importe);
-                double impuesto = 0; // Aquí puedes calcular el impuesto si lo tienes.
+                double impuesto = Math.Round(subtotal * 0.18, 2); // Aquí puedes calcular el impuesto si lo tienes.
                 double descuento = pedido.Descuento ?? 0.0; // Aquí puedes calcular el descuento si lo tienes.
-                double total = subtotal + impuesto - descuento;
+                double total = subtotal - descuento;
 
                 html += $@"
                                     <tr>
@@ -550,7 +551,7 @@ namespace proyecto_inkamanu_net.Controllers
                 // Descargar la imagen del logo
                 using var client = new HttpClient();
                 var logoBytes = await client.GetByteArrayAsync("https://firebasestorage.googleapis.com/v0/b/proyectos-cb445.appspot.com/o/img_logo_inkamanu_redondeado.png?alt=media&token=18299219-bc91-40b6-aebe-1c554fa6612c&_gl=1*wy7j2e*_ga*MTcyOTkyMjIwMS4xNjk2NDU2NzU2*_ga_CW55HF8NVT*MTY5ODk1Mjg2Ny41LjEuMTY5ODk1MzM5MS4xNC4wLjA.");
-                
+
 
                 // https://pinetools.com/es/redondear-esquinas-imagen link para redondear y poner transparente una imagen
 
@@ -629,7 +630,7 @@ namespace proyecto_inkamanu_net.Controllers
                 // Supongamos que el descuento es del 10% y el IGV es del 18%
                 double descuento = pedido.Descuento ?? 0.0; // 10% de descuento
                 //double igv = (detalles.Sum(d => d.Importe) - descuento) * 0.18m; // 18% de IGV
-                double igv = 0.0; // 18% de IGV
+                double igv = Math.Round(pedido.Total * 0.18, 2); // 18% de IGV
 
                 worksheet.Cells[filaInicio + 2, 4].Value = "Descuento:";
                 worksheet.Cells[filaInicio + 2, 5].Value = descuento;
@@ -675,7 +676,7 @@ namespace proyecto_inkamanu_net.Controllers
         }
 
 
-      
+
 
 
         /* Hasta aqui son los metodos para exportar */
@@ -838,6 +839,7 @@ namespace proyecto_inkamanu_net.Controllers
                     Regalo = pedido.Regalo,
                     Subtotal = pedido.Total + (pedido.Descuento ?? 0.0),
                     Descuento = pedido.Descuento ?? 0.0,
+                    Igv = pedido.Total * 0.18,
                     Total = pedido.Total
                 };
 
