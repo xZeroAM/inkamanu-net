@@ -209,8 +209,6 @@ namespace proyecto_inkamanu_net.Controllers
                     }
 
                     // Preparar el mensaje de correo electrónico
-                    // Obtener detalles del pedido
-
 
                     // Generar el contenido del correo electrónico
                     var emailSubject = "Confirmación de Pago y Detalles del Pedido";
@@ -270,7 +268,7 @@ namespace proyecto_inkamanu_net.Controllers
 
                 var html = ConstruirTexto(pedido, cliente, detalles);
 
-                // Retorna la cadena HTML en lugar de generar un archivo PDF
+               
                 return html;
             }
             catch (Exception ex)
@@ -369,5 +367,4 @@ namespace proyecto_inkamanu_net.Controllers
             return View("Error!");
         }
     }
-
 }
