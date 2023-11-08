@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using MimeKit;
 using MailKit.Net.Smtp;
 using MimeKit.Text;
+using MailKit.Security;
 namespace proyecto_inkamanu_net.Models
 {
     public class EmailSender : IMyEmailSender
