@@ -40,7 +40,7 @@ public class HomeController : Controller
         _context.Add(objContacto);
         await _context.SaveChangesAsync();
 
-        var message = $"Estimado {objContacto.Nombre}, te estaremos contactando pronto";
+        var message = $"Estimado(a) {objContacto.Nombre}, te estaremos contactando pronto";
         TempData["MessageCONTACTO"] = message;
         var message1 = $@"
             Estimado(a) {objContacto.Nombre},

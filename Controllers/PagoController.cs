@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using proyecto_inkamanu_net.Data;
 using proyecto_inkamanu_net.Models;
 using proyecto_inkamanu_net.Models.Entity;
-
+using System.Text;
 namespace proyecto_inkamanu_net.Controllers
 {
 
@@ -22,7 +22,9 @@ namespace proyecto_inkamanu_net.Controllers
 
         private readonly ICarritoService _carritoService;
 
-        public PagoController(ILogger<PagoController> logger, UserManager<ApplicationUser> userManager, ApplicationDbContext context, ICarritoService carritoService)
+        private readonly IMyEmailSender _emailSender;
+
+        public PagoController(ILogger<PagoController> logger, UserManager<ApplicationUser> userManager, ApplicationDbContext context, ICarritoService carritoService, IMyEmailSender emailSender)
         {
             _logger = logger;
             _userManager = userManager;
@@ -31,6 +33,8 @@ namespace proyecto_inkamanu_net.Controllers
             /**/
 
             _carritoService = carritoService;
+
+            _emailSender = emailSender;
         }
 
         /// <summary>
@@ -86,6 +90,7 @@ namespace proyecto_inkamanu_net.Controllers
         [HttpPost]
         public async Task<IActionResult> Pagar(Pago pago)
         {
+            Pedido pedido = null; // Declarar pedido fuera del bloque using para usarlo después en el correo electrónico
             using (var transaction = _context.Database.BeginTransaction()) // Iniciar transacción
             {
                 try
@@ -104,7 +109,7 @@ namespace proyecto_inkamanu_net.Controllers
                         {
                             TempData["Error"] = $"No hay suficiente stock para el producto {item.Producto.Nombre}.";
                             transaction.Rollback(); // Revertir transacción
-                            return RedirectToAction("Carrito"); // ir a la vista carrito
+                            return RedirectToAction("Index", "Carrito"); // ir a la vista carrito
                         }
                     }
 
@@ -128,7 +133,7 @@ namespace proyecto_inkamanu_net.Controllers
                         }
                     }
 
-                    Pedido pedido = new Pedido
+                    pedido = new Pedido
                     {
                         UserID = pago.UserID,
                         Total = pago.MontoTotal,
@@ -169,8 +174,7 @@ namespace proyecto_inkamanu_net.Controllers
 
                     transaction.Commit(); // Confirmar transacción
 
-                    TempData["MessagePago"] = "El pago se ha registrado y su pedido nro " + pedido.ID + " esta en camino";
-                    return View("Create");
+
                 }
                 catch (Exception ex)
                 {
@@ -181,6 +185,180 @@ namespace proyecto_inkamanu_net.Controllers
                     return RedirectToAction("Error"); // me redirige a la vista de error
                 }
             }
+
+            // Si llegamos aquí, la transacción fue exitosa
+            if (pedido != null) // Asegúrate de que pedido no es null
+            {
+                try
+                {
+                    // Asegúrate de que el usuario existe
+                    var user = await _userManager.GetUserAsync(User);
+                    if (user == null || user.Email == null)
+                    {
+                        _logger.LogError($"No se pudo encontrar un usuario con el ID: {pago.UserID}");
+                        TempData["Error"] = "No se pudo encontrar la información del usuario para enviar el correo electrónico.";
+                        return RedirectToAction("Error"); // O manejar de otra manera
+                    }
+
+                    // Asegúrate de que el servicio de correo electrónico está disponible
+                    if (_emailSender == null)
+                    {
+                        _logger.LogError("El servicio de envío de correo electrónico no está disponible.");
+                        TempData["Error"] = "El servicio de correo electrónico no está configurado correctamente.";
+                        return RedirectToAction("Error"); // O manejar de otra manera
+                    }
+
+                    // Preparar el mensaje de correo electrónico
+
+                    // Generar el contenido del correo electrónico
+                    var emailSubject = "Confirmación de Pago y Detalles del Pedido";
+                    var emailBody = await ExportarUnSoloPedidoEnTexto(pedido.ID);
+
+                    // Enviar correo electrónico
+                    await _emailSender.SendEmailAsync(user.Email, emailSubject, emailBody);
+
+
+                    TempData["MessagePago"] = "El pago se ha registrado y su pedido nro " + pedido.ID + " esta en camino";
+                }
+                catch (Exception emailEx)
+                {
+                    // Log the email sending error
+                    _logger.LogError(emailEx, "Error al enviar el correo electrónico de confirmación");
+                    // Considera qué hacer si el correo no se puede enviar. ¿Notificar al usuario, reintentar, poner en cola para un nuevo intento?
+                }
+            }
+
+            return View("Create");
+        }
+
+        public async Task<string> ExportarUnSoloPedidoEnTexto(int? id)
+        {
+            try
+            {
+                if (id == null)
+                {
+                    return $"El pedido con ID {id} no fue encontrado, por eso no se puede exportar en formato de texto.";
+                }
+
+                Pedido? pedido = await _context.DataPedido.FindAsync(id);
+
+                if (pedido == null)
+                {
+                    return $"El pedido con ID {id} no fue encontrado, por eso no se puede exportar en formato de texto.";
+                }
+
+                ApplicationUser? cliente = await _context.Users.FirstOrDefaultAsync(u => u.UserName == pedido.UserID);
+
+                if (cliente == null)
+                {
+                    return $"El cliente con ID {pedido.UserID} no fue encontrado en la tabla de Clientes.";
+                }
+
+                var detalles = (from detalle in _context.DataDetallePedido
+                                join producto in _context.DataProducto on detalle.Producto.id equals producto.id
+                                where detalle.pedido.ID == pedido.ID
+                                select new DetallePedido2
+                                {
+                                    Cantidad = detalle.Cantidad,
+                                    PrecioUnitario = detalle.Precio,
+                                    NombreProducto = producto.Nombre,
+                                    DescripcionProducto = producto.Descripcion,
+                                    Importe = detalle.Cantidad * detalle.Precio
+                                }).ToList();
+
+                var html = ConstruirTexto(pedido, cliente, detalles);
+
+               
+                return html;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error al exportar el pedido {id} a formato de texto");
+                return $"Ocurrió un error al exportar el pedido {id} a formato de texto. Por favor, inténtelo de nuevo más tarde.";
+            }
+        }
+
+        private string ConstruirTexto(Pedido pedido, ApplicationUser cliente, List<DetallePedido2> detalles)
+        {
+            var texto = new StringBuilder();
+            // Encabezado
+
+            texto.AppendLine($"Estimado(a) {cliente.Nombres},");
+            texto.AppendLine("A continuación, le enviamos el detalle de su pedido:");
+            texto.AppendLine();
+            texto.AppendLine("+---------------------------------------+"); // Parte superior
+            texto.AppendLine("|            InkaManu                 |"); // Nombre de la empresa
+            texto.AppendLine("| La Molina, Av. la Fontana 1250, Lima |"); // Dirección
+            texto.AppendLine("|      Teléfono: +51 927572267        |"); // Teléfono
+            texto.AppendLine("|    Email: jesus_soria@usmp.pe       |"); // Email
+            texto.AppendLine("+---------------------------------------+"); // Parte inferior
+
+            texto.AppendLine(); // Línea en blanco
+
+            // Información del Pedido
+            texto.AppendLine("+---------------------------------------+"); // Parte superior
+            texto.AppendLine($"| Información del Pedido ({pedido.ID}) |"); // Información del Pedido
+
+            texto.AppendLine($"| Cliente: {cliente.Nombres} {cliente.ApellidoPat} {cliente.ApellidoMat} |"); // Nombre del Cliente
+            texto.AppendLine($"| Email del Cliente: {cliente.Email} |"); // Email del Cliente
+            texto.AppendLine($"| Factura N°:   ({pedido.ID})            |"); // Número de Factura
+
+
+            texto.AppendLine($"| Fecha: {DateTime.Now:dd/MM/yyyy} |"); // Fecha en la que se le esta enviando el mensaje, la fecha actual de hoy
+
+            texto.AppendLine($"| Estado del Pedido:  {pedido.Status} |"); // Estado del Pedido
+            texto.AppendLine("+---------------------------------------+"); // Parte inferior
+
+            texto.AppendLine();
+            texto.AppendLine("Detalles del Pedido:");
+            texto.AppendLine();
+
+            // Encabezados de la tabla
+            texto.AppendLine("+---------------------------------------+------------+-----------------------+--------------+-------------------------+");
+            texto.AppendLine("| Producto                              | Cantidad   | Precio Unitario (S/)  | Importe (S/) | Descripción del Producto |");
+            texto.AppendLine("+---------------------------------------+------------+-----------------------+--------------+-------------------------+");
+
+            foreach (var detalle in detalles)
+            {
+                // Cada fila de la tabla
+                texto.AppendLine($"| {detalle.NombreProducto.PadRight(37)} | {detalle.Cantidad.ToString().PadLeft(10)} | {detalle.PrecioUnitario.ToString().PadLeft(21)} | {detalle.Importe.ToString().PadLeft(12)} | {GetFirst12Words(detalle.DescripcionProducto).PadRight(27)} |");
+            }
+
+            double subtotal = detalles.Sum(d => Convert.ToDouble(d.Importe));
+            double impuesto = Math.Round(subtotal * 0.18, 2);
+            double total = subtotal - (pedido.Descuento ?? 0.0);
+
+            // Totales
+            texto.AppendLine("+---------------------------------------+------------+-----------------------+--------------+-------------------------+");
+            texto.AppendLine($"| Subtotal                              |            |                       | S/ {subtotal.ToString().PadLeft(12)} |                         |");
+            texto.AppendLine($"| Impuesto                              |            |                       | S/ {impuesto.ToString().PadLeft(12)} |                         |");
+            texto.AppendLine($"| Descuento                             |            |                       | S/ {pedido.Descuento.ToString().PadLeft(12)} |                         |");
+            texto.AppendLine($"| Total                                 |            |                       | S/ {total.ToString().PadLeft(12)} |                         |");
+            texto.AppendLine("+---------------------------------------+------------+-----------------------+--------------+-------------------------+");
+            texto.AppendLine();
+            // Mensaje de agradecimiento
+            texto.AppendLine("¡Gracias por su compra!");
+            texto.AppendLine();
+            texto.AppendLine("Saludos cordiales,");
+            texto.AppendLine();
+            texto.AppendLine("[La Empresa Cervezera Inkamanu]");
+            texto.AppendLine();
+
+            return texto.ToString();
+        }
+
+        private string GetFirst12Words(string text)
+        {
+            // Divide el texto en palabras
+            string[] words = text.Split(' ');
+
+            // Toma las primeras 12 palabras o todas si son menos de 12
+            int maxWords = Math.Min(12, words.Length);
+
+            // Une las primeras 12 palabras
+            string result = string.Join(" ", words.Take(maxWords));
+
+            return result;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -189,5 +367,4 @@ namespace proyecto_inkamanu_net.Controllers
             return View("Error!");
         }
     }
-
 }
