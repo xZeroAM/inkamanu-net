@@ -53,6 +53,8 @@ En la web
 
 Dependencia linea de comando dotnet add package System.Drawing.Common
 
+Listo en jesus_ing14 puse los cambios para mandar un mensaje al momento de darle click a pagar
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 </p>
