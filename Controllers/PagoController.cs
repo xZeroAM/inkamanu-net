@@ -88,8 +88,17 @@ namespace proyecto_inkamanu_net.Controllers
         /// </summary>
 
         [HttpPost]
-        public async Task<IActionResult> Pagar(Pago pago)
+        public async Task<IActionResult> Pagar(string cardNumber, string cardName, string cardMonth, string cardYear, string cardCvv, string shipping, double MontoTotal)
         {
+            Pago pago = new Pago();
+            pago.UserID = _userManager.GetUserName(User);
+            pago.MontoTotal = MontoTotal;
+            pago.NumeroTarjeta = cardNumber;
+            pago.NombreTarjeta = cardName;
+
+            pago.DueDateYYMM = cardMonth+"/"+cardYear;
+            pago.Cvv = cardCvv;
+
             Pedido pedido = null; // Declarar pedido fuera del bloque using para usarlo después en el correo electrónico
             using (var transaction = _context.Database.BeginTransaction()) // Iniciar transacción
             {
