@@ -1,11 +1,100 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700|Source+Sans+Pro:400,600,700&display=swap");
 
-
+:root {
+  --my-blue: #0074E4;
+  --light-my-blue: #6FA6FF;
+  /* Aquí defines el tono más claro */
+  --celeste: #40E0D0;
+  --light-celeste: hsl(177, 72%, 70%);
+  --amarillo: #f9d806;
+  --light-amarillo: #ffee80;
+  --rojo: #FF0000;
+  --light-rojo: #FFAFAF;
+  --verde: #369681;
+  --light-verde: #00B050;
+  --black: #130f40;
+  --light-color: #666;
+  --border: .1rem solid rgba(0, 0, 0, .1);
+  --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+  --blue: #00004B;
+  --grey-blue: #00796B;
+}
 
 *:focus {
   outline: none;
 }
 
+/**/
+
+.inputBox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.inputBox .card-input {
+  width: 49%;
+}
+
+.inputBox .card-input label {
+  display: block;
+  padding: .5rem 0;
+  font-size: 1.5rem;
+  color: var(--light-color);
+}
+
+.inputBox .card-input input {
+  background: #eee;
+  border-radius: .5rem;
+  padding: 1rem;
+  font-size: 1.6rem;
+  color: var(--black);
+  text-transform: none;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.inputBox .card-input input:focus {
+  border: .1rem solid var(--celeste);
+}
+
+.inputBox .card-input select {
+  background: #eee;
+  border-radius: .5rem;
+  padding: 1rem;
+  font-size: 1.6rem;
+  color: var(--black);
+  text-transform: none;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.inputBox .card-input select:focus {
+  border: .1rem solid var(--celeste);
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  margin: .5rem 0;
+  background: linear-gradient(to top, #87CEEB, #00BFFF);
+  /* Cambia el color de fondo */
+  color: var(--black);
+  /* Cambia el color del texto */
+  border: none;
+  border-radius: .5rem;
+  padding: 1rem;
+  font-size: 2.6rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background: var(--my-blue);
+  /* Cambia el color de fondo al pasar el mouse */
+}
+
+
+/**/
 .wrapper {
   min-height: 100vh;
   display: flex;
